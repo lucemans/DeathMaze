@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ public final class DeathMaze extends JavaPlugin {
     @Override
     public void onEnable() {
         getDataFolder().mkdirs();
+        new File(getDataFolder(), File.separator + "players").mkdirs();
 
         instance = this;
         stats = new HashMap<Player, PlayerStats>();

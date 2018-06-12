@@ -6,9 +6,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
+import java.text.DecimalFormat;
+
 public class ScoreBoardUtil {
 
-    public static void send(Player p/*, PlayerStats stats*/) {
+    public static void send(Player p, PlayerStats stats) {
         ScoreboardManager m = Bukkit.getScoreboardManager();
         Scoreboard b = m.getNewScoreboard();
 
@@ -21,6 +23,9 @@ public class ScoreBoardUtil {
 
         Score nameScore = o.getScore("Name: " + p.getName());
         nameScore.setScore(9);
+
+        Score distanceScore = o.getScore("Distance: " + new DecimalFormat("#.#").format(stats.getDistance()));
+        distanceScore.setScore(8);
 
         p.setScoreboard(b);
     }
