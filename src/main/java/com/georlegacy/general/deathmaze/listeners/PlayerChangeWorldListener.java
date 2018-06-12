@@ -14,9 +14,7 @@ public class PlayerChangeWorldListener implements Listener {
 
     @EventHandler
     private void onChange(PlayerChangedWorldEvent e) {
-        if (plugin.getConfiguration().getEnabledWorlds().contains(e.getPlayer().getWorld())) {
-            e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
-        }
+        e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     }
 
 }

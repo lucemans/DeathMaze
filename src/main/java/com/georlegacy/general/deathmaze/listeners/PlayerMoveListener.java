@@ -24,7 +24,6 @@ public class PlayerMoveListener implements Listener {
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
-            e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
             return;
         }
         ScoreBoardUtil.send(p);
