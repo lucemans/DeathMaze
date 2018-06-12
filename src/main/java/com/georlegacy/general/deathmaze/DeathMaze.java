@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze;
 
 import com.georlegacy.general.deathmaze.listeners.PlayerChangeWorldListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerMoveListener;
+import com.georlegacy.general.deathmaze.listeners.PlayerQuitListener;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.DataEncoder;
@@ -38,6 +39,7 @@ public final class DeathMaze extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
     }
 
     @Override
