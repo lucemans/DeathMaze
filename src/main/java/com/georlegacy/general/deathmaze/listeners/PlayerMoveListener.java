@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
+import com.georlegacy.general.deathmaze.util.ScoreBoardUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +25,7 @@ public class PlayerMoveListener implements Listener {
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
             return;
         }
+        ScoreBoardUtil.send(p);
         if (!locs.containsKey(p)) {
             locs.put(p, p.getLocation());
             return;

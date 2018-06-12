@@ -1,5 +1,6 @@
 package com.georlegacy.general.deathmaze.util;
 
+import com.georlegacy.general.deathmaze.DeathMaze;
 import com.google.gson.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -8,6 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 public class ConfigUtil {
@@ -15,10 +17,11 @@ public class ConfigUtil {
 
     private ConfigUtil() {
         try {
-            this.config.load(new File("plugins/DeathMaze/config.yml"));
+            File f = new File(DeathMaze.getInstance().getDataFolder(), "config.yml");
+            if (!f.exists())
+                Files.copy(DeathMaze.getInstance().getClass().getClassLoader().getResourceAsStream("config.yml"), f.toPath());
+            this.config = YamlConfiguration.loadConfiguration(f);
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }

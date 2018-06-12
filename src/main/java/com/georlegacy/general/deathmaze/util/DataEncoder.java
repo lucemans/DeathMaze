@@ -9,7 +9,7 @@ public class DataEncoder {
 
     public static boolean encode(PlayerStats stats) {
         try {
-            File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "players", stats.getName() + ".yml");
+            File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "players", stats.getUuid() + ".dat");
             if (!f.exists())
                 f.createNewFile();
             FileOutputStream fos = new FileOutputStream(f);
@@ -30,7 +30,7 @@ public class DataEncoder {
     }
 
     public static PlayerStats decode(String name) {
-        File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "players", name + ".yml");
+        File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "players", name + ".dat");
         if (!f.exists())
             return null;
         try (FileInputStream fis = new FileInputStream(f); ObjectInputStream ois = new ObjectInputStream(fis)) {
