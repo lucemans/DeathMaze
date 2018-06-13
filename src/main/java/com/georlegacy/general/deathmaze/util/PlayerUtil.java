@@ -21,4 +21,10 @@ public class PlayerUtil {
         }
     }
 
+    public static void addKill(Player p) {
+        if (DeathMaze.getInstance().stats.containsKey(p)) {
+            DeathMaze.getInstance().stats.get(p).setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
+        }
+    }
+
 }

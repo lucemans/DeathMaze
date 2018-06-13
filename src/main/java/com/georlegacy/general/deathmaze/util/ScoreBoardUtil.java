@@ -24,7 +24,7 @@ public class ScoreBoardUtil {
         Score nameScore = o.getScore("Name: " + p.getName());
         nameScore.setScore(9);
 
-        Score distanceScore = o.getScore("Distance: " + new DecimalFormat("#.#").format(stats.getDistance()));
+        Score distanceScore = o.getScore("Distance: " + DistanceFormatter.format(Double.parseDouble(new DecimalFormat("#.#").format(stats.getDistance()))));
         distanceScore.setScore(8);
 
         p.setScoreboard(b);

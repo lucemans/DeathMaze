@@ -6,7 +6,6 @@ import com.georlegacy.general.deathmaze.listeners.PlayerQuitListener;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.DataEncoder;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 

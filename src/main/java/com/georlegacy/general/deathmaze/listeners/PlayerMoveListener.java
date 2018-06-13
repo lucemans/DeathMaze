@@ -47,10 +47,10 @@ public class PlayerMoveListener implements Listener {
             locs.put(p, p.getLocation());
             return;
         }
-        if (Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getY() - locs.get(p).getY()) < 1) {
+        if (p.getLocation().getX() == locs.get(p).getX() && p.getLocation().getZ() == locs.get(p).getZ()) {
             return;
         }
-        PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getY() - locs.get(p).getY()));
+        PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
         locs.put(p, p.getLocation());
     }
 
