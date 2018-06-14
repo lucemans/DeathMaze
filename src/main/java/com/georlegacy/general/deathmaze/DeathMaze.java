@@ -3,6 +3,7 @@ package com.georlegacy.general.deathmaze;
 import com.georlegacy.general.deathmaze.listeners.PlayerChangeWorldListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerMoveListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerQuitListener;
+import com.georlegacy.general.deathmaze.listeners.PlayerTeleportListener;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.DataEncoder;
@@ -27,6 +28,8 @@ public final class DeathMaze extends JavaPlugin {
         return instance;
     }
 
+    public PlayerMoveListener moveListener;
+
     @Override
     public void onEnable() {
         getDataFolder().mkdirs();
@@ -36,9 +39,12 @@ public final class DeathMaze extends JavaPlugin {
         stats = new HashMap<Player, PlayerStats>();
         config = ConfigUtil.get();
 
+        moveListener = new PlayerMoveListener(this);
+
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
-        this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        this.getServer().getPluginManager().registerEvents(moveListener, this);
+        this.getServer().getPluginManager().registerEvents(new PlayerTeleportListener(this), this);
     }
 
     @Override

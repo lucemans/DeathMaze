@@ -19,12 +19,18 @@ public class PlayerMoveListener implements Listener {
         this.plugin = plugin;
     }
 
-    private HashMap<Player, Location> locs = new HashMap<Player, Location>();
+    public HashMap<Player, Location> locs = new HashMap<Player, Location>();
+
+    public HashMap<Player, Boolean> teleporters = new HashMap<Player, Boolean>();
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+            return;
+        }
+        if (teleporters.getOrDefault(p, false)) {
+            locs.remove(p);
             return;
         }
         PlayerStats stats;
