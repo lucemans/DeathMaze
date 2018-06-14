@@ -1,3 +1,21 @@
+# Availiable Placeholders for Marked Options:
+# %UUID% - Player's UUID
+# %NAME% - Player's name
+# %DISTANCE% - Distance walked in the maze by the player
+# %KILLS% - Player's kills in the maze
+# %DEATHS% - Player's deaths in the maze
+# %REGIONS% - Explored regions in the maze
+# %CONTAINERS% - Containers looted within the maze
+
+# Worlds that deathmaze is active in.
 EnabledWorlds:
 - world
 - nether
+
+# Header for sidebar scoreboard.
+# Color codes allowed
+ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'
+
+# Format for sidebar scoreboard content.
+# Color codes and placeholders allowed, use \n for new line.
+ScoreboardFormat: '&r\n&bName: &e%NAME%\n&bDistance: &e%DISTANCE%\n&bKills: &e%KILLS%\n&bDeaths: &e%DEATHS%'

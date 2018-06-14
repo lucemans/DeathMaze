@@ -1,11 +1,14 @@
 package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.google.gson.annotations.Since;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.scoreboard.Score;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +37,15 @@ public class ConfigUtil {
         List<World> worlds = new ArrayList<World>();
         this.config.getStringList("EnabledWorlds").forEach(string -> worlds.add(Bukkit.getWorld(string)));
         return !worlds.isEmpty() ? worlds : null;
+    }
+
+    public String getScoreboardHeader() {
+        return ChatColor.translateAlternateColorCodes('&', this.config.getString("ScoreboardHeader"));
+    }
+
+    public List<Score> getScoreBoardFormat(PlayerStats stats) {
+        //TODO Create getter and parser for placeholders
+        return null;
     }
 
 }
