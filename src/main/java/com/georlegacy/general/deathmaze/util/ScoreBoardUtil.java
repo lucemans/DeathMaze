@@ -31,7 +31,7 @@ public class ScoreBoardUtil {
         killScore.setScore(7);
 
         Score deathScore = o.getScore("Deaths: " + stats.getDeaths());
-        deathScore.setScore(7);
+        deathScore.setScore(6);
 
         p.setScoreboard(b);
     }
