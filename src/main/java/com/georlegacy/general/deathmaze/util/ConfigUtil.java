@@ -2,11 +2,9 @@ package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
-import com.google.gson.annotations.Since;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scoreboard.Score;
 
@@ -43,8 +41,22 @@ public class ConfigUtil {
         return ChatColor.translateAlternateColorCodes('&', this.config.getString("ScoreboardHeader"));
     }
 
-    public List<Score> getScoreBoardFormat(PlayerStats stats) {
-        //TODO Create getter and parser for placeholders
+    public List<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
+        HashMap<String, Integer> scores = new HashMap<String, Integer>();
+        String[] lines = this.config.getString("ScoreboardFormat").split("\n");
+        int i = 0;
+        for (String line : lines) {
+            String formattedLine = ChatColor.translateAlternateColorCodes('&', line
+                    .replace("%UUID%", stats.getUuid())
+                    .replace("%NAME%", stats.getName())
+                    .replace("%DISTANCE%", stats.getDistance() + "")
+                    .replace("%KILLS%", stats.getKills() + "")
+                    .replace("%DEATHS%", stats.getDeaths() + "")
+                    .replace("%REGIONS%", stats.getRegionsExplored() + "")
+                    .replace("%CONTAINERS%", stats.getContainersLooted() + ""));
+            scores.put(formattedLine, lines.length - i);
+            i++;
+        }
         return null;
     }
 
