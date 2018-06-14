@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 public class ScoreBoardUtil {
 
     public static void send(Player p, PlayerStats stats) {
+        //TODO implement config
         ScoreboardManager m = Bukkit.getScoreboardManager();
         Scoreboard b = m.getNewScoreboard();
 
