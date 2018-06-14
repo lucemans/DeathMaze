@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 public class PlayerUtil {
 
     public static void addDistance(Player p, double dist) {
+        if (dist > 10)
+            return;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
             DeathMaze.getInstance().stats.get(p).setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
         } else {
