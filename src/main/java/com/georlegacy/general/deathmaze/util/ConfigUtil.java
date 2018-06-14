@@ -41,9 +41,9 @@ public class ConfigUtil {
         return ChatColor.translateAlternateColorCodes('&', this.config.getString("ScoreboardHeader"));
     }
 
-    public List<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
+    public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
         HashMap<String, Integer> scores = new HashMap<String, Integer>();
-        String[] lines = this.config.getString("ScoreboardFormat").split("\n");
+        String[] lines = this.config.getString("ScoreboardFormat").split("\\n");
         int i = 0;
         for (String line : lines) {
             String formattedLine = ChatColor.translateAlternateColorCodes('&', line
@@ -57,7 +57,7 @@ public class ConfigUtil {
             scores.put(formattedLine, lines.length - i);
             i++;
         }
-        return null;
+        return scores.entrySet();
     }
 
 }
