@@ -27,6 +27,12 @@ public class ScoreBoardUtil {
         Score distanceScore = o.getScore("Distance: " + DistanceFormatter.format(Double.parseDouble(new DecimalFormat("#.#").format(stats.getDistance()))));
         distanceScore.setScore(8);
 
+        Score killScore = o.getScore("Kills: " + stats.getKills());
+        killScore.setScore(7);
+
+        Score deathScore = o.getScore("Deaths: " + stats.getDeaths());
+        deathScore.setScore(7);
+
         p.setScoreboard(b);
     }
 
