@@ -27,27 +27,11 @@ public class PlayerMoveListener implements Listener {
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
             return;
         }
-        PlayerStats stats;
-        if (DeathMaze.getInstance().stats.containsKey(p)) {
-            stats = DeathMaze.getInstance().stats.get(p);
-        } else {
-            if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
-                DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
-                stats = DeathMaze.getInstance().stats.get(p);
-            } else {
-                PlayerStats newStats = new PlayerStats();
-                newStats.setName(p.getName());
-                newStats.setUuid(p.getUniqueId().toString());
-                DeathMaze.getInstance().stats.put(p, newStats);
-                stats = DeathMaze.getInstance().stats.get(p);
-            }
-        }
-        ScoreBoardUtil.send(p, stats);
         if (!locs.containsKey(p)) {
             locs.put(p, p.getLocation());
             return;
         }
-        if (p.getLocation().getX() == locs.get(p).getX() && p.getLocation().getZ() == locs.get(p).getZ()) {
+        if (p.getLocation().getBlockX() == locs.get(p).getBlockX() && p.getLocation().getBlockZ() == locs.get(p).getBlockZ()) {
             return;
         }
         PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));

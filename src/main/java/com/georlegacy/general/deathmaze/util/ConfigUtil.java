@@ -43,21 +43,20 @@ public class ConfigUtil {
 
     public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
         HashMap<String, Integer> scores = new HashMap<String, Integer>();
-        String[] lines = this.config.getString("ScoreboardFormat").replace("\n", "|LINE_BREAK_TEMP_PC|").split("|LINE_BREAK_TEMP_PC|");
+        List<String> lines = this.config.getStringList("ScoreboardFormat");
         int i = 0;
         for (String line : lines) {
-            System.out.println(line);
             String formattedLine = ChatColor.translateAlternateColorCodes('&', line
                     .replace("%UUID%", stats.getUuid())
                     .replace("%NAME%", stats.getName())
-                    .replace("%DISTANCE%", stats.getDistance() + "")
+                    .replace("%DISTANCE%", DistanceFormatter.format(stats.getDistance()))
                     .replace("%KILLS%", stats.getKills() + "")
                     .replace("%DEATHS%", stats.getDeaths() + "")
                     .replace("%REGIONS%", stats.getRegionsExplored() + "")
                     .replace("%CONTAINERS%", stats.getContainersLooted() + ""));
             if (line.length() >= 40)
                 formattedLine = "LINE_TOO_LONG";
-            scores.put(formattedLine, lines.length - i);
+            scores.put(formattedLine, lines.size() - i);
             i++;
         }
         return scores.entrySet();

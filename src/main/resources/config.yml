@@ -17,5 +17,10 @@ EnabledWorlds:
 ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'
 
 # Format for sidebar scoreboard content.
-# Color codes and placeholders allowed, use \n for new line.
-ScoreboardFormat: '&r\n&bName: &e%NAME%\n&bDistance: &e%DISTANCE%\n&bKills: &e%KILLS%\n&bDeaths: &e%DEATHS%'
+# Color codes and placeholders allowed.
+ScoreboardFormat:
+ - '&r'
+ - '&bName: &e%NAME%'
+ - '&bDistance: &e%DISTANCE%'
+ - '&bKills: &e%KILLS%'
+ - '&bDeaths: &e%DEATHS%'

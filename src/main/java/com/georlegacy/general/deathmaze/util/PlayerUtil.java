@@ -9,45 +9,59 @@ public class PlayerUtil {
     public static void addDistance(Player p, double dist) {
         if (dist > 15)
             return;
+        PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
-            DeathMaze.getInstance().stats.get(p).setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
+            stats = DeathMaze.getInstance().stats.get(p);
+            stats.setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
         } else {
             if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
                 DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
-                DeathMaze.getInstance().stats.get(p).setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
+                stats = DeathMaze.getInstance().stats.get(p);
+                stats.setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
             } else {
-                PlayerStats stats = new PlayerStats();
+                stats = new PlayerStats();
                 stats.setName(p.getName());
+                stats.setUuid(p.getUniqueId().toString());
                 stats.setDistance(dist);
             }
         }
+        ScoreBoardUtil.send(p, stats);
     }
 
     public static void addKill(Player p) {
+        PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
-            DeathMaze.getInstance().stats.get(p).setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
+            stats = DeathMaze.getInstance().stats.get(p);
+            stats.setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
         } else {
             if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
                 DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
-                DeathMaze.getInstance().stats.get(p).setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
+                stats = DeathMaze.getInstance().stats.get(p);
+                stats.setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
             } else {
-                PlayerStats stats = new PlayerStats();
+                stats = new PlayerStats();
                 stats.setName(p.getName());
+                stats.setUuid(p.getUniqueId().toString());
                 stats.setKills(1);
             }
         }
     }
 
     public static void addDeath(Player p) {
+        PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
             DeathMaze.getInstance().stats.get(p).setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
+            stats = DeathMaze.getInstance().stats.get(p);
+            stats.setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
         } else {
             if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
                 DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
-                DeathMaze.getInstance().stats.get(p).setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
+                stats = DeathMaze.getInstance().stats.get(p);
+                stats.setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
             } else {
-                PlayerStats stats = new PlayerStats();
+                stats = new PlayerStats();
                 stats.setName(p.getName());
+                stats.setUuid(p.getUniqueId().toString());
                 stats.setDeaths(1);
             }
         }

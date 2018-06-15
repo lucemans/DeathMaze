@@ -19,7 +19,6 @@ public class ScoreBoardUtil {
         o.setDisplayName(DeathMaze.getInstance().getConfiguration().getScoreboardHeader());
 
         for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getScoreBoardFormat(stats)) {
-            System.out.println(entry.getKey());
             Score s = o.getScore(entry.getKey());
             s.setScore(entry.getValue());
         }
