@@ -46,6 +46,7 @@ public class ConfigUtil {
         String[] lines = this.config.getString("ScoreboardFormat").split("\\n");
         int i = 0;
         for (String line : lines) {
+            System.out.println(line);
             String formattedLine = ChatColor.translateAlternateColorCodes('&', line
                     .replace("%UUID%", stats.getUuid())
                     .replace("%NAME%", stats.getName())
@@ -54,6 +55,8 @@ public class ConfigUtil {
                     .replace("%DEATHS%", stats.getDeaths() + "")
                     .replace("%REGIONS%", stats.getRegionsExplored() + "")
                     .replace("%CONTAINERS%", stats.getContainersLooted() + ""));
+            if (line.length() >= 40)
+                formattedLine = "LINE_TOO_LONG";
             scores.put(formattedLine, lines.length - i);
             i++;
         }

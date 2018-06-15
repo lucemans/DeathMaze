@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ScoreBoardUtil {
@@ -20,6 +19,7 @@ public class ScoreBoardUtil {
         o.setDisplayName(DeathMaze.getInstance().getConfiguration().getScoreboardHeader());
 
         for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getScoreBoardFormat(stats)) {
+            System.out.println(entry.getKey());
             Score s = o.getScore(entry.getKey());
             s.setScore(entry.getValue());
         }
