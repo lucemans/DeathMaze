@@ -43,7 +43,7 @@ public class ConfigUtil {
 
     public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
         HashMap<String, Integer> scores = new HashMap<String, Integer>();
-        String[] lines = this.config.getString("ScoreboardFormat").split("\\n");
+        String[] lines = this.config.getString("ScoreboardFormat").replace("\n", "|LINE_BREAK_TEMP_PC|").split("|LINE_BREAK_TEMP_PC|");
         int i = 0;
         for (String line : lines) {
             System.out.println(line);
