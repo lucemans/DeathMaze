@@ -50,7 +50,6 @@ public class PlayerUtil {
     public static void addDeath(Player p) {
         PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
-            DeathMaze.getInstance().stats.get(p).setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
             stats = DeathMaze.getInstance().stats.get(p);
             stats.setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
         } else {
