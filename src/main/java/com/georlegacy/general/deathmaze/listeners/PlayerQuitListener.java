@@ -1,7 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
-import com.georlegacy.general.deathmaze.util.DataEncoder;
+import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +18,7 @@ public class PlayerQuitListener implements Listener {
         Player p = e.getPlayer();
 
         if (plugin.stats.containsKey(p)) {
-            DataEncoder.encode(plugin.stats.get(p));
+            StatsEncoder.encode(plugin.stats.get(p));
         }
     }
 

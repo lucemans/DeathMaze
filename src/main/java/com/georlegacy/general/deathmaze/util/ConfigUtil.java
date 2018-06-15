@@ -62,4 +62,8 @@ public class ConfigUtil {
         return scores.entrySet();
     }
 
+    public long getDefaultRefillMillis() {
+        return this.config.getLong("DefaultRefillMillis");
+    }
+
 }

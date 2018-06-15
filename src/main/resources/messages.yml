@@ -1,0 +1,15 @@
+# The prefix displayed before every message.
+# Ensure there is a space after the prefix.
+Prefix: '&cDeath&7Maze '
+
+# Global placeholders
+# %NAME% - The player's name
+
+# Unique placeholders
+# %LOC% - The block's location
+AddContainerLootableCommandFailNoContainer: '&eSorry, the block you are currently looking at does not appear to be a container.'
+
+# Unique placeholders
+# %LOC% - The container's location
+# %TYPE% - The container's type
+AddContainerLootableCommandSuccess: '&aThe container has been added to the maze successfully.'

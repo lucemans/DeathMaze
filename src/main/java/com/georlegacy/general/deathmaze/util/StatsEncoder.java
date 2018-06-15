@@ -5,7 +5,7 @@ import com.georlegacy.general.deathmaze.objects.PlayerStats;
 
 import java.io.*;
 
-public class DataEncoder {
+public class StatsEncoder {
 
     public static boolean encode(PlayerStats stats) {
         try {
@@ -40,10 +40,7 @@ public class DataEncoder {
                 fis.close();
                 ois.close();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }

@@ -24,3 +24,6 @@ ScoreboardFormat:
  - '&bDistance: &e%DISTANCE%'
  - '&bKills: &e%KILLS%'
  - '&bDeaths: &e%DEATHS%'
+
+# Default refill time period when creating lootable containers in milliseconds.
+DefaultRefillMillis: 5000

@@ -4,9 +4,12 @@ import com.georlegacy.general.deathmaze.listeners.PlayerChangeWorldListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerDeathListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerKillEntityListener;
 import com.georlegacy.general.deathmaze.listeners.PlayerMoveListener;
+import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
-import com.georlegacy.general.deathmaze.util.DataEncoder;
+import com.georlegacy.general.deathmaze.util.LangUtil;
+import com.georlegacy.general.deathmaze.util.MazeEncoder;
+import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,11 +20,17 @@ import java.util.Map;
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
 
+    private Maze maze;
+
     protected static DeathMaze instance;
     private ConfigUtil config;
 
     public ConfigUtil getConfiguration() {
         return config;
+    }
+
+    public Maze getMaze() {
+        return maze;
     }
 
     public static DeathMaze getInstance() {
@@ -33,7 +42,11 @@ public final class DeathMaze extends JavaPlugin {
         getDataFolder().mkdirs();
         new File(getDataFolder(), File.separator + "players").mkdirs();
 
+        LangUtil.init();
+
         instance = this;
+
+        maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
         config = ConfigUtil.get();
 
@@ -47,7 +60,7 @@ public final class DeathMaze extends JavaPlugin {
     @Override
     public void onDisable() {
         for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
-            DataEncoder.encode(entry.getValue());
+            StatsEncoder.encode(entry.getValue());
         }
     }
 

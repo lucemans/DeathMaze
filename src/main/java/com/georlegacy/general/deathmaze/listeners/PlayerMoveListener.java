@@ -1,10 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
-import com.georlegacy.general.deathmaze.objects.PlayerStats;
-import com.georlegacy.general.deathmaze.util.DataEncoder;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
-import com.georlegacy.general.deathmaze.util.ScoreBoardUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -2,3 +2,7 @@ name: DeathMaze
 author: 615283
 version: ${project.version}
 main: com.georlegacy.general.deathmaze.DeathMaze
+commands:
+  deathmaze:
+    usage: /<command>
+    aliases: [dm, dmaze, deathm, maze]

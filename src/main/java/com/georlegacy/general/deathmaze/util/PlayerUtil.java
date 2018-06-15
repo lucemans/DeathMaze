@@ -14,8 +14,8 @@ public class PlayerUtil {
             stats = DeathMaze.getInstance().stats.get(p);
             stats.setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
         } else {
-            if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
-                DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
+            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
                 stats = DeathMaze.getInstance().stats.get(p);
                 stats.setDistance(DeathMaze.getInstance().stats.get(p).getDistance() + dist);
             } else {
@@ -34,8 +34,8 @@ public class PlayerUtil {
             stats = DeathMaze.getInstance().stats.get(p);
             stats.setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
         } else {
-            if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
-                DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
+            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
                 stats = DeathMaze.getInstance().stats.get(p);
                 stats.setKills(DeathMaze.getInstance().stats.get(p).getKills() + 1);
             } else {
@@ -53,8 +53,8 @@ public class PlayerUtil {
             stats = DeathMaze.getInstance().stats.get(p);
             stats.setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
         } else {
-            if (DataEncoder.decode(p.getUniqueId().toString()) != null) {
-                DeathMaze.getInstance().stats.put(p, DataEncoder.decode(p.getUniqueId().toString()));
+            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
                 stats = DeathMaze.getInstance().stats.get(p);
                 stats.setDeaths(DeathMaze.getInstance().stats.get(p).getDeaths() + 1);
             } else {
