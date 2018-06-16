@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
+import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -73,7 +74,23 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("set")) {
-            //TODO add
+            if (args[2].equalsIgnoreCase("refill")) {
+                if (args.length > 4) {
+                    //TODO fail no number
+                    return true;
+                }
+                try {
+                    long seconds = Long.parseLong(args[3]);
+                    //TODO success msg and changing period
+                    return true;
+                } catch (NumberFormatException e) {
+                    //TODO not a number lol
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+            p.sendMessage(ColorUtil.format("&c/deathmaze lootable set refill <seconds> - &7Sets the refill time for the container"));
+            return true;
         }
         if (args[1].equalsIgnoreCase("update")) {
             boolean isEmpty = true;
