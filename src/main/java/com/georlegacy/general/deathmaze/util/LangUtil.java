@@ -10,20 +10,27 @@ import java.nio.file.Files;
 
 public class LangUtil {
 
-    protected static YamlConfiguration config;
+    protected YamlConfiguration config;
 
-    private static boolean isInitialised = false;
+    private boolean isInitialised = false;
 
     private LangUtil() {
         try {
             File f = new File(DeathMaze.getInstance().getDataFolder(), "messages.yml");
             if (!f.exists())
                 Files.copy(DeathMaze.getInstance().getClass().getClassLoader().getResourceAsStream("messages.yml"), f.toPath());
-            this.config = YamlConfiguration.loadConfiguration(f);
+            config = YamlConfiguration.loadConfiguration(f);
             isInitialised = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+        PREFIX = isInitialised ? format(config.getString("Prefix")) : null;
+        HELP_HEADER = isInitialised ? format(config.getString("HelpHeader")) : null;
+        NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : null;
+        ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
+        ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
     }
 
     public static void init() {
@@ -31,10 +38,14 @@ public class LangUtil {
     }
 
     //TODO add placeholders
-    public static String PREFIX = isInitialised ? format(config.getString("Prefix")) : null;
+    public static String PREFIX;
 
-    public static String ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
+    public static String HELP_HEADER;
 
-    public static String ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
+    public static String NO_PERMISSION_MESSAGE;
+
+    public static String ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER;
+
+    public static String ADD_CONTAINER_COMMAND_SUCCESS;
 
 }

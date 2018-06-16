@@ -7,6 +7,6 @@ import java.util.LinkedList;
 
 public class Maze implements Serializable {
 
-    @Getter public LinkedList<ContainerLootable> containers;
+    @Getter public LinkedList<ContainerLootable> containers = new LinkedList<ContainerLootable>();
 
 }

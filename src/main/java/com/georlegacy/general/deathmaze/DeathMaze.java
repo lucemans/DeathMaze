@@ -43,10 +43,9 @@ public final class DeathMaze extends JavaPlugin {
         getDataFolder().mkdirs();
         new File(getDataFolder(), File.separator + "players").mkdirs();
 
-        LangUtil.init();
-
         instance = this;
 
+        LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
         config = ConfigUtil.get();
@@ -62,6 +61,7 @@ public final class DeathMaze extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        MazeEncoder.encode(maze);
         for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
             StatsEncoder.encode(entry.getValue());
         }

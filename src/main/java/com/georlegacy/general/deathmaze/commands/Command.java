@@ -1,13 +1,16 @@
 package com.georlegacy.general.deathmaze.commands;
 
-import org.bukkit.command.CommandSender;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface Command {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Command {
 
     String permission();
 
     String subCommand();
-
-    boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args);
 
 }

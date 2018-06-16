@@ -5,6 +5,11 @@ Prefix: '&cDeath&7Maze '
 # Global placeholders
 # %NAME% - The player's name
 
+# The header when help is displayed
+HelpHeader: '&aHelp for DeathMaze:'
+
+NoPermissionMessage: '&eIt does not appear that you currently have permission to run this command.'
+
 # Unique placeholders
 # %LOC% - The block's location
 AddContainerLootableCommandFailNoContainer: '&eSorry, the block you are currently looking at does not appear to be a container.'

@@ -8,44 +8,43 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Container;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.InventoryHolder;
 
-public class AddContainerLootableCommand implements Command {
-    private final DeathMaze plugin;
-    public AddContainerLootableCommand(DeathMaze plugin) {
-        this.plugin = plugin;
-    }
+import java.util.HashSet;
+import java.util.Set;
 
-    @Override
+public class ContainerLootableCommand {
+
+    @Command(permission = "deathmaze.addlootablecontainer", subCommand = "lootable")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         Player p = (Player) sender;
-        Block block = p.getTargetBlock(null, 5);
-        if (!(block instanceof Container)) {
+        Set<Material> transparent = new HashSet<Material>();
+        transparent.add(Material.AIR);
+        Block block = p.getTargetBlock(transparent, 5);
+        if (!(block.getState() instanceof InventoryHolder)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            System.out.println("1");
             return true;
         }
         if (block == null) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            System.out.println("2");
             return true;
         }
         if (block.getType().equals(Material.AIR)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            System.out.println("3");
             return true;
         }
-        plugin.getMaze().getContainers().add(new ContainerLootable(
-                plugin.getConfiguration().getDefaultRefillMillis(),
-                (Container) block
-        ));
-        p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_SUCCESS);
-        return true;
-    }
-
-    @Override
-    public String permission() {
-        return "deathmaze.addlootablecontainer";
-    }
-
-    @Override
-    public String subCommand() {
-        return "add lootable";
+        if (args[1].equalsIgnoreCase("add")) {
+            DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
+                    DeathMaze.getInstance().getConfiguration().getDefaultRefillMillis(),
+                    (InventoryHolder) block.getState()
+            ));
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_SUCCESS);
+            return true;
+        }
+        //TODO remove and help
+        return false;
     }
 }
