@@ -75,7 +75,8 @@ public class ContainerLootableCommand {
         if (args[1].equalsIgnoreCase("set")) {
             //TODO add
         }
-        if (args[1].equalsIgnoreCase("update")) {boolean isEmpty = true;
+        if (args[1].equalsIgnoreCase("update")) {
+            boolean isEmpty = true;
             for (ItemStack it : ((InventoryHolder) block.getState()).getInventory().getContents()) {
                 if (it != null)
                     isEmpty = false;
@@ -95,6 +96,7 @@ public class ContainerLootableCommand {
                     DeathMaze.getInstance().getMaze().getContainers().remove(c);
                     DeathMaze.getInstance().reloadAll();
                     p.sendMessage(LangUtil.PREFIX + LangUtil.UPDATE_CONTAINER_COMMAND_SUCCESS);
+                    return true;
                 }
             }
             p.sendMessage(LangUtil.PREFIX + LangUtil.UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
