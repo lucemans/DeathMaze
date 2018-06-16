@@ -35,6 +35,7 @@ public class LangUtil {
         ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
         ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
         INCORRECT_ARGS_MESSAGE = isInitialised ? format(config.getString("IncorrectArgsMessage")) : null;
+        REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : null;
     }
 
     public static void init() {
@@ -59,5 +60,7 @@ public class LangUtil {
     public static String ADD_CONTAINER_COMMAND_SUCCESS;
 
     public static String ADD_CONTAINER_COMMAND_EMPTY;
+
+    public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
 
 }

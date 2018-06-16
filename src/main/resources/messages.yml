@@ -32,3 +32,7 @@ AddContainerLootableCommandSuccess: '&aThe container has been added to the maze 
 # Unique placeholders
 # %LOC% - The container's location
 AddContainerLootableCommandEmpty: '&eYou cannot add an empty container!'
+
+# Unique placeholders
+# %LOC% - The container's location
+RemoveContainerAttemptMessage: '&eThat container is registered in the maze and cannot be removed unless it has been removed.'

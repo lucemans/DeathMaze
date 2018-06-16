@@ -1,10 +1,7 @@
 package com.georlegacy.general.deathmaze;
 
 import com.georlegacy.general.deathmaze.commands.DeathMazeCommand;
-import com.georlegacy.general.deathmaze.listeners.PlayerChangeWorldListener;
-import com.georlegacy.general.deathmaze.listeners.PlayerDeathListener;
-import com.georlegacy.general.deathmaze.listeners.PlayerKillEntityListener;
-import com.georlegacy.general.deathmaze.listeners.PlayerMoveListener;
+import com.georlegacy.general.deathmaze.listeners.*;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
@@ -54,6 +51,7 @@ public final class DeathMaze extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerKillEntityListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
 
         this.getCommand("deathmaze").setExecutor(new DeathMazeCommand());
     }
@@ -77,7 +75,6 @@ public final class DeathMaze extends JavaPlugin {
         refills.clear();
         for (ContainerLootable c : maze.getContainers()) {
             Refill refill = new Refill(this);
-            System.out.println(c.getRefillSeconds());
             final int id = getServer().getScheduler().scheduleSyncRepeatingTask(this, refill, 1L, (c.getRefillSeconds()*20));
             refill.setTaskID(id);
             refills.put(id, c);
