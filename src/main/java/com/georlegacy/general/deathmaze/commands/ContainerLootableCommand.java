@@ -35,7 +35,7 @@ public class ContainerLootableCommand {
         }
         if (args[1].equalsIgnoreCase("add")) {
             DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
-                    DeathMaze.getInstance().getConfiguration().getDefaultRefillMillis(),
+                    DeathMaze.getInstance().getConfiguration().getDefaultRefillSeconds(),
                     (InventoryHolder) block.getState(),
                     block.getLocation()
             ));

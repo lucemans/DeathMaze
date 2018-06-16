@@ -12,8 +12,8 @@ import java.io.Serializable;
 
 public class ContainerLootable implements Serializable {
 
-    public ContainerLootable(final long refillMillis, final InventoryHolder container, final Location location) {
-        this.refillMillis = refillMillis;
+    public ContainerLootable(final long refillSeconds, final InventoryHolder container, final Location location) {
+        this.refillMillis = refillSeconds;
         this.items = container.getInventory().getContents();
     }
 
