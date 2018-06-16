@@ -23,23 +23,21 @@ public class ContainerLootableCommand {
         Block block = p.getTargetBlock(transparent, 5);
         if (!(block.getState() instanceof InventoryHolder)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
-            System.out.println("1");
             return true;
         }
         if (block == null) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
-            System.out.println("2");
             return true;
         }
         if (block.getType().equals(Material.AIR)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
-            System.out.println("3");
             return true;
         }
         if (args[1].equalsIgnoreCase("add")) {
             DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
                     DeathMaze.getInstance().getConfiguration().getDefaultRefillMillis(),
-                    (InventoryHolder) block.getState()
+                    (InventoryHolder) block.getState(),
+                    block.getLocation()
             ));
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_SUCCESS);
             return true;

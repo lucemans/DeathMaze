@@ -22,8 +22,6 @@ public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
 
     private Maze maze;
-
-    protected static DeathMaze instance;
     private ConfigUtil config;
 
     public ConfigUtil getConfiguration() {
@@ -35,15 +33,13 @@ public final class DeathMaze extends JavaPlugin {
     }
 
     public static DeathMaze getInstance() {
-        return instance;
+        return getPlugin(DeathMaze.class);
     }
 
     @Override
     public void onEnable() {
         getDataFolder().mkdirs();
         new File(getDataFolder(), File.separator + "players").mkdirs();
-
-        instance = this;
 
         LangUtil.init();
         maze = MazeEncoder.decode();
