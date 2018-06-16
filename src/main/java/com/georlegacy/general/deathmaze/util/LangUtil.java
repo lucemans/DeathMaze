@@ -31,6 +31,8 @@ public class LangUtil {
         NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : null;
         REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("RemoveContainerLootableCommandFailNotContainer")) : null;
         REMOVE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("RemoveContainerLootableCommandSuccess")) : null;
+        UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("RemoveContainerLootableCommandFailNotContainer")) : null;
+        UPDATE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("RemoveContainerLootableCommandSuccess")) : null;
         ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
         ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
         ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
@@ -54,6 +56,10 @@ public class LangUtil {
     public static String REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
     public static String REMOVE_CONTAINER_COMMAND_SUCCESS;
+
+    public static String UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
+
+    public static String UPDATE_CONTAINER_COMMAND_SUCCESS;
 
     public static String ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER;
 

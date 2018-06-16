@@ -60,31 +60,45 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("remove")) {
-            List<Location> containers = new ArrayList<Location>();
-            DeathMaze.getInstance().getMaze().getContainers().forEach((containerLootable -> containers.add(containerLootable.getLocation().getLocation())));
-            boolean isCurrentContainer = false;
-            for (Location l : containers) {
-                if (l.equals(block.getLocation())) {
-                    isCurrentContainer = true;
+            List<ContainerLootable> containers = DeathMaze.getInstance().getMaze().getContainers();
+            for (ContainerLootable c : containers) {
+                if (c.getLocation().getLocation().equals(block.getLocation())) {
+                    DeathMaze.getInstance().getMaze().getContainers().remove(c);
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_SUCCESS);
+                    DeathMaze.getInstance().reloadAll();
+                    return true;
                 }
             }
-            if (!isCurrentContainer) {
-                p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
-                return true;
-            }
-            DeathMaze.getInstance().getMaze().getContainers().remove(new ContainerLootable(
-                    DeathMaze.getInstance().getConfiguration().getDefaultRefillSeconds(),
-                    (InventoryHolder) block.getState(),
-                    block.getLocation()
-            ));
-            p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_SUCCESS);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
             return true;
         }
         if (args[1].equalsIgnoreCase("set")) {
             //TODO add
         }
-        if (args[1].equalsIgnoreCase("update")) {
-            //TODO add
+        if (args[1].equalsIgnoreCase("update")) {boolean isEmpty = true;
+            for (ItemStack it : ((InventoryHolder) block.getState()).getInventory().getContents()) {
+                if (it != null)
+                    isEmpty = false;
+            }
+            if (isEmpty) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_EMPTY);
+                return true;
+            }
+            List<ContainerLootable> containers = DeathMaze.getInstance().getMaze().getContainers();
+            for (ContainerLootable c : containers) {
+                if (c.getLocation().getLocation().equals(block.getLocation())) {
+                    DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
+                            c.getRefillSeconds(),
+                            (InventoryHolder) block.getState(),
+                            c.getLocation().getLocation()
+                    ));
+                    DeathMaze.getInstance().getMaze().getContainers().remove(c);
+                    DeathMaze.getInstance().reloadAll();
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.UPDATE_CONTAINER_COMMAND_SUCCESS);
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
+            return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;

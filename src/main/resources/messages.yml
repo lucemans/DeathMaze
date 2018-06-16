@@ -22,6 +22,14 @@ RemoveContainerLootableCommandSuccess: '&aThat container has been removed from t
 
 # Unique placeholders
 # %LOC% - The block's location
+UpdateContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
+
+# Unique placeholders
+# %LOC% - The block's location
+UpdateContainerLootableCommandSuccess: '&aThe containers content has been updated successfully.'
+
+# Unique placeholders
+# %LOC% - The block's location
 AddContainerLootableCommandFailNoContainer: '&eSorry, the block you are currently looking at does not appear to be a container.'
 
 # Unique placeholders
