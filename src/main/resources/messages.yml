@@ -1,6 +1,6 @@
 # The prefix displayed before every message.
 # Ensure there is a space after the prefix.
-Prefix: '&cDeath&7Maze '
+Prefix: '&c&lDeath&7&lMaze &8| '
 
 # Global placeholders
 # %NAME% - The player's name
@@ -9,6 +9,16 @@ Prefix: '&cDeath&7Maze '
 HelpHeader: '&aHelp for DeathMaze:'
 
 NoPermissionMessage: '&eIt does not appear that you currently have permission to run this command.'
+
+IncorrectArgsMessage: '&eYou have provided incorrect arguments. Use /deathmaze to see help.'
+
+# Unique placeholders
+# %LOC% - The block's location
+RemoveContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
+
+# Unique placeholders
+# %LOC% - The block's location
+RemoveContainerLootableCommandSuccess: '&aThat container has been removed from the maze. It will no longer be refilled.'
 
 # Unique placeholders
 # %LOC% - The block's location

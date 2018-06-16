@@ -5,7 +5,6 @@ import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.Container;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
@@ -22,19 +21,23 @@ public class ContainerLootableCommand {
         transparent.add(Material.AIR);
         Block block = p.getTargetBlock(transparent, 5);
         if (!(block.getState() instanceof InventoryHolder)) {
-            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;
         }
         if (block == null) {
-            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;
         }
         if (block.getType().equals(Material.AIR)) {
-            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;
         }
         if (((InventoryHolder) block.getState()).getInventory().getContents().length == 0) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_EMPTY);
+            return true;
+        }
+        if (args.length == 1) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
             return true;
         }
         if (args[1].equalsIgnoreCase("add")) {
@@ -47,7 +50,24 @@ public class ContainerLootableCommand {
             DeathMaze.getInstance().reloadAll();
             return true;
         }
-        //TODO remove and help
-        return false;
+        if (args[1].equalsIgnoreCase("remove")) {
+            if (!DeathMaze.getInstance().getMaze().getContainers().contains(new ContainerLootable(
+                    DeathMaze.getInstance().getConfiguration().getDefaultRefillSeconds(),
+                    (InventoryHolder) block.getState(),
+                    block.getLocation()
+            ))) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
+                return true;
+            }
+            DeathMaze.getInstance().getMaze().getContainers().remove(new ContainerLootable(
+                    DeathMaze.getInstance().getConfiguration().getDefaultRefillSeconds(),
+                    (InventoryHolder) block.getState(),
+                    block.getLocation()
+            ));
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_SUCCESS);
+            return true;
+        }
+        p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
+        return true;
     }
 }
