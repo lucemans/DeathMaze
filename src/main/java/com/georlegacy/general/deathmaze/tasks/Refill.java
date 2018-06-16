@@ -15,15 +15,18 @@ public class Refill implements Runnable {
     private int taskID;
     private final DeathMaze plugin;
 
-    public Refill(int taskID, DeathMaze plugin) {
-        this.taskID = taskID;
+    public Refill(DeathMaze plugin) {
         this.plugin = plugin;
+    }
+
+    public void setTaskID(int taskID) {
+        this.taskID = taskID;
     }
 
     @Override
     public void run() {
         ContainerLootable c = plugin.getRefills().get(taskID);
-        InventoryHolder inv = (InventoryHolder) c.getLocation().getBlock().getState();
+        InventoryHolder inv = (InventoryHolder) c.getLocation().getLocation().getBlock().getState();
         List<ItemStack> it = new ArrayList<ItemStack>();
         try {
             inv.getInventory().setContents(ItemStackSerializerUtil.itemStackArrayFromBase64(c.getItems()));

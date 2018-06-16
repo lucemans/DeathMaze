@@ -40,6 +40,7 @@ public class ContainerLootableCommand {
                     block.getLocation()
             ));
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_SUCCESS);
+            DeathMaze.getInstance().reloadAll();
             return true;
         }
         //TODO remove and help

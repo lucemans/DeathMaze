@@ -8,6 +8,7 @@ import com.georlegacy.general.deathmaze.listeners.PlayerMoveListener;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
+import com.georlegacy.general.deathmaze.tasks.Refill;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
@@ -63,12 +64,23 @@ public final class DeathMaze extends JavaPlugin {
         for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
             StatsEncoder.encode(entry.getValue());
         }
+        for (int id : refills.keySet()) {
+            getServer().getScheduler().cancelTask(id);
+        }
+    }
+
+    public void reloadAll() {
+        startRefills();
     }
 
     private void startRefills() {
         refills.clear();
         for (ContainerLootable c : maze.getContainers()) {
-            refills.put(getServer().getScheduler().scheduleSyncRepeatingTask(this, null, 0L, c.getRefillMillis()*20), c);
+            Refill refill = new Refill(this);
+            System.out.println(c.getRefillSeconds());
+            final int id = getServer().getScheduler().scheduleSyncRepeatingTask(this, refill, 1L, (c.getRefillSeconds()*20));
+            refill.setTaskID(id);
+            refills.put(id, c);
         }
     }
 
