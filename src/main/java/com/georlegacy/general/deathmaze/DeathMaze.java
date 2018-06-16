@@ -46,6 +46,8 @@ public final class DeathMaze extends JavaPlugin {
         refills = new HashMap<Integer, ContainerLootable>();
         config = ConfigUtil.get();
 
+        startRefills();
+
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
