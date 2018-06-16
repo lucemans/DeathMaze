@@ -18,3 +18,7 @@ AddContainerLootableCommandFailNoContainer: '&eSorry, the block you are currentl
 # %LOC% - The container's location
 # %TYPE% - The container's type
 AddContainerLootableCommandSuccess: '&aThe container has been added to the maze successfully.'
+
+# Unique placeholders
+# %LOC% - The container's location
+AddContainerLootableCommandEmpty: '&eYou cannot add an empty container!'

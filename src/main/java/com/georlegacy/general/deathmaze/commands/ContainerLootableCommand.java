@@ -33,6 +33,10 @@ public class ContainerLootableCommand {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;
         }
+        if (((InventoryHolder) block.getState()).getInventory().getContents().length == 0) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_EMPTY);
+            return true;
+        }
         if (args[1].equalsIgnoreCase("add")) {
             DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
                     DeathMaze.getInstance().getConfiguration().getDefaultRefillSeconds(),

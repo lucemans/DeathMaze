@@ -31,6 +31,7 @@ public class LangUtil {
         NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : null;
         ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
         ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
+        ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
     }
 
     public static void init() {
@@ -47,5 +48,7 @@ public class LangUtil {
     public static String ADD_CONTAINER_LOOATABLE_COMMAND_FAIL_NO_CONTAINER;
 
     public static String ADD_CONTAINER_COMMAND_SUCCESS;
+
+    public static String ADD_CONTAINER_COMMAND_EMPTY;
 
 }
