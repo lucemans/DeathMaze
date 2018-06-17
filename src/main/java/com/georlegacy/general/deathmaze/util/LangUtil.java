@@ -38,6 +38,10 @@ public class LangUtil {
         ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
         INCORRECT_ARGS_MESSAGE = isInitialised ? format(config.getString("IncorrectArgsMessage")) : null;
         REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : null;
+        SET_REFILL_TIME_CONTAINER_NOT_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNotNumber")) : null;
+        SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : null;
+        SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : null;
+        SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : null;
     }
 
     public static void init() {
@@ -68,5 +72,13 @@ public class LangUtil {
     public static String ADD_CONTAINER_COMMAND_EMPTY;
 
     public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
+
+    public static String SET_REFILL_TIME_CONTAINER_NOT_NUMBER;
+
+    public static String SET_REFILL_TIME_CONTAINER_NO_NUMBER;
+
+    public static String SET_REFILL_TIME_CONTAINER_SUCCESS;
+
+    public static String SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
 }

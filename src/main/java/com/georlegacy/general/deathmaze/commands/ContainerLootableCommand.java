@@ -4,6 +4,7 @@ import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
+import com.georlegacy.general.deathmaze.util.SerializableLocation;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -74,17 +75,36 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("set")) {
+            if (args.length < 3) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+                p.sendMessage(ColorUtil.format("&c/deathmaze lootable set refill <seconds> - &7Sets the refill time for the container"));
+                return true;
+            }
             if (args[2].equalsIgnoreCase("refill")) {
-                if (args.length > 4) {
-                    //TODO fail no number
+                if (args.length < 4) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REFILL_TIME_CONTAINER_NO_NUMBER);
                     return true;
                 }
                 try {
                     long seconds = Long.parseLong(args[3]);
-                    //TODO success msg and changing period
+                    List<ContainerLootable> containers = DeathMaze.getInstance().getMaze().getContainers();
+                    for (ContainerLootable c : containers) {
+                        if (c.getLocation().getLocation().equals(block.getLocation())) {
+                            DeathMaze.getInstance().getMaze().getContainers().remove(c);
+                            DeathMaze.getInstance().getMaze().getContainers().add(new ContainerLootable(
+                                    seconds,
+                                    (InventoryHolder) block.getState(),
+                                    c.getLocation().getLocation()
+                            ));
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REFILL_TIME_CONTAINER_SUCCESS);
+                            DeathMaze.getInstance().reloadAll();
+                            return true;
+                        }
+                    }
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
                     return true;
                 } catch (NumberFormatException e) {
-                    //TODO not a number lol
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REFILL_TIME_CONTAINER_NOT_NUMBER);
                     return true;
                 }
             }

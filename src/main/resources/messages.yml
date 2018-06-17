@@ -2,9 +2,6 @@
 # Ensure there is a space after the prefix.
 Prefix: '&c&lDeath&7&lMaze &8| '
 
-# Global placeholders
-# %NAME% - The player's name
-
 # The header when help is displayed
 HelpHeader: '&aHelp for DeathMaze:'
 
@@ -12,35 +9,26 @@ NoPermissionMessage: '&eIt does not appear that you currently have permission to
 
 IncorrectArgsMessage: '&eYou have provided incorrect arguments. Use /deathmaze to see help.'
 
-# Unique placeholders
-# %LOC% - The block's location
 RemoveContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
 
-# Unique placeholders
-# %LOC% - The block's location
 RemoveContainerLootableCommandSuccess: '&aThat container has been removed from the maze. It will no longer be refilled.'
 
-# Unique placeholders
-# %LOC% - The block's location
 UpdateContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
 
-# Unique placeholders
-# %LOC% - The block's location
 UpdateContainerLootableCommandSuccess: '&aThe containers content has been updated successfully.'
 
-# Unique placeholders
-# %LOC% - The block's location
 AddContainerLootableCommandFailNoContainer: '&eSorry, the block you are currently looking at does not appear to be a container.'
 
-# Unique placeholders
-# %LOC% - The container's location
-# %TYPE% - The container's type
 AddContainerLootableCommandSuccess: '&aThe container has been added to the maze successfully.'
 
-# Unique placeholders
-# %LOC% - The container's location
 AddContainerLootableCommandEmpty: '&eYou cannot add an empty container!'
 
-# Unique placeholders
-# %LOC% - The container's location
 RemoveContainerAttemptMessage: '&eThat container is registered in the maze and cannot be removed unless it has been removed.'
+
+SetRefillTimeContainerNotNumber: 'The refill time for this container must be a number of seconds.'
+
+SetRefillTimeContainerNoNumber: 'You need to provide the number of seconds for the refill time.'
+
+SetRefillTimeContainerSuccess: 'You have successfully changed the refill time.'
+
+SetRefillTimeContainerCommandFailNotContainer: '&eThat container is not currently registered.'
