@@ -23,6 +23,7 @@ public class PlayerUtil {
                 stats.setName(p.getName());
                 stats.setUuid(p.getUniqueId().toString());
                 stats.setDistance(dist);
+                DeathMaze.getInstance().stats.put(p, stats);
             }
         }
         ScoreBoardUtil.send(p, stats);
