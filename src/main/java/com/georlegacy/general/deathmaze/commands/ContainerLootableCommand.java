@@ -20,7 +20,7 @@ import java.util.Set;
 
 public class ContainerLootableCommand {
 
-    @Command(permission = "deathmaze.addlootablecontainer", subCommand = "lootable")
+    @Command(permission = "deathmaze.admin.lootable", subCommand = "lootable")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         Player p = (Player) sender;
         Set<Material> transparent = new HashSet<Material>();

@@ -18,12 +18,19 @@ public class DeathMazeCommand implements CommandExecutor {
             sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
             return true;
         }
+        com.georlegacy.general.deathmaze.commands.Command c;
         switch (args[0]) {
             case "lootable":
-                com.georlegacy.general.deathmaze.commands.Command c = getAnnotation(ContainerLootableCommand.class);
+                c = getAnnotation(ContainerLootableCommand.class);
                 if (!sender.hasPermission(c.permission()))
                     sender.sendMessage(LangUtil.PREFIX + LangUtil.NO_PERMISSION_MESSAGE);
                 new ContainerLootableCommand().onCommand(sender, command, label, args);
+                break;
+            case "region":
+                c = getAnnotation(RegionExplorableCommand.class);
+                if (!sender.hasPermission(c.permission()))
+                    sender.sendMessage(LangUtil.PREFIX + LangUtil.NO_PERMISSION_MESSAGE);
+                new RegionExplorableCommand().onCommand(sender, command, label, args);
                 break;
         }
 

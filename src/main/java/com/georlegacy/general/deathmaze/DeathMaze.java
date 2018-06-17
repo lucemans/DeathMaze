@@ -10,6 +10,7 @@ import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
 import com.georlegacy.general.deathmaze.util.StatsEncoder;
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,11 +25,11 @@ public final class DeathMaze extends JavaPlugin {
 
     @Getter private Maze maze;
     private ConfigUtil config;
+    @Getter private WorldEditPlugin worldedit;
 
     public ConfigUtil getConfiguration() {
         return config;
     }
-
     public static DeathMaze getInstance() {
         return getPlugin(DeathMaze.class);
     }
