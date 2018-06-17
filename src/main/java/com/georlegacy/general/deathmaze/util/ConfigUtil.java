@@ -38,7 +38,7 @@ public class ConfigUtil {
     }
 
     public String getScoreboardHeader() {
-        return ChatColor.translateAlternateColorCodes('&', this.config.getString("ScoreboardHeader"));
+        return this.config.getString("ScoreBoardHeader").length() > 32 ? "HEADER_TOO_LONG" : ColorUtil.format(this.config.getString("ScoreboardHeader"));
     }
 
     public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
