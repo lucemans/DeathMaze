@@ -17,10 +17,10 @@ public class ContainerLootable implements Serializable {
         this.items = ItemStackSerializerUtil.itemStackArrayToBase64(container.getInventory().getContents());
     }
 
-    @Getter @Setter public long refillSeconds;
+    @Getter @Setter private long refillSeconds;
 
-    @Getter public SerializableLocation location;
+    @Getter private SerializableLocation location;
 
-    @Getter public String items;
+    @Getter private String items;
 
 }
