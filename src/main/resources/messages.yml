@@ -23,6 +23,8 @@ AddContainerLootableCommandSuccess: '&aThe container has been added to the maze 
 
 AddContainerLootableCommandEmpty: '&eYou cannot add an empty container!'
 
+AddContainerLootableCommandAlreadyRegistered: '&eThat container is already registered.'
+
 RemoveContainerAttemptMessage: '&eThat container is registered in the maze and cannot be removed unless it has been removed.'
 
 SetRefillTimeContainerNotNumber: 'The refill time for this container must be a number of seconds.'

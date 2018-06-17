@@ -43,6 +43,13 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("add")) {
+            List<ContainerLootable> containers = DeathMaze.getInstance().getMaze().getContainers();
+            for (ContainerLootable c : containers) {
+                if (c.getLocation().getLocation().equals(block.getLocation())) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_COMMAND_ALREADY_REGISTERED);
+                    return true;
+                }
+            }
             boolean isEmpty = true;
             for (ItemStack it : ((InventoryHolder) block.getState()).getInventory().getContents()) {
                 if (it != null)

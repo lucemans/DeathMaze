@@ -72,6 +72,9 @@ public final class DeathMaze extends JavaPlugin {
     }
 
     private void startRefills() {
+        for (int id : refills.keySet()) {
+            getServer().getScheduler().cancelTask(id);
+        }
         refills.clear();
         for (ContainerLootable c : maze.getContainers()) {
             Refill refill = new Refill(this);
