@@ -34,3 +34,13 @@ SetRefillTimeContainerNoNumber: 'You need to provide the number of seconds for t
 SetRefillTimeContainerSuccess: 'You have successfully changed the refill time.'
 
 SetRefillTimeContainerCommandFailNotContainer: '&eThat container is not currently registered.'
+
+AddRegionAlreadyExists: '&eA region of this name already exists.'
+
+AddRegionNoSelection: '&eYou need to make a WorldEdit selection prior to creating a region.'
+
+AddRegionSelectionTooSmall: '&eYoure current region selection is too small, it must be at least 2 x 2 x 2.'
+
+AddRegionNonCuboidSelection: '&eYour region selection must be of Cuboid nature'
+
+AddRegionExistingOverlap: '&eThis would overlap a current region.'

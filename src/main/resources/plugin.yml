@@ -1,4 +1,5 @@
 name: DeathMaze
+depend: [WorldEdit]
 author: 615283
 version: ${project.version}
 main: com.georlegacy.general.deathmaze.DeathMaze

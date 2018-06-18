@@ -43,6 +43,12 @@ public class LangUtil {
         SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : null;
         SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : null;
         SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : null;
+        ADD_REGION_ALREADY_EXISTS = isInitialised ? format(config.getString("AddRegionAlreadyExists")) : null;
+        ADD_REGION_NO_SELECTION = isInitialised ? format(config.getString("AddRegionNoSelection")) : null;
+        ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : null;
+        ADD_REGION_NON_CUBOID_SELECTION = isInitialised ? format(config.getString("AddRegionNonCuboidSelection")) : null;
+        ADD_REGION_EXISTING_OVERLAP = isInitialised ? format(config.getString("AddRegionExistingOverlap")) : null;
+
     }
 
     public static void init() {
@@ -82,5 +88,15 @@ public class LangUtil {
     public static String SET_REFILL_TIME_CONTAINER_SUCCESS;
 
     public static String SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
+
+    public static String ADD_REGION_ALREADY_EXISTS;
+
+    public static String ADD_REGION_NO_SELECTION;
+
+    public static String ADD_REGION_SELECTION_TOO_SMALL;
+
+    public static String ADD_REGION_NON_CUBOID_SELECTION;
+
+    public static String ADD_REGION_EXISTING_OVERLAP;
 
 }
