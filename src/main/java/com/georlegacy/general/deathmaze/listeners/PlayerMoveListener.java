@@ -1,7 +1,9 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
+import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,8 +21,9 @@ public class PlayerMoveListener implements Listener {
     public HashMap<Player, Location> locs = new HashMap<Player, Location>();
 
     @EventHandler
-    public void onMove(PlayerMoveEvent e) {
+    public void onMoveForDistance(PlayerMoveEvent e) {
         Player p = e.getPlayer();
+
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
             return;
         }
@@ -33,6 +36,27 @@ public class PlayerMoveListener implements Listener {
         }
         PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
         locs.put(p, p.getLocation());
+    }
+
+    @EventHandler
+    public void onMoveForRegion(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+
+        if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+            return;
+        }
+        for (RegionExplorable r : plugin.getMaze().getRegions()) {
+            CuboidSelection cs = new CuboidSelection(r.getPos1().getLocation().getWorld(), r.getPos1().getLocation(), r.getPos2().getLocation());
+            if (cs.contains(p.getLocation())) {
+                if (plugin.getRegions().containsKey(p)) {
+                    if (plugin.getRegions().get(p).equals(r)) {
+                        return;
+                    }
+                    //TODO update region
+                }
+                //TODO set region
+            }
+        }
     }
 
 }

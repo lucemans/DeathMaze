@@ -40,6 +40,9 @@ public class RegionExplorableCommand {
             }
             CuboidSelection cs = (CuboidSelection) s;
             for (RegionExplorable r : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (!r.getPos1().getLocation().getWorld().equals(cs.getWorld())) {
+                    continue;
+                }
                 if (cs.getMinimumPoint().getX() > r.getPos2().getLocation().getX() || cs.getMaximumPoint().getX() > r.getPos1().getLocation().getX()) {
                     p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_EXISTING_OVERLAP);
                     return true;
@@ -53,8 +56,14 @@ public class RegionExplorableCommand {
                     return true;
                 }
             }
-
-
+            DeathMaze.getInstance().getMaze().getRegions().add(new RegionExplorable(
+                    args[2],
+                    cs.getMinimumPoint(),
+                    cs.getMinimumPoint()
+            ));
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_SUCCESS);
+            DeathMaze.getInstance().reloadAll();
+            return true;
         }
         if (args[1].equalsIgnoreCase("remove")) {
 

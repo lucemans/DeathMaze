@@ -31,6 +31,7 @@ public class LangUtil {
         NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : null;
         REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("RemoveContainerLootableCommandFailNotContainer")) : null;
         REMOVE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("RemoveContainerLootableCommandSuccess")) : null;
+        REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : null;
         UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("UpdateContainerLootableCommandFailNotContainer")) : null;
         UPDATE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("UpdateContainerLootableCommandSuccess")) : null;
         ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
@@ -38,7 +39,6 @@ public class LangUtil {
         ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
         ADD_CONTAINER_COMMAND_ALREADY_REGISTERED = isInitialised ? format(config.getString("AddContainerLootableCommandAlreadyRegistered")) : null;
         INCORRECT_ARGS_MESSAGE = isInitialised ? format(config.getString("IncorrectArgsMessage")) : null;
-        REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : null;
         SET_REFILL_TIME_CONTAINER_NOT_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNotNumber")) : null;
         SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : null;
         SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : null;
@@ -48,6 +48,7 @@ public class LangUtil {
         ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : null;
         ADD_REGION_NON_CUBOID_SELECTION = isInitialised ? format(config.getString("AddRegionNonCuboidSelection")) : null;
         ADD_REGION_EXISTING_OVERLAP = isInitialised ? format(config.getString("AddRegionExistingOverlap")) : null;
+        ADD_REGION_SUCCESS = isInitialised ? format(config.getString("AddRegionSuccess")) : null;
 
     }
 
@@ -67,6 +68,8 @@ public class LangUtil {
 
     public static String REMOVE_CONTAINER_COMMAND_SUCCESS;
 
+    public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
+
     public static String UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
     public static String UPDATE_CONTAINER_COMMAND_SUCCESS;
@@ -78,8 +81,6 @@ public class LangUtil {
     public static String ADD_CONTAINER_COMMAND_EMPTY;
 
     public static String ADD_CONTAINER_COMMAND_ALREADY_REGISTERED;
-
-    public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
 
     public static String SET_REFILL_TIME_CONTAINER_NOT_NUMBER;
 
@@ -98,5 +99,7 @@ public class LangUtil {
     public static String ADD_REGION_NON_CUBOID_SELECTION;
 
     public static String ADD_REGION_EXISTING_OVERLAP;
+
+    public static String ADD_REGION_SUCCESS;
 
 }

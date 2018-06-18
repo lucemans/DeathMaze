@@ -5,6 +5,7 @@ import com.georlegacy.general.deathmaze.listeners.*;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
+import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.tasks.Refill;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
@@ -22,6 +23,7 @@ import java.util.Map;
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
     @Getter private HashMap<Integer, ContainerLootable> refills;
+    @Getter private HashMap<Player, RegionExplorable> regions;
 
     @Getter private Maze maze;
     private ConfigUtil config;

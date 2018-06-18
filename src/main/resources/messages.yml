@@ -13,6 +13,8 @@ RemoveContainerLootableCommandFailNotContainer: '&eThat container is not current
 
 RemoveContainerLootableCommandSuccess: '&aThat container has been removed from the maze. It will no longer be refilled.'
 
+RemoveContainerAttemptMessage: '&eThat container is registered in the maze and cannot be removed unless it has been removed.'
+
 UpdateContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
 
 UpdateContainerLootableCommandSuccess: '&aThe containers content has been updated successfully.'
@@ -24,8 +26,6 @@ AddContainerLootableCommandSuccess: '&aThe container has been added to the maze 
 AddContainerLootableCommandEmpty: '&eYou cannot add an empty container!'
 
 AddContainerLootableCommandAlreadyRegistered: '&eThat container is already registered.'
-
-RemoveContainerAttemptMessage: '&eThat container is registered in the maze and cannot be removed unless it has been removed.'
 
 SetRefillTimeContainerNotNumber: 'The refill time for this container must be a number of seconds.'
 
@@ -44,3 +44,5 @@ AddRegionSelectionTooSmall: '&eYoure current region selection is too small, it m
 AddRegionNonCuboidSelection: '&eYour region selection must be of Cuboid nature'
 
 AddRegionExistingOverlap: '&eThis would overlap a current region.'
+
+AddRegionSuccess: '&aThe region has been added successfully.'
