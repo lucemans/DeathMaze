@@ -52,9 +52,9 @@ public class PlayerMoveListener implements Listener {
                     if (plugin.getRegions().get(p).equals(r)) {
                         return;
                     }
-                    //TODO update region
+                    PlayerUtil.setRegion(p, r);
                 }
-                //TODO set region
+                PlayerUtil.setRegion(p, r);
             }
         }
     }

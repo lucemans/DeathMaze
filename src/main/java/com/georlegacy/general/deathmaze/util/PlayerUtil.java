@@ -2,7 +2,10 @@ package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
+import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.entity.Player;
+
+import java.util.Random;
 
 public class PlayerUtil {
 
@@ -65,6 +68,19 @@ public class PlayerUtil {
                 stats.setDeaths(1);
             }
         }
+    }
+
+    public static void setRegion(Player p, RegionExplorable r) {
+        Random rand = new Random();
+        p.sendTitle(
+                DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r),
+                r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())),
+                DeathMaze.getInstance().getConfiguration().getRegionEntryFadeIn(),
+                DeathMaze.getInstance().getConfiguration().getRegionEntryStay(),
+                DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
+        );
+        DeathMaze.getInstance().getRegions().put(p, r);
+        //TODO total explored etc
     }
 
 }

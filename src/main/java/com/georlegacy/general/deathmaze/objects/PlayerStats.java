@@ -5,29 +5,30 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
-public @Data class PlayerStats implements Serializable {
+public  @Data class PlayerStats implements Serializable {
 
     public PlayerStats() {
 
     }
 
-    @Getter @Setter public String name;
+    @Getter @Setter private String name;
 
-    @Getter @Setter public String uuid;
+    @Getter @Setter private String uuid;
 
-    @Getter @Setter public int totalXp;
+    @Getter @Setter private int totalXp;
 
-    @Getter @Setter public int level;
+    @Getter @Setter private int level;
 
-    @Getter @Setter public double distance;
+    @Getter @Setter private double distance;
 
-    @Getter @Setter public int kills;
+    @Getter @Setter private int kills;
 
-    @Getter @Setter public int deaths;
+    @Getter @Setter private int deaths;
 
-    @Getter @Setter public int regionsExplored;
+    @Getter @Setter private List<RegionExplorable> regionsExplored;
 
-    @Getter @Setter public int containersLooted;
+    @Getter @Setter private List<ContainerLootable> containersLooted;
 
 }

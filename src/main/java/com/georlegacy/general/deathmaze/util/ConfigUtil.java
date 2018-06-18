@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
+import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -52,14 +53,30 @@ public class ConfigUtil {
                     .replace("%DISTANCE%", DistanceFormatter.format(stats.getDistance()))
                     .replace("%KILLS%", stats.getKills() + "")
                     .replace("%DEATHS%", stats.getDeaths() + "")
-                    .replace("%REGIONS%", stats.getRegionsExplored() + "")
-                    .replace("%CONTAINERS%", stats.getContainersLooted() + ""));
+                    .replace("%REGIONS%", stats.getRegionsExplored().size() + "")
+                    .replace("%CONTAINERS%", stats.getContainersLooted().size() + ""));
             if (line.length() >= 40)
                 formattedLine = "LINE_TOO_LONG";
             scores.put(formattedLine, lines.size() - i);
             i++;
         }
         return scores.entrySet();
+    }
+
+    public String getRegionEntryHeader(RegionExplorable r) {
+        return ColorUtil.format(this.config.getString("RegionEntryHeader").replace("%RNAME%", r.getName()));
+    }
+
+    public int getRegionEntryFadeIn() {
+        return this.config.getInt("RegionEntryFadeIn");
+    }
+
+    public int getRegionEntryFadeOut() {
+        return this.config.getInt("RegionEntryFadeOut");
+    }
+
+    public int getRegionEntryStay() {
+        return this.config.getInt("RegionEntryStay");
     }
 
     public long getDefaultRefillSeconds() {

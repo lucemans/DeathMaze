@@ -25,5 +25,15 @@ ScoreboardFormat:
  - '&bKills: &e%KILLS%'
  - '&bDeaths: &e%DEATHS%'
 
+# Header for region entry title
+# %RNAME% - Name of the region
+RegionEntryHeader: '&c&lNow entering &o%RNAME%'
+
+RegionEntryTitleFadeIn: 10
+
+RegionEntryTitleFadeOut: 10
+
+RegionEntryTitleStay: 10
+
 # Default refill time period when creating lootable containers in milliseconds.
 DefaultRefillSeconds: 15
