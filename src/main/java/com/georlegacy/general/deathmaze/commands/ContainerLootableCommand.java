@@ -10,13 +10,11 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ContainerLootableCommand {
 
@@ -27,6 +25,20 @@ public class ContainerLootableCommand {
         transparent.add(Material.AIR);
         Block block = p.getTargetBlock(transparent, 5);
         if (!(block.getState() instanceof InventoryHolder)) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
+            return true;
+        }
+        if (Arrays.asList(
+                InventoryType.ANVIL,
+                InventoryType.BEACON,
+                InventoryType.CRAFTING,
+                InventoryType.CREATIVE,
+                InventoryType.ENCHANTING,
+                InventoryType.ENDER_CHEST,
+                InventoryType.MERCHANT,
+                InventoryType.PLAYER,
+                InventoryType.WORKBENCH
+        ).contains(((InventoryHolder) block.getState()).getInventory().getType())) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;
         }

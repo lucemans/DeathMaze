@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.entity.Player;
@@ -105,6 +106,25 @@ public class PlayerUtil {
                 stats.setName(p.getName());
                 stats.setUuid(p.getUniqueId().toString());
                 stats.getRegionsExplored().add(r);
+            }
+        }
+    }
+
+    public static void addContainer(Player p, ContainerLootable c) {
+        PlayerStats stats;
+        if (DeathMaze.getInstance().stats.containsKey(p)) {
+            stats = DeathMaze.getInstance().stats.get(p);
+            stats.getContainersLooted().add(c);
+        } else {
+            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
+                stats = DeathMaze.getInstance().stats.get(p);
+                stats.getContainersLooted().add(c);
+            } else {
+                stats = new PlayerStats();
+                stats.setName(p.getName());
+                stats.setUuid(p.getUniqueId().toString());
+                stats.getContainersLooted().add(c);
             }
         }
     }

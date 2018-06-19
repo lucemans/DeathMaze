@@ -28,6 +28,7 @@ public class Refill implements Runnable {
         ContainerLootable c = plugin.getRefills().get(taskID);
         InventoryHolder inv = (InventoryHolder) c.getLocation().getLocation().getBlock().getState();
         List<ItemStack> it = new ArrayList<ItemStack>();
+        plugin.getLoots().put(c, false);
         try {
             inv.getInventory().setContents(ItemStackSerializerUtil.itemStackArrayFromBase64(c.getItems()));
         } catch (IOException e) {

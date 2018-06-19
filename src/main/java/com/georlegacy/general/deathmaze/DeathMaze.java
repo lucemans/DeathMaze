@@ -24,6 +24,7 @@ public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
+    @Getter private HashMap<ContainerLootable, Boolean> loots;
 
     @Getter private Maze maze;
     private ConfigUtil config;
@@ -53,6 +54,7 @@ public final class DeathMaze extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerKillEntityListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerOpenContainerListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
 
