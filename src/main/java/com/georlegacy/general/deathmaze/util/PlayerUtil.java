@@ -5,6 +5,7 @@ import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Random;
 
 public class PlayerUtil {
@@ -80,7 +81,32 @@ public class PlayerUtil {
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
         DeathMaze.getInstance().getRegions().put(p, r);
-        //TODO total explored etc
+        PlayerStats stats;
+        if (DeathMaze.getInstance().stats.containsKey(p)) {
+            stats = DeathMaze.getInstance().stats.get(p);
+            for (RegionExplorable region : stats.getRegionsExplored()) {
+                if (r.getName().equals(region.getName())) {
+                    return;
+                }
+            }
+            stats.getRegionsExplored().add(r);
+        } else {
+            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
+                stats = DeathMaze.getInstance().stats.get(p);
+                for (RegionExplorable region : stats.getRegionsExplored()) {
+                    if (r.getName().equals(region.getName())) {
+                        return;
+                    }
+                }
+                stats.getRegionsExplored().add(r);
+            } else {
+                stats = new PlayerStats();
+                stats.setName(p.getName());
+                stats.setUuid(p.getUniqueId().toString());
+                stats.getRegionsExplored().add(r);
+            }
+        }
     }
 
 }

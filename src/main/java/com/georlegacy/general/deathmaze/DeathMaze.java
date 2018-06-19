@@ -72,6 +72,7 @@ public final class DeathMaze extends JavaPlugin {
 
     public void reloadAll() {
         startRefills();
+        //todo add checks to reload playerstats content
     }
 
     private void startRefills() {
