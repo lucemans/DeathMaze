@@ -31,17 +31,23 @@ public class MazeEncoder {
     }
 
     public static Maze decode() {
+        System.out.println("decoding");
         File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "maze.dat");
-        if (!f.exists())
+        if (!f.exists()) {
+            System.out.println("doesnt exist");
             return new Maze();
+        }
         try (FileInputStream fis = new FileInputStream(f); ObjectInputStream ois = new ObjectInputStream(fis)) {
             try {
+                System.out.println("returning");
+                System.out.println((Maze) ois.readObject());
                 return (Maze) ois.readObject();
             } finally {
                 fis.close();
                 ois.close();
             }
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("an exception");
             e.printStackTrace();
             return null;
         }
