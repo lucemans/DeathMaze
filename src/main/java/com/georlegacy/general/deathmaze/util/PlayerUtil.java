@@ -51,6 +51,7 @@ public class PlayerUtil {
                 stats.setKills(1);
             }
         }
+        ScoreBoardUtil.send(p, stats);
     }
 
     public static void addDeath(Player p) {
@@ -70,6 +71,7 @@ public class PlayerUtil {
                 stats.setDeaths(1);
             }
         }
+        ScoreBoardUtil.send(p, stats);
     }
 
     public static void setRegion(Player p, RegionExplorable r) {
@@ -108,6 +110,7 @@ public class PlayerUtil {
                 stats.getRegionsExplored().add(r);
             }
         }
+        ScoreBoardUtil.send(p, stats);
     }
 
     public static void addContainer(Player p, ContainerLootable c) {
@@ -127,6 +130,7 @@ public class PlayerUtil {
                 stats.getContainersLooted().add(c);
             }
         }
+        ScoreBoardUtil.send(p, stats);
     }
 
 }

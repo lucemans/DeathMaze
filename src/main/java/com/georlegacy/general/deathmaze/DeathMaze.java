@@ -11,6 +11,7 @@ import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
 import com.georlegacy.general.deathmaze.util.StatsEncoder;
+import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -46,6 +47,7 @@ public final class DeathMaze extends JavaPlugin {
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
         refills = new HashMap<Integer, ContainerLootable>();
+        worldedit = new WorldEditPlugin();
         config = ConfigUtil.get();
 
         startRefills();
@@ -74,7 +76,7 @@ public final class DeathMaze extends JavaPlugin {
 
     public void reloadAll() {
         startRefills();
-        //todo add checks to reload playerstats content
+        //todo add checks to reload playerstats content (MOVED TO PQL)
     }
 
     private void startRefills() {
