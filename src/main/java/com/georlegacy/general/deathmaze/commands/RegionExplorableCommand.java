@@ -7,7 +7,6 @@ import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import sun.nio.ch.SelectorImpl;
 
 public class RegionExplorableCommand {
 
