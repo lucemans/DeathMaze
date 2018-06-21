@@ -10,16 +10,13 @@ public class MazeEncoder {
 
     public static boolean encode(Maze maze) {
         try {
-            File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "maze.dat");
-            if (!f.exists())
-                f.createNewFile();
-            FileOutputStream fos = new FileOutputStream(f);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(maze);
+            File file = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "maze.dat");
+            if (!file.exists())
+                file.createNewFile();
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeUnshared(maze);
             oos.flush();
             oos.close();
-            fos.flush();
-            fos.close();
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -32,20 +29,16 @@ public class MazeEncoder {
 
     public static Maze decode() {
         System.out.println("decoding");
-        File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "maze.dat");
-        if (!f.exists()) {
+        File file = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "maze.dat");
+        if (!file.exists()) {
             System.out.println("doesnt exist");
             return new Maze();
         }
-        try (FileInputStream fis = new FileInputStream(f); ObjectInputStream ois = new ObjectInputStream(fis)) {
-            try {
-                System.out.println("returning");
-                System.out.println((Maze) ois.readObject());
-                return (Maze) ois.readObject();
-            } finally {
-                fis.close();
-                ois.close();
-            }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            System.out.println("returning");
+            Maze m = (Maze) ois.readObject();
+            System.out.println(m);
+            return m;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("an exception");
             e.printStackTrace();
