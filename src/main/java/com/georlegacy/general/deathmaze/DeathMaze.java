@@ -46,6 +46,8 @@ public final class DeathMaze extends JavaPlugin {
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
         refills = new HashMap<Integer, ContainerLootable>();
+        regions = new HashMap<Player, RegionExplorable>();
+        loots = new HashMap<ContainerLootable, Boolean>();
         config = ConfigUtil.get();
 
         startRefills();
@@ -82,7 +84,6 @@ public final class DeathMaze extends JavaPlugin {
             getServer().getScheduler().cancelTask(id);
         }
         refills.clear();
-        System.out.println(maze);
         for (ContainerLootable c : maze.getContainers()) {
             Refill refill = new Refill(this);
             final int id = getServer().getScheduler().scheduleSyncRepeatingTask(this, refill, 1L, (c.getRefillSeconds()*20));

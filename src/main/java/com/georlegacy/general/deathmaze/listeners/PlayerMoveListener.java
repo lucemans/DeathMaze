@@ -25,19 +25,15 @@ public class PlayerMoveListener implements Listener {
         Player p = e.getPlayer();
 
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
-            System.out.println("not world");
             return;
         }
         if (!locs.containsKey(p)) {
-            System.out.println("not in");
             locs.put(p, p.getLocation());
             return;
         }
         if (p.getLocation().getBlockX() == locs.get(p).getBlockX() && p.getLocation().getBlockZ() == locs.get(p).getBlockZ()) {
-            System.out.println("too close");
             return;
         }
-        System.out.println("adding");
         PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
         locs.put(p, p.getLocation());
     }

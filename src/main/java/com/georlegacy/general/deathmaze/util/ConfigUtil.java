@@ -39,7 +39,8 @@ public class ConfigUtil {
     }
 
     public String getScoreboardHeader() {
-        return this.config.getString("ScoreBoardHeader").length() > 32 ? "HEADER_TOO_LONG" : ColorUtil.format(this.config.getString("ScoreboardHeader"));
+        String header = this.config.getString("ScoreboardHeader");
+        return header.length() > 32 ? "HEADER_TOO_LONG" : ColorUtil.format(header);
     }
 
     public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {

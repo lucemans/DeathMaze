@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 public  @Data class PlayerStats implements Serializable {
 
     public PlayerStats() {
-
+        regionsExplored = new LinkedList<RegionExplorable>();
+        containersLooted = new LinkedList<ContainerLootable>();
     }
 
     @Getter @Setter private String name;
