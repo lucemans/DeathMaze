@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.objects;
 
 import com.georlegacy.general.deathmaze.util.SerializableLocation;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
+import com.sk89q.worldedit.regions.CuboidRegion;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
@@ -38,16 +39,16 @@ public class RegionExplorable implements Serializable {
     }
 
     public boolean overlaps(CuboidSelection cs) {
-        if (cs.getMaximumPoint().getX() > pos1.getLocation().getX() || pos2.getLocation().getX() > cs.getMinimumPoint().getX()) {
-            return false;
-        }
-        if (cs.getMaximumPoint().getY() < pos1.getLocation().getY() || pos2.getLocation().getY() < cs.getMinimumPoint().getY()) {
-            return false;
-        }
-        if (cs.getMaximumPoint().getZ() < pos2.getLocation().getZ() || pos2.getLocation().getZ() < cs.getMinimumPoint().getZ()) {
-            return false;
-        }
-        return true;
+        Location nmin = cs.getMinimumPoint();
+        Location nmax = cs.getMaximumPoint();
+
+        CuboidSelection current = new CuboidSelection(pos1.getLocation().getWorld(), pos1.getLocation(), pos2.getLocation());
+        Location min = current.getMinimumPoint();
+        Location max = current.getMaximumPoint();
+
+        return cs.getWorld().equals(pos1.getLocation().getWorld()) &&
+                !(nmin.getX() > max.getX() || nmin.getY() > max.getY() || nmin.getZ() > max.getZ() ||
+                        min.getX() > nmax.getX() || min.getY() > nmax.getY() || min.getZ() > nmax.getZ());
     }
 
 }

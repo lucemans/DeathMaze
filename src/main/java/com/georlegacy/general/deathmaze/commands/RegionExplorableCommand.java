@@ -45,9 +45,6 @@ public class RegionExplorableCommand {
             }
             CuboidSelection cs = (CuboidSelection) s;
             for (RegionExplorable r : DeathMaze.getInstance().getMaze().getRegions()) {
-                if (!r.getPos1().getLocation().getWorld().equals(cs.getWorld())) {
-                    continue;
-                }
                 if (r.overlaps(cs)) {
                     p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_EXISTING_OVERLAP);
                     return true;

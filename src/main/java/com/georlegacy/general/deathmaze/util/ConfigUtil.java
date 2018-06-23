@@ -81,15 +81,15 @@ public class ConfigUtil {
     }
 
     public int getRegionEntryFadeIn() {
-        return this.config.getInt("RegionEntryFadeIn");
+        return this.config.getInt("RegionEntryTitleFadeIn");
     }
 
     public int getRegionEntryFadeOut() {
-        return this.config.getInt("RegionEntryFadeOut");
+        return this.config.getInt("RegionEntryTitleFadeOut");
     }
 
     public int getRegionEntryStay() {
-        return this.config.getInt("RegionEntryStay");
+        return this.config.getInt("RegionEntryTitleStay");
     }
 
     public long getDefaultRefillSeconds() {

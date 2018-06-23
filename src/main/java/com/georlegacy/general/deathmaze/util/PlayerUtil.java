@@ -75,7 +75,11 @@ public class PlayerUtil {
     }
 
     public static void setRegion(Player p, RegionExplorable r) {
+        System.out.println("setting");
         Random rand = new Random();
+        System.out.println(DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r));
+        System.out.println(r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())));
+        System.out.println(DeathMaze.getInstance().getConfiguration().getRegionEntryFadeIn());
         p.sendTitle(
                 DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r),
                 r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())),
