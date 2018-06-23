@@ -17,6 +17,7 @@ public class DeathMazeCommand implements CommandExecutor {
             sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
             sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update> - &7Controls lootable containers"));
+            sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
             return true;
         }
         com.georlegacy.general.deathmaze.commands.Command c;
@@ -36,14 +37,6 @@ public class DeathMazeCommand implements CommandExecutor {
         }
 
         return true;
-    }
-
-    private Method getMethod(Class clazz) {
-        try {
-            return clazz.getMethod("onCommand", CommandSender.class, Command.class, String.class, String[].class);
-        } catch (NoSuchMethodException e) {
-            return null;
-        }
     }
 
     private com.georlegacy.general.deathmaze.commands.Command getAnnotation(Class clazz) {

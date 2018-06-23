@@ -12,16 +12,19 @@ import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
 import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+import javafx.collections.transformation.FilteredList;
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileFilter;
+import java.util.*;
 
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
+    public Set<PlayerStats> offlineStats;
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
@@ -48,6 +51,7 @@ public final class DeathMaze extends JavaPlugin {
         configuration = ConfigUtil.get();
         worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 
+        loadStats();
         startRefills();
 
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
@@ -73,8 +77,24 @@ public final class DeathMaze extends JavaPlugin {
     }
 
     public void reloadAll() {
+        configuration = ConfigUtil.get();
         startRefills();
-        //todo add checks to reload playerstats content (MOVED TO PQL)
+    }
+
+    public void loadStats() {
+        offlineStats = new HashSet<PlayerStats>();
+        for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
+            StatsEncoder.encode(entry.getValue());
+        }
+        stats.clear();
+        for (File stats : Objects.requireNonNull(new File(getDataFolder() + File.separator + "players").listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.getName().endsWith(".dat");
+            }
+        }))) {
+            offlineStats.add(StatsEncoder.decode(stats));
+        }
     }
 
     private void startRefills() {

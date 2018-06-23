@@ -48,3 +48,17 @@ AddRegionNonCuboidSelection: '&eYour region selection must be of Cuboid nature'
 AddRegionExistingOverlap: '&eThis would overlap a current region.'
 
 AddRegionSuccess: '&aThe region has been added successfully.'
+
+PreviewRegionNoRegion: '&eYou need to provide a region to preview.'
+
+PreviewRegionNotRegion: '&eThat does not appear to be a valid region.'
+
+PreviewRegionSuccess: '&aPreviewing the region.'
+
+PreviewRegionEnd: '&aClosing preview.'
+
+RemoveRegionNoRegion: '&eYou need to provide a region to remove.'
+
+RemoveRegionNotRegion: '&eThat does not appear to be a valid region.'
+
+RemoveRegionSuccess: '&aThe region has been removed successfully.'

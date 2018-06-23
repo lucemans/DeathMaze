@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.PositionPreview;
@@ -61,23 +62,46 @@ public class RegionExplorableCommand {
         }
         if (args[1].equalsIgnoreCase("preview")) {
             if (args.length < 3) {
-
+                p.sendMessage(LangUtil.PREFIX + LangUtil.PREVIEW_REGION_NO_REGION);
+                return true;
             }
             for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
                 if (region.getName().equalsIgnoreCase(args[2])) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.PREVIEW_REGION_SUCCESS);
                     PositionPreview preview = new PositionPreview(region, p);
                     preview.show();
                     Bukkit.getScheduler().scheduleAsyncDelayedTask(DeathMaze.getInstance(), new Runnable() {
                         @Override
                         public void run() {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.PREVIEW_REGION_END);
                             preview.hide();
                         }
                     }, 100L);
                 }
             }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.PREVIEW_REGION_NOT_REGION);
+            return true;
         }
         if (args[1].equalsIgnoreCase("remove")) {
-
+            if (args.length < 3) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_REGION_NO_REGION);
+                return true;
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_REGION_SUCCESS);
+                    DeathMaze.getInstance().getMaze().getRegions().remove(region);
+                    for (PlayerStats stats : DeathMaze.getInstance().offlineStats) {
+                        if (stats.getRegionsExplored().contains(region)) {
+                            stats.getRegionsExplored().remove(region);
+                        }
+                    }
+                    DeathMaze.getInstance().loadStats();
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_REGION_NOT_REGION);
+            return true;
         }
         if (args[1].equalsIgnoreCase("set")) {
 
@@ -85,8 +109,7 @@ public class RegionExplorableCommand {
         if (args[1].equalsIgnoreCase("splash")) {
 
         }
-
-
+        p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;
     }
 

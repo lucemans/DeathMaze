@@ -46,4 +46,15 @@ public class StatsEncoder {
         }
     }
 
+    public static PlayerStats decode(File file) {
+        if (!file.exists())
+            return null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (PlayerStats) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

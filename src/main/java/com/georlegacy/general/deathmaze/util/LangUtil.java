@@ -50,6 +50,13 @@ public class LangUtil {
         ADD_REGION_NON_CUBOID_SELECTION = isInitialised ? format(config.getString("AddRegionNonCuboidSelection")) : null;
         ADD_REGION_EXISTING_OVERLAP = isInitialised ? format(config.getString("AddRegionExistingOverlap")) : null;
         ADD_REGION_SUCCESS = isInitialised ? format(config.getString("AddRegionSuccess")) : null;
+        PREVIEW_REGION_NO_REGION = isInitialised ? format(config.getString("PreviewRegionNoRegion")) : null;
+        PREVIEW_REGION_NOT_REGION = isInitialised ? format(config.getString("PreviewRegionNotRegion")) : null;
+        PREVIEW_REGION_SUCCESS = isInitialised ? format(config.getString("PreviewRegionSuccess")) : null;
+        PREVIEW_REGION_END = isInitialised ? format(config.getString("PreviewRegionEnd")) : null;
+        REMOVE_REGION_NO_REGION = isInitialised ? format(config.getString("RemoveRegionNoRegion")) : null;
+        REMOVE_REGION_NOT_REGION = isInitialised ? format(config.getString("RemoveRegionNotRegion")) : null;
+        REMOVE_REGION_SUCCESS = isInitialised ? format(config.getString("RemoveRegionSuccess")) : null;
 
     }
 
@@ -104,5 +111,19 @@ public class LangUtil {
     public static String ADD_REGION_EXISTING_OVERLAP;
 
     public static String ADD_REGION_SUCCESS;
+
+    public static String PREVIEW_REGION_NO_REGION;
+
+    public static String PREVIEW_REGION_NOT_REGION;
+
+    public static String PREVIEW_REGION_SUCCESS;
+
+    public static String PREVIEW_REGION_END;
+
+    public static String REMOVE_REGION_NO_REGION;
+
+    public static String REMOVE_REGION_NOT_REGION;
+
+    public static String REMOVE_REGION_SUCCESS;
 
 }
