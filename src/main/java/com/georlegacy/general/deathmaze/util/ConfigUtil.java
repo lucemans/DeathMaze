@@ -3,8 +3,10 @@ package com.georlegacy.general.deathmaze.util;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.sun.prism.shader.Mask_TextureRGB_AlphaTest_Loader;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scoreboard.Score;
@@ -15,7 +17,7 @@ import java.nio.file.Files;
 import java.util.*;
 
 public class ConfigUtil {
-    protected YamlConfiguration config;
+    private YamlConfiguration config;
 
     private ConfigUtil() {
         try {
@@ -62,6 +64,16 @@ public class ConfigUtil {
             i++;
         }
         return scores.entrySet();
+    }
+
+    public Material getPreviewMaterial() {
+        Material mat;
+        try {
+            mat = Material.getMaterial(this.config.getString("PreviewBlock"));
+        } catch (IllegalArgumentException e) {
+            mat = Material.GLASS;
+        }
+        return mat;
     }
 
     public String getRegionEntryHeader(RegionExplorable r) {

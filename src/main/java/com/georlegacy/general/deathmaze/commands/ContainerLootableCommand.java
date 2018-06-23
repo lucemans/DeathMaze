@@ -24,6 +24,10 @@ public class ContainerLootableCommand {
         Set<Material> transparent = new HashSet<Material>();
         transparent.add(Material.AIR);
         Block block = p.getTargetBlock(transparent, 5);
+        if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.COMMAND_WRONG_WORLD_MESSAGE);
+            return true;
+        }
         if (!(block.getState() instanceof InventoryHolder)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
             return true;

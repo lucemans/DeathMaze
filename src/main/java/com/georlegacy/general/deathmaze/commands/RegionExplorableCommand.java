@@ -3,8 +3,10 @@ package com.georlegacy.general.deathmaze.commands;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.util.LangUtil;
+import com.georlegacy.general.deathmaze.util.PositionPreview;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,6 +18,10 @@ public class RegionExplorableCommand {
         if (args[1].equalsIgnoreCase("add")) {
             if (args.length < 3) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
+                return true;
+            }
+            if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.COMMAND_WRONG_WORLD_MESSAGE);
                 return true;
             }
             for (RegionExplorable r : DeathMaze.getInstance().getMaze().getRegions()) {
@@ -42,15 +48,7 @@ public class RegionExplorableCommand {
                 if (!r.getPos1().getLocation().getWorld().equals(cs.getWorld())) {
                     continue;
                 }
-                if (cs.getMinimumPoint().getX() > r.getPos2().getLocation().getX() || cs.getMaximumPoint().getX() > r.getPos1().getLocation().getX()) {
-                    p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_EXISTING_OVERLAP);
-                    return true;
-                }
-                if (cs.getMinimumPoint().getY() > r.getPos2().getLocation().getY() || cs.getMaximumPoint().getY() > r.getPos1().getLocation().getY()) {
-                    p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_EXISTING_OVERLAP);
-                    return true;
-                }
-                if (cs.getMinimumPoint().getZ() > r.getPos2().getLocation().getZ() || cs.getMaximumPoint().getZ() > r.getPos1().getLocation().getZ()) {
+                if (r.overlaps(cs)) {
                     p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_EXISTING_OVERLAP);
                     return true;
                 }
@@ -58,11 +56,28 @@ public class RegionExplorableCommand {
             DeathMaze.getInstance().getMaze().getRegions().add(new RegionExplorable(
                     args[2],
                     cs.getMinimumPoint(),
-                    cs.getMinimumPoint()
+                    cs.getMaximumPoint()
             ));
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_REGION_SUCCESS);
             DeathMaze.getInstance().reloadAll();
             return true;
+        }
+        if (args[1].equalsIgnoreCase("preview")) {
+            if (args.length < 3) {
+
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    PositionPreview preview = new PositionPreview(region, p);
+                    preview.show();
+                    Bukkit.getScheduler().scheduleAsyncDelayedTask(DeathMaze.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            preview.hide();
+                        }
+                    }, 100L);
+                }
+            }
         }
         if (args[1].equalsIgnoreCase("remove")) {
 

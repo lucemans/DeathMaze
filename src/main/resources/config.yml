@@ -26,6 +26,9 @@ ScoreboardFormat:
  - '&bDeaths: &e%DEATHS%'
  - '&bChests: &e%CONTAINERS%'
 
+# The block used in previewing regions (CLIENT SIDE PREVIEW)
+PreviewBlock: GLASS
+
 # Header for region entry title
 # %RNAME% - Name of the region
 RegionEntryHeader: '&c&lNow entering &o%RNAME%'

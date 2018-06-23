@@ -27,12 +27,9 @@ public final class DeathMaze extends JavaPlugin {
     @Getter private HashMap<ContainerLootable, Boolean> loots;
 
     @Getter private Maze maze;
-    private ConfigUtil config;
+    @Getter private ConfigUtil configuration;
     @Getter private WorldEditPlugin worldedit;
 
-    public ConfigUtil getConfiguration() {
-        return config;
-    }
     public static DeathMaze getInstance() {
         return getPlugin(DeathMaze.class);
     }
@@ -48,7 +45,8 @@ public final class DeathMaze extends JavaPlugin {
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
-        config = ConfigUtil.get();
+        configuration = ConfigUtil.get();
+        worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 
         startRefills();
 

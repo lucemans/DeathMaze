@@ -9,6 +9,8 @@ NoPermissionMessage: '&eIt does not appear that you currently have permission to
 
 IncorrectArgsMessage: '&eYou have provided incorrect arguments. Use /deathmaze to see help.'
 
+CommandWrongWorldMessage: '&eYou have to be in a maze world to perform this action.'
+
 RemoveContainerLootableCommandFailNotContainer: '&eThat container is not currently registered.'
 
 RemoveContainerLootableCommandSuccess: '&aThat container has been removed from the maze. It will no longer be refilled.'
