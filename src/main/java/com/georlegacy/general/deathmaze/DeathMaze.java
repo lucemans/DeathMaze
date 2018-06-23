@@ -45,6 +45,7 @@ public final class DeathMaze extends JavaPlugin {
         LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
+        offlineStats = new HashSet<PlayerStats>();
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
@@ -82,17 +83,19 @@ public final class DeathMaze extends JavaPlugin {
     }
 
     public void loadStats() {
-        offlineStats = new HashSet<PlayerStats>();
+        System.out.println("loading");
         for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
+            System.out.println(entry + "first for");
             StatsEncoder.encode(entry.getValue());
         }
+        System.out.println(offlineStats);
         stats.clear();
-        for (File stats : Objects.requireNonNull(new File(getDataFolder() + File.separator + "players").listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.getName().endsWith(".dat");
-            }
-        }))) {
+        for (PlayerStats stats : offlineStats) {
+            StatsEncoder.encode(stats);
+        }
+        offlineStats.clear();
+        for (File stats : Objects.requireNonNull(new File(getDataFolder() + File.separator + "players").listFiles(pathname -> pathname.getName().endsWith(".dat")))) {
+            System.out.println(stats);
             offlineStats.add(StatsEncoder.decode(stats));
         }
     }

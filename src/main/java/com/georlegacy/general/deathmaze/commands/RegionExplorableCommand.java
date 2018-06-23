@@ -77,6 +77,7 @@ public class RegionExplorableCommand {
                             preview.hide();
                         }
                     }, 100L);
+                    return true;
                 }
             }
             p.sendMessage(LangUtil.PREFIX + LangUtil.PREVIEW_REGION_NOT_REGION);

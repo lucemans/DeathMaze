@@ -25,6 +25,7 @@ ScoreboardFormat:
  - '&bKills: &e%KILLS%'
  - '&bDeaths: &e%DEATHS%'
  - '&bChests: &e%CONTAINERS%'
+ - '&bRegions: &e%REGIONS%'
 
 # The block used in previewing regions (CLIENT SIDE PREVIEW)
 PreviewBlock: GLASS
