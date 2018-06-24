@@ -1,5 +1,6 @@
 name: DeathMaze
 depend: [WorldEdit]
+softdepend: [PlaceholderAPI]
 author: 615283
 version: ${project.version}
 main: com.georlegacy.general.deathmaze.DeathMaze

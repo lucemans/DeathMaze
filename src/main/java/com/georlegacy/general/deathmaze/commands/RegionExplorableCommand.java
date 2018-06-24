@@ -92,12 +92,8 @@ public class RegionExplorableCommand {
                 if (region.getName().equalsIgnoreCase(args[2])) {
                     p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_REGION_SUCCESS);
                     DeathMaze.getInstance().getMaze().getRegions().remove(region);
-                    for (PlayerStats stats : DeathMaze.getInstance().offlineStats) {
-                        if (stats.getRegionsExplored().contains(region)) {
-                            stats.getRegionsExplored().remove(region);
-                        }
-                    }
-                    DeathMaze.getInstance().loadStats();
+                    DeathMaze.getInstance().reloadAll();
+                    //TODO remove form players
                     return true;
                 }
             }

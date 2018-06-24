@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze;
 
 import com.georlegacy.general.deathmaze.commands.DeathMazeCommand;
+import com.georlegacy.general.deathmaze.hooks.PAPIHook;
 import com.georlegacy.general.deathmaze.listeners.*;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
@@ -14,6 +15,7 @@ import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import javafx.collections.transformation.FilteredList;
 import lombok.Getter;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +26,6 @@ import java.util.*;
 
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
-    public Set<PlayerStats> offlineStats;
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
@@ -45,15 +46,17 @@ public final class DeathMaze extends JavaPlugin {
         LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
-        offlineStats = new HashSet<PlayerStats>();
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
         configuration = ConfigUtil.get();
         worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 
-        loadStats();
         startRefills();
+
+        if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            new PAPIHook().register();
+        }
 
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
@@ -80,24 +83,7 @@ public final class DeathMaze extends JavaPlugin {
     public void reloadAll() {
         configuration = ConfigUtil.get();
         startRefills();
-    }
-
-    public void loadStats() {
-        System.out.println("loading");
-        for (Map.Entry<Player, PlayerStats> entry : stats.entrySet()) {
-            System.out.println(entry + "first for");
-            StatsEncoder.encode(entry.getValue());
-        }
-        System.out.println(offlineStats);
-        stats.clear();
-        for (PlayerStats stats : offlineStats) {
-            StatsEncoder.encode(stats);
-        }
-        offlineStats.clear();
-        for (File stats : Objects.requireNonNull(new File(getDataFolder() + File.separator + "players").listFiles(pathname -> pathname.getName().endsWith(".dat")))) {
-            System.out.println(stats);
-            offlineStats.add(StatsEncoder.decode(stats));
-        }
+        checkPlayers();
     }
 
     private void startRefills() {
@@ -110,6 +96,20 @@ public final class DeathMaze extends JavaPlugin {
             final int id = getServer().getScheduler().scheduleSyncRepeatingTask(this, refill, 1L, (c.getRefillSeconds()*20));
             refill.setTaskID(id);
             refills.put(id, c);
+        }
+    }
+
+    private void checkPlayers() {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (!stats.containsKey(p)) continue;
+            for (RegionExplorable region : stats.get(p).getRegionsExplored()) {
+                if (!maze.getRegions().contains(region))
+                    stats.get(p).getRegionsExplored().remove(region);
+            }
+            for (ContainerLootable container : stats.get(p).getContainersLooted()) {
+                if (!maze.getContainers().contains(container))
+                    stats.get(p).getContainersLooted().remove(container);
+            }
         }
     }
 
