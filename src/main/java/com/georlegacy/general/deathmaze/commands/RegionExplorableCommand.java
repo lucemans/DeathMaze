@@ -152,7 +152,13 @@ public class RegionExplorableCommand {
                             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_ADD_SPLASH_NO_SPLASH);
                             return true;
                         }
-                        String splash = args[4];
+                        StringBuilder builder = new StringBuilder();
+                        int i = 0;
+                        for (String arg : args) {
+                            if (!(i < 4)) builder.append(arg + " ");
+                            i++;
+                        }
+                        String splash = builder.toString();
                         if (region.getEntrySplashes().contains(splash)) {
                             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_ADD_SPLASH_EXISTS);
                             return true;
@@ -166,13 +172,21 @@ public class RegionExplorableCommand {
                             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NO_SPLASH);
                             return true;
                         }
-                        String splash = args[4];
-                        if (!region.getEntrySplashes().contains(splash)) {
-                            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NOT_SPLASH);
-                            return true;
+                        StringBuilder builder = new StringBuilder();
+                        int i = 0;
+                        for (String arg : args) {
+                            if (!(i < 4)) builder.append(arg + " ");
+                            i++;
                         }
-                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_SUCCESS);
-                        region.getEntrySplashes().remove(splash);
+                        String splash = builder.toString();
+                        for (String oldSplash : region.getEntrySplashes()) {
+                            if (oldSplash.equalsIgnoreCase(splash)) {
+                                p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_SUCCESS);
+                                region.getEntrySplashes().remove(splash);
+                                return true;
+                            }
+                        }
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NOT_SPLASH);
                         return true;
                     }
                     if (args[3].equalsIgnoreCase("list")) {
