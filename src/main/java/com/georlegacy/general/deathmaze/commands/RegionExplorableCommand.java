@@ -9,6 +9,7 @@ import com.georlegacy.general.deathmaze.util.PositionPreview;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -139,7 +140,55 @@ public class RegionExplorableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("splash")) {
-
+            if (args.length < 4) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+                p.sendMessage(ColorUtil.format("&c/deathmaze region splash <region> <add|remove|list> <splash> - &7Controls the splashes for the region."));
+                return true;
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    if (args[3].equalsIgnoreCase("add")) {
+                        if (args.length < 5) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_ADD_SPLASH_NO_SPLASH);
+                            return true;
+                        }
+                        String splash = args[4];
+                        if (region.getEntrySplashes().contains(splash)) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_ADD_SPLASH_EXISTS);
+                            return true;
+                        }
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_ADD_SPLASH_SUCCESS);
+                        region.getEntrySplashes().add(splash);
+                        return true;
+                    }
+                    if (args[3].equalsIgnoreCase("remove")) {
+                        if (args.length < 5) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NO_SPLASH);
+                            return true;
+                        }
+                        String splash = args[4];
+                        if (!region.getEntrySplashes().contains(splash)) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NOT_SPLASH);
+                            return true;
+                        }
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_SUCCESS);
+                        region.getEntrySplashes().remove(splash);
+                        return true;
+                    }
+                    if (args[3].equalsIgnoreCase("list")) {
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_LIST_SPLASH_HEADER);
+                        for (String splash : region.getEntrySplashes()) {
+                            p.sendMessage(ColorUtil.format("&a" + splash));
+                        }
+                        return true;
+                    }
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+                    p.sendMessage(ColorUtil.format("&c/deathmaze region splash <region> <add|remove|list> <splash> - &7Controls the splashes for the region."));
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_SPLASH_NOT_REGION);
+            return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;

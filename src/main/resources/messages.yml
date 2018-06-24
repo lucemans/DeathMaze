@@ -75,3 +75,18 @@ SetRegionNotRegion: '&eThat is not a valid region.'
 
 SetRegionSoundSuccess: '&aThe region entry sound has successfully been set.'
 
+RegionSplashNotRegion: '&eYou need to provide a region to edit splashes of.'
+
+RegionAddSplashNoSplash: '&eYou need to provide a splash to add.'
+
+RegionAddSplashExists: '&eThat splash already exists.'
+
+RegionAddSplashSuccess: '&aThe splash has been added successfully.'
+
+RegionRemoveSplashNoSplash: '&eYou need to provide a splash to remove.'
+
+RegionRemoveSplashNotSplash: '&eThat splash does not exist.'
+
+RegionRemoveSplashSuccess: '&aThe splash has been removed.'
+
+RegionListSplashHeader: '&aSplashes are as following:'

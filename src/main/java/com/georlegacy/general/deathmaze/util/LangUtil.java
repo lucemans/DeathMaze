@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import org.bukkit.configuration.file.YamlConfiguration;
+
 import static com.georlegacy.general.deathmaze.util.ColorUtil.format;
 
 import java.io.File;
@@ -63,6 +64,14 @@ public class LangUtil {
         SET_REGION_SOUND_NOT_SOUND = isInitialised ? format(config.getString("SetRegionSoundNotSound")) : null;
         SET_REGION_NOT_REGION = isInitialised ? format(config.getString("SetRegionNotRegion")) : null;
         SET_REGION_SOUND_SUCCESS = isInitialised ? format(config.getString("SetRegionSoundSuccess")) : null;
+        REGION_SPLASH_NOT_REGION = isInitialised ? format(config.getString("RegionSplashNotRegion")) : null;
+        REGION_ADD_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionAddSplashNoSplash")) : null;
+        REGION_ADD_SPLASH_EXISTS = isInitialised ? format(config.getString("RegionAddSplashExists")) : null;
+        REGION_ADD_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionAddSplashSuccess")) : null;
+        REGION_REMOVE_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNoSplash")) : null;
+        REGION_REMOVE_SPLASH_NOT_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNotSplash")) : null;
+        REGION_REMOVE_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionRemoveSplashSuccess")) : null;
+        REGION_LIST_SPLASH_HEADER = isInitialised ? format(config.getString("RegionListSplashHeader")) : null;
 
     }
 
@@ -73,76 +82,92 @@ public class LangUtil {
     public static String
             PREFIX,
 
-            HELP_HEADER,
+    HELP_HEADER,
 
-            NO_PERMISSION_MESSAGE,
+    NO_PERMISSION_MESSAGE,
 
-            INCORRECT_ARGS_MESSAGE,
+    INCORRECT_ARGS_MESSAGE,
 
-            COMMAND_WRONG_WORLD_MESSAGE,
+    COMMAND_WRONG_WORLD_MESSAGE,
 
-            REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-            REMOVE_CONTAINER_COMMAND_SUCCESS,
+    REMOVE_CONTAINER_COMMAND_SUCCESS,
 
-            REMOVE_CONTAINER_ATTEMPT_MESSAGE,
+    REMOVE_CONTAINER_ATTEMPT_MESSAGE,
 
-            UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-            UPDATE_CONTAINER_COMMAND_SUCCESS,
+    UPDATE_CONTAINER_COMMAND_SUCCESS,
 
-            ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER,
+    ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER,
 
-            ADD_CONTAINER_COMMAND_SUCCESS,
+    ADD_CONTAINER_COMMAND_SUCCESS,
 
-            ADD_CONTAINER_COMMAND_EMPTY,
+    ADD_CONTAINER_COMMAND_EMPTY,
 
-            ADD_CONTAINER_COMMAND_ALREADY_REGISTERED,
+    ADD_CONTAINER_COMMAND_ALREADY_REGISTERED,
 
-            SET_REFILL_TIME_CONTAINER_NOT_NUMBER,
+    SET_REFILL_TIME_CONTAINER_NOT_NUMBER,
 
-            SET_REFILL_TIME_CONTAINER_NO_NUMBER,
+    SET_REFILL_TIME_CONTAINER_NO_NUMBER,
 
-            SET_REFILL_TIME_CONTAINER_SUCCESS,
+    SET_REFILL_TIME_CONTAINER_SUCCESS,
 
-            SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-            CHECK_CONTAINER_LOOTABLE_FALSE,
+    CHECK_CONTAINER_LOOTABLE_FALSE,
 
-            CHECK_CONTAINER_LOOTABLE_TRUE,
+    CHECK_CONTAINER_LOOTABLE_TRUE,
 
-            ADD_REGION_ALREADY_EXISTS,
+    ADD_REGION_ALREADY_EXISTS,
 
-            ADD_REGION_NO_SELECTION,
+    ADD_REGION_NO_SELECTION,
 
-            ADD_REGION_SELECTION_TOO_SMALL,
+    ADD_REGION_SELECTION_TOO_SMALL,
 
-            ADD_REGION_NON_CUBOID_SELECTION,
+    ADD_REGION_NON_CUBOID_SELECTION,
 
-            ADD_REGION_EXISTING_OVERLAP,
+    ADD_REGION_EXISTING_OVERLAP,
 
-            ADD_REGION_SUCCESS,
+    ADD_REGION_SUCCESS,
 
-            PREVIEW_REGION_NO_REGION,
+    PREVIEW_REGION_NO_REGION,
 
-            PREVIEW_REGION_NOT_REGION,
+    PREVIEW_REGION_NOT_REGION,
 
-            PREVIEW_REGION_SUCCESS,
+    PREVIEW_REGION_SUCCESS,
 
-            PREVIEW_REGION_END,
+    PREVIEW_REGION_END,
 
-            REMOVE_REGION_NO_REGION,
+    REMOVE_REGION_NO_REGION,
 
-            REMOVE_REGION_NOT_REGION,
+    REMOVE_REGION_NOT_REGION,
 
-            REMOVE_REGION_SUCCESS,
+    REMOVE_REGION_SUCCESS,
 
-            SET_REGION_SOUND_NO_SOUND,
+    SET_REGION_SOUND_NO_SOUND,
 
-            SET_REGION_SOUND_NOT_SOUND,
+    SET_REGION_SOUND_NOT_SOUND,
 
-            SET_REGION_NOT_REGION,
+    SET_REGION_NOT_REGION,
 
-            SET_REGION_SOUND_SUCCESS;
+    SET_REGION_SOUND_SUCCESS,
+
+    REGION_SPLASH_NOT_REGION,
+
+    REGION_ADD_SPLASH_NO_SPLASH,
+
+    REGION_ADD_SPLASH_EXISTS,
+
+    REGION_ADD_SPLASH_SUCCESS,
+
+    REGION_REMOVE_SPLASH_NO_SPLASH,
+
+    REGION_REMOVE_SPLASH_NOT_SPLASH,
+
+    REGION_REMOVE_SPLASH_SUCCESS,
+
+    REGION_LIST_SPLASH_HEADER;
 
 }

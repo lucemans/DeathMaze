@@ -21,7 +21,7 @@ public class DeathMazeCommand implements CommandExecutor {
             return true;
         }
         com.georlegacy.general.deathmaze.commands.Command c;
-        switch (args[0]) {
+        switch (args[0].toLowerCase()) {
             case "lootable":
                 c = getAnnotation(ContainerLootableCommand.class);
                 if (!sender.hasPermission(c.permission()))
@@ -34,8 +34,15 @@ public class DeathMazeCommand implements CommandExecutor {
                     sender.sendMessage(LangUtil.PREFIX + LangUtil.NO_PERMISSION_MESSAGE);
                 new RegionExplorableCommand().onCommand(sender, command, label, args);
                 break;
+            case "reload":
+                break;
+            case "version":
+                break;
         }
-
+        sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+        sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
+        sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
+        sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
         return true;
     }
 
