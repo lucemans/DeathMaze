@@ -4,8 +4,6 @@ import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
-import com.georlegacy.general.deathmaze.util.SerializableLocation;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -161,6 +159,20 @@ public class ContainerLootableCommand {
                 }
             }
             p.sendMessage(LangUtil.PREFIX + LangUtil.UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("check")) {
+            if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_FALSE);
+                return true;
+            }
+            for (ContainerLootable container : DeathMaze.getInstance().getMaze().getContainers()) {
+                if (container.getLocation().getLocation().equals(block.getLocation())) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_TRUE);
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_FALSE);
             return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);

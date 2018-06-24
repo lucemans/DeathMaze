@@ -5,6 +5,10 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
 public class PAPIHook extends PlaceholderExpansion {
+    private final DeathMaze plugin;
+    public PAPIHook(DeathMaze plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public String getIdentifier() {
@@ -23,8 +27,13 @@ public class PAPIHook extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, String identifier) {
-
-
+        if (player == null) {
+            return null;
+        }
+        if (identifier.equalsIgnoreCase("kills")) {
+            return plugin.stats.containsKey(player) ? String.valueOf(plugin.stats.get(player).getKills()) : String.valueOf(0);
+        }
+        //TODO complete others
         return null;
     }
 }

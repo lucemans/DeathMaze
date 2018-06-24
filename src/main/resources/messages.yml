@@ -37,6 +37,10 @@ SetRefillTimeContainerSuccess: 'You have successfully changed the refill time.'
 
 SetRefillTimeContainerCommandFailNotContainer: '&eThat container is not currently registered.'
 
+CheckContainerLootableFalse: '&eThat container has not been registered or is not in a maze enabled world.'
+
+CheckContainerLootableTrue: '&aThat container is a registered container within the maze.'
+
 AddRegionAlreadyExists: '&eA region of this name already exists.'
 
 AddRegionNoSelection: '&eYou need to make a WorldEdit selection prior to creating a region.'
@@ -62,3 +66,11 @@ RemoveRegionNoRegion: '&eYou need to provide a region to remove.'
 RemoveRegionNotRegion: '&eThat does not appear to be a valid region.'
 
 RemoveRegionSuccess: '&aThe region has been removed successfully.'
+
+SetRegionSoundNoSound: '&eYou need to provide a sound to set the entry sound to.'
+
+SetRegionSoundNotSound: '&eThat is not a valid sound.'
+
+SetRegionNotRegion: '&eThat is not a valid region.'
+
+SetRegionSoundSuccess: '&aThe region entry sound has successfully been set.'

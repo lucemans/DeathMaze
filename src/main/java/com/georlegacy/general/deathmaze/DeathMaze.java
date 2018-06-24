@@ -55,7 +55,7 @@ public final class DeathMaze extends JavaPlugin {
         startRefills();
 
         if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
-            new PAPIHook().register();
+            new PAPIHook(this).register();
         }
 
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);

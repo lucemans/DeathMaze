@@ -23,11 +23,7 @@ public class PlayerOpenContainerListener implements Listener {
             return;
         }
         for (ContainerLootable c : plugin.getMaze().getContainers()) {
-            if (plugin.getLoots().get(c)) {
-                return;
-            }
             if (c.getLocation().getLocation().equals(e.getInventory().getLocation())) {
-                plugin.getLoots().put(c, true);
                 PlayerUtil.addContainer(p, c);
             }
         }

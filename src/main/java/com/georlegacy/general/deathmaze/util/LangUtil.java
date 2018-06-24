@@ -44,6 +44,8 @@ public class LangUtil {
         SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : null;
         SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : null;
         SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : null;
+        CHECK_CONTAINER_LOOTABLE_FALSE = isInitialised ? format(config.getString("CheckContainerLootableFalse")) : null;
+        CHECK_CONTAINER_LOOTABLE_TRUE = isInitialised ? format(config.getString("CheckContainerLootableTrue")) : null;
         ADD_REGION_ALREADY_EXISTS = isInitialised ? format(config.getString("AddRegionAlreadyExists")) : null;
         ADD_REGION_NO_SELECTION = isInitialised ? format(config.getString("AddRegionNoSelection")) : null;
         ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : null;
@@ -57,6 +59,10 @@ public class LangUtil {
         REMOVE_REGION_NO_REGION = isInitialised ? format(config.getString("RemoveRegionNoRegion")) : null;
         REMOVE_REGION_NOT_REGION = isInitialised ? format(config.getString("RemoveRegionNotRegion")) : null;
         REMOVE_REGION_SUCCESS = isInitialised ? format(config.getString("RemoveRegionSuccess")) : null;
+        SET_REGION_SOUND_NO_SOUND = isInitialised ? format(config.getString("SetRegionSoundNoSound")) : null;
+        SET_REGION_SOUND_NOT_SOUND = isInitialised ? format(config.getString("SetRegionSoundNotSound")) : null;
+        SET_REGION_NOT_REGION = isInitialised ? format(config.getString("SetRegionNotRegion")) : null;
+        SET_REGION_SOUND_SUCCESS = isInitialised ? format(config.getString("SetRegionSoundSuccess")) : null;
 
     }
 
@@ -64,66 +70,79 @@ public class LangUtil {
         new LangUtil();
     }
 
-    public static String PREFIX;
+    public static String
+            PREFIX,
 
-    public static String HELP_HEADER;
+            HELP_HEADER,
 
-    public static String NO_PERMISSION_MESSAGE;
+            NO_PERMISSION_MESSAGE,
 
-    public static String INCORRECT_ARGS_MESSAGE;
+            INCORRECT_ARGS_MESSAGE,
 
-    public static String COMMAND_WRONG_WORLD_MESSAGE;
+            COMMAND_WRONG_WORLD_MESSAGE,
 
-    public static String REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
+            REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-    public static String REMOVE_CONTAINER_COMMAND_SUCCESS;
+            REMOVE_CONTAINER_COMMAND_SUCCESS,
 
-    public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
+            REMOVE_CONTAINER_ATTEMPT_MESSAGE,
 
-    public static String UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
+            UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-    public static String UPDATE_CONTAINER_COMMAND_SUCCESS;
+            UPDATE_CONTAINER_COMMAND_SUCCESS,
 
-    public static String ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER;
+            ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER,
 
-    public static String ADD_CONTAINER_COMMAND_SUCCESS;
+            ADD_CONTAINER_COMMAND_SUCCESS,
 
-    public static String ADD_CONTAINER_COMMAND_EMPTY;
+            ADD_CONTAINER_COMMAND_EMPTY,
 
-    public static String ADD_CONTAINER_COMMAND_ALREADY_REGISTERED;
+            ADD_CONTAINER_COMMAND_ALREADY_REGISTERED,
 
-    public static String SET_REFILL_TIME_CONTAINER_NOT_NUMBER;
+            SET_REFILL_TIME_CONTAINER_NOT_NUMBER,
 
-    public static String SET_REFILL_TIME_CONTAINER_NO_NUMBER;
+            SET_REFILL_TIME_CONTAINER_NO_NUMBER,
 
-    public static String SET_REFILL_TIME_CONTAINER_SUCCESS;
+            SET_REFILL_TIME_CONTAINER_SUCCESS,
 
-    public static String SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
+            SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
 
-    public static String ADD_REGION_ALREADY_EXISTS;
+            CHECK_CONTAINER_LOOTABLE_FALSE,
 
-    public static String ADD_REGION_NO_SELECTION;
+            CHECK_CONTAINER_LOOTABLE_TRUE,
 
-    public static String ADD_REGION_SELECTION_TOO_SMALL;
+            ADD_REGION_ALREADY_EXISTS,
 
-    public static String ADD_REGION_NON_CUBOID_SELECTION;
+            ADD_REGION_NO_SELECTION,
 
-    public static String ADD_REGION_EXISTING_OVERLAP;
+            ADD_REGION_SELECTION_TOO_SMALL,
 
-    public static String ADD_REGION_SUCCESS;
+            ADD_REGION_NON_CUBOID_SELECTION,
 
-    public static String PREVIEW_REGION_NO_REGION;
+            ADD_REGION_EXISTING_OVERLAP,
 
-    public static String PREVIEW_REGION_NOT_REGION;
+            ADD_REGION_SUCCESS,
 
-    public static String PREVIEW_REGION_SUCCESS;
+            PREVIEW_REGION_NO_REGION,
 
-    public static String PREVIEW_REGION_END;
+            PREVIEW_REGION_NOT_REGION,
 
-    public static String REMOVE_REGION_NO_REGION;
+            PREVIEW_REGION_SUCCESS,
 
-    public static String REMOVE_REGION_NOT_REGION;
+            PREVIEW_REGION_END,
 
-    public static String REMOVE_REGION_SUCCESS;
+            REMOVE_REGION_NO_REGION,
+
+            REMOVE_REGION_NOT_REGION,
+
+            REMOVE_REGION_SUCCESS,
+
+            SET_REGION_SOUND_NO_SOUND,
+
+            SET_REGION_SOUND_NOT_SOUND,
+
+            SET_REGION_NOT_REGION,
+
+            SET_REGION_SOUND_SUCCESS;
 
 }

@@ -4,9 +4,11 @@ import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import org.bukkit.Color;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
 import java.util.Random;
 
 public class PlayerUtil {
@@ -75,11 +77,7 @@ public class PlayerUtil {
     }
 
     public static void setRegion(Player p, RegionExplorable r) {
-        System.out.println("setting");
         Random rand = new Random();
-        System.out.println(DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r));
-        System.out.println(r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())));
-        System.out.println(DeathMaze.getInstance().getConfiguration().getRegionEntryFadeIn());
         p.sendTitle(
                 DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r),
                 r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())),
@@ -87,6 +85,8 @@ public class PlayerUtil {
                 DeathMaze.getInstance().getConfiguration().getRegionEntryStay(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
+        p.playSound(p.getLocation(), r.getEntrySound(), 1, 1);
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, true, Color.BLACK));
         DeathMaze.getInstance().getRegions().put(p, r);
         PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
@@ -121,19 +121,18 @@ public class PlayerUtil {
         PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
             stats = DeathMaze.getInstance().stats.get(p);
-            stats.getContainersLooted().add(c);
         } else {
             if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
                 DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
                 stats = DeathMaze.getInstance().stats.get(p);
-                stats.getContainersLooted().add(c);
             } else {
                 stats = new PlayerStats();
                 stats.setName(p.getName());
                 stats.setUuid(p.getUniqueId().toString());
-                stats.getContainersLooted().add(c);
             }
         }
+        if (!stats.getContainersLooted().contains(c))
+            stats.getContainersLooted().add(c);
         ScoreBoardUtil.send(p, stats);
     }
 

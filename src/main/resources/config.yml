@@ -34,11 +34,21 @@ PreviewBlock: GLASS
 # %RNAME% - Name of the region
 RegionEntryHeader: '&c&lNow entering &o%RNAME%'
 
+# The time taken for the region entry title to fade in
+# Must be an integer
 RegionEntryTitleFadeIn: 10
 
+# The time taken for the region entry title to fade out
+# Must be an integer
 RegionEntryTitleFadeOut: 10
 
+# The time the region entry title stays on the screen before fading out
+# Must be an integer
 RegionEntryTitleStay: 10
+
+# Denotes how many seconds of blindness is to be given to a player upon entering a region, 0 for no blindness
+# Must be an integer
+RegionEntryBlindness: 2
 
 # Default refill time period when creating lootable containers in milliseconds.
 DefaultRefillSeconds: 15

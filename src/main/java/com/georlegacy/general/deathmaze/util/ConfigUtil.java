@@ -3,18 +3,18 @@ package com.georlegacy.general.deathmaze.util;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
-import com.sun.prism.shader.Mask_TextureRGB_AlphaTest_Loader;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.scoreboard.Score;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
+
+import static com.georlegacy.general.deathmaze.util.NumberFormatter.*;
 
 public class ConfigUtil {
     private YamlConfiguration config;
@@ -54,10 +54,10 @@ public class ConfigUtil {
                     .replace("%UUID%", stats.getUuid())
                     .replace("%NAME%", stats.getName())
                     .replace("%DISTANCE%", DistanceFormatter.format(stats.getDistance()))
-                    .replace("%KILLS%", stats.getKills() + "")
-                    .replace("%DEATHS%", stats.getDeaths() + "")
-                    .replace("%REGIONS%", stats.getRegionsExplored().size() + "")
-                    .replace("%CONTAINERS%", stats.getContainersLooted().size() + ""));
+                    .replace("%KILLS%", format(stats.getKills()))
+                    .replace("%DEATHS%", format(stats.getDeaths()))
+                    .replace("%REGIONS%", format(stats.getRegionsExplored().size()))
+                    .replace("%CONTAINERS%", format(stats.getContainersLooted().size())));
             if (line.length() >= 40)
                 formattedLine = "LINE_TOO_LONG";
             scores.put(formattedLine, lines.size() - i);
@@ -90,6 +90,10 @@ public class ConfigUtil {
 
     public int getRegionEntryStay() {
         return this.config.getInt("RegionEntryTitleStay");
+    }
+
+    public int getRegionEntryBlindness() {
+        return this.config.getInt("RegionEntryBlindness");
     }
 
     public long getDefaultRefillSeconds() {

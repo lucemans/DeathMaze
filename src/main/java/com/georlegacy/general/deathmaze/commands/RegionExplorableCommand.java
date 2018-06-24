@@ -3,11 +3,13 @@ package com.georlegacy.general.deathmaze.commands;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.PositionPreview;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -16,6 +18,10 @@ public class RegionExplorableCommand {
     @Command(permission = "deathmaze.admin.region", subCommand = "region")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         Player p = (Player) sender;
+        if (args.length == 1) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
+            return true;
+        }
         if (args[1].equalsIgnoreCase("add")) {
             if (args.length < 3) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
@@ -101,7 +107,36 @@ public class RegionExplorableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("set")) {
-
+            if (args.length < 4) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+                p.sendMessage(ColorUtil.format("&c/deathmaze region set <region> sound <sound> - &7Sets the entry sound for the region."));
+                return true;
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    if (args[3].equalsIgnoreCase("sound")) {
+                        if (args.length < 5) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REGION_SOUND_NO_SOUND);
+                            return true;
+                        }
+                        Sound sound;
+                        try {
+                            sound = Sound.valueOf(args[4].toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REGION_SOUND_NOT_SOUND);
+                            return true;
+                        }
+                        region.setEntrySound(sound);
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REGION_SOUND_SUCCESS);
+                        return true;
+                    }
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
+                    p.sendMessage(ColorUtil.format("&c/deathmaze region set sound <sound> - &7Sets the entry sound for the region."));
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.SET_REGION_NOT_REGION);
+            return true;
         }
         if (args[1].equalsIgnoreCase("splash")) {
 

@@ -16,7 +16,7 @@ public class DeathMazeCommand implements CommandExecutor {
         if (args.length == 0) {
             sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
             sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
-            sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update> - &7Controls lootable containers"));
+            sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
             return true;
         }
