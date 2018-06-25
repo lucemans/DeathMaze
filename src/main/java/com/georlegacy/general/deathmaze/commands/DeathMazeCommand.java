@@ -37,12 +37,18 @@ public class DeathMazeCommand implements CommandExecutor {
             case "reload":
                 break;
             case "version":
+                c = getAnnotation(VersionCommand.class);
+                if (!sender.hasPermission(c.permission()))
+                    sender.hasPermission(LangUtil.PREFIX + LangUtil.NO_PERMISSION_MESSAGE);
+                new VersionCommand().onCommand(sender, command, label, args);
                 break;
             default:
                 sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
                 sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
+                sender.sendMessage(ColorUtil.format("&c/deathmaze reload - &7Coming soon"));
+                sender.sendMessage(ColorUtil.format("&c/deathmaze version - &7Displays version and info"));
                 break;
         }
         return true;

@@ -87,6 +87,8 @@ RegionRemoveSplashNoSplash: '&eYou need to provide a splash to remove.'
 
 RegionRemoveSplashNotSplash: '&eThat splash does not exist.'
 
+RegionRemoveSplashNotEnough: '&eThat would leave you with no splashes.'
+
 RegionRemoveSplashSuccess: '&aThe splash has been removed.'
 
 RegionListSplashHeader: '&aSplashes are as following:'

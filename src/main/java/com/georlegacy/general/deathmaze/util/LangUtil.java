@@ -70,6 +70,7 @@ public class LangUtil {
         REGION_ADD_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionAddSplashSuccess")) : null;
         REGION_REMOVE_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNoSplash")) : null;
         REGION_REMOVE_SPLASH_NOT_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNotSplash")) : null;
+        REGION_REMOVE_SPLASH_NOT_ENOUGH = isInitialised ? format(config.getString("RegionRemoveSplashNotEnough")) : null;
         REGION_REMOVE_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionRemoveSplashSuccess")) : null;
         REGION_LIST_SPLASH_HEADER = isInitialised ? format(config.getString("RegionListSplashHeader")) : null;
 
@@ -165,6 +166,8 @@ public class LangUtil {
     REGION_REMOVE_SPLASH_NO_SPLASH,
 
     REGION_REMOVE_SPLASH_NOT_SPLASH,
+
+    REGION_REMOVE_SPLASH_NOT_ENOUGH,
 
     REGION_REMOVE_SPLASH_SUCCESS,
 

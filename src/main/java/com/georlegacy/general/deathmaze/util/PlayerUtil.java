@@ -4,7 +4,6 @@ import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -80,13 +79,13 @@ public class PlayerUtil {
         Random rand = new Random();
         p.sendTitle(
                 DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r),
-                r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size())),
+                ColorUtil.format(r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size()))),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeIn(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryStay(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
         p.playSound(p.getLocation(), r.getEntrySound(), 1, 1);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, true));
         DeathMaze.getInstance().getRegions().put(p, r);
         PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {

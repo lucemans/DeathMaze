@@ -3,6 +3,7 @@ depend: [WorldEdit]
 softdepend: [PlaceholderAPI]
 author: 615283
 version: ${project.version}
+website: "https://github.com/BroCraftLive/DeathMaze"
 main: com.georlegacy.general.deathmaze.DeathMaze
 commands:
   deathmaze:

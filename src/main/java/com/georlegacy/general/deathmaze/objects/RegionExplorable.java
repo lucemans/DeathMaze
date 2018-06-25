@@ -19,7 +19,7 @@ public class RegionExplorable implements Serializable {
         this.pos2 = new SerializableLocation(pos2);
         this.entrySound = Sound.AMBIENT_CAVE;
         this.entrySplashes = new LinkedList<String>();
-        this.entrySplashes.add("Knowing what is unknown ");
+        this.entrySplashes.add("&dKnowing what is unknown ");
     }
 
     @Getter private String name;

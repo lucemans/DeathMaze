@@ -9,6 +9,7 @@ import com.georlegacy.general.deathmaze.util.PositionPreview;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
@@ -180,9 +181,13 @@ public class RegionExplorableCommand {
                         }
                         String splash = builder.toString();
                         for (String oldSplash : region.getEntrySplashes()) {
-                            if (oldSplash.equalsIgnoreCase(splash)) {
+                            if (oldSplash.equalsIgnoreCase(splash)|| ChatColor.stripColor(oldSplash).equalsIgnoreCase(splash)) {
+                                if (region.getEntrySplashes().size() == 1) {
+                                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_NOT_ENOUGH);
+                                    return true;
+                                }
                                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_REMOVE_SPLASH_SUCCESS);
-                                region.getEntrySplashes().remove(splash);
+                                region.getEntrySplashes().remove(oldSplash);
                                 return true;
                             }
                         }
