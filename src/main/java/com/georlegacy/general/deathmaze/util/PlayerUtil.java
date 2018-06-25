@@ -85,7 +85,7 @@ public class PlayerUtil {
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
         p.playSound(p.getLocation(), r.getEntrySound(), 1, 1);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, true));
+        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, false));
         DeathMaze.getInstance().getRegions().put(p, r);
         PlayerStats stats;
         if (DeathMaze.getInstance().stats.containsKey(p)) {
