@@ -18,13 +18,14 @@ ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'
 
 # Format for sidebar scoreboard content.
 # Color codes and placeholders allowed.
+# Ensure no two lines are the same!
 ScoreboardFormat:
  - '&r'
  - '&bName: &e%NAME%'
  - '&bDistance: &e%DISTANCE%'
  - '&bKills: &e%KILLS%'
  - '&bDeaths: &e%DEATHS%'
- - '&bChests: &e%CONTAINERS%'
+ - '&bLootables: &e%CONTAINERS%'
  - '&bRegions: &e%REGIONS%'
 
 # The block used in previewing regions (CLIENT SIDE PREVIEW)

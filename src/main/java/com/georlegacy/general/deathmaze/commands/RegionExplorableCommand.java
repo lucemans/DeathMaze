@@ -101,7 +101,6 @@ public class RegionExplorableCommand {
                     p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_REGION_SUCCESS);
                     DeathMaze.getInstance().getMaze().getRegions().remove(region);
                     DeathMaze.getInstance().reloadAll();
-                    //TODO remove form players
                     return true;
                 }
             }
@@ -209,6 +208,7 @@ public class RegionExplorableCommand {
             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_SPLASH_NOT_REGION);
             return true;
         }
+        //TODO dm region check - provides current region, and shows the entry sound
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;
     }

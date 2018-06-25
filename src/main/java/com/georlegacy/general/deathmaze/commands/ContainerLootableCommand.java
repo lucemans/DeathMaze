@@ -87,7 +87,6 @@ public class ContainerLootableCommand {
             for (ContainerLootable c : containers) {
                 if (c.getLocation().getLocation().equals(block.getLocation())) {
                     DeathMaze.getInstance().getMaze().getContainers().remove(c);
-                    //TODO remove form players stats
                     p.sendMessage(LangUtil.PREFIX + LangUtil.REMOVE_CONTAINER_COMMAND_SUCCESS);
                     DeathMaze.getInstance().reloadAll();
                     return true;
@@ -162,6 +161,7 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("check")) {
+            //TODO show refill time
             if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_FALSE);
                 return true;

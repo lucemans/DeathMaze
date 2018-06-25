@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.hooks;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.util.DistanceFormatter;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
@@ -33,7 +34,18 @@ public class PAPIHook extends PlaceholderExpansion {
         if (identifier.equalsIgnoreCase("kills")) {
             return plugin.stats.containsKey(player) ? String.valueOf(plugin.stats.get(player).getKills()) : String.valueOf(0);
         }
-        //TODO complete others
+        if (identifier.equalsIgnoreCase("deaths")) {
+            return plugin.stats.containsKey(player) ? String.valueOf(plugin.stats.get(player).getDeaths()) : String.valueOf(0);
+        }
+        if (identifier.equalsIgnoreCase("distance")) {
+            return plugin.stats.containsKey(player) ? DistanceFormatter.format(plugin.stats.get(player).getDistance()) : "0m";
+        }
+        if (identifier.equalsIgnoreCase("lootables")) {
+            return plugin.stats.containsKey(player) ? String.valueOf(plugin.stats.get(player).getContainersLooted().size()) : String.valueOf(0);
+        }
+        if (identifier.equalsIgnoreCase("regions")) {
+            return plugin.stats.containsKey(player) ? String.valueOf(plugin.stats.get(player).getRegionsExplored().size()) : String.valueOf(0);
+        }
         return null;
     }
 }
