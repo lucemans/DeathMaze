@@ -19,6 +19,7 @@ public class PlayerQuitListener implements Listener {
 
         if (plugin.stats.containsKey(p)) {
             StatsEncoder.encode(plugin.stats.get(p));
+            plugin.stats.remove(p);
         }
     }
 

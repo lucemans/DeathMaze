@@ -10,8 +10,9 @@ public class StatsEncoder {
     public static boolean encode(PlayerStats stats) {
         try {
             File f = new File(DeathMaze.getInstance().getDataFolder() + File.separator + "players", stats.getUuid() + ".dat");
-            if (!f.exists())
-                f.createNewFile();
+            if (f.exists())
+                f.delete();
+            f.createNewFile();
             FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(stats);
