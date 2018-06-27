@@ -53,10 +53,13 @@ public class PlayerMoveListener implements Listener {
                         return;
                     }
                     PlayerUtil.setRegion(p, r);
+                    return;
                 }
                 PlayerUtil.setRegion(p, r);
+                return;
             }
         }
+        plugin.getRegions().remove(p);
     }
 
 }
