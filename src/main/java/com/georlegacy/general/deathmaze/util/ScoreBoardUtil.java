@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
-import java.util.Map;
+import java.util.*;
 
 public class ScoreBoardUtil {
 
@@ -18,12 +18,26 @@ public class ScoreBoardUtil {
         o.setDisplaySlot(DisplaySlot.SIDEBAR);
         o.setDisplayName(DeathMaze.getInstance().getConfiguration().getScoreboardHeader());
 
+        Collection<String> news = new ArrayList();
+
+        Collection<String> olds = new ArrayList(p.getScoreboard().getEntries());
+
         for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getScoreBoardFormat(stats)) {
             Score s = o.getScore(entry.getKey());
             s.setScore(entry.getValue());
+            news.add(entry.getKey());
         }
 
-        p.setScoreboard(b);
+        List<String> oldsList = new ArrayList<String>(olds);
+        List<String> newsList = new ArrayList<String>(news);
+
+        oldsList.removeAll(news);
+        newsList.removeAll(olds);
+
+        if (oldsList.size() != 0 || newsList.size() != 0) {
+            p.setScoreboard(b);
+        }
+
     }
 
 }
