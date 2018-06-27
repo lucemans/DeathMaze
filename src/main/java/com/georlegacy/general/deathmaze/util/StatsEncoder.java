@@ -35,12 +35,7 @@ public class StatsEncoder {
         if (!f.exists())
             return null;
         try (FileInputStream fis = new FileInputStream(f); ObjectInputStream ois = new ObjectInputStream(fis)) {
-            try {
-                return (PlayerStats) ois.readObject();
-            } finally {
-                fis.close();
-                ois.close();
-            }
+            return (PlayerStats) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
