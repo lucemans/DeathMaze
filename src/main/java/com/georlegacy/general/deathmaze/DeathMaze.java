@@ -104,12 +104,8 @@ public final class DeathMaze extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!stats.containsKey(p)) continue;
             ArrayList<RegionExplorable> l = new ArrayList<RegionExplorable>(stats.get(p).getRegionsExplored());
-            Bukkit.getLogger().info("Checking Players");
             for (RegionExplorable region : (ArrayList<RegionExplorable>) l.clone()){
-                Bukkit.getLogger().info("found " + region.getName());
-                if (!containsMaze(maze.getRegions(), region))
-                {
-                    Bukkit.getLogger().info("REMOVING");
+                if (!containsMaze(maze.getRegions(), region)) {
                     stats.get(p).getRegionsExplored().remove(region);
                 }
             }
