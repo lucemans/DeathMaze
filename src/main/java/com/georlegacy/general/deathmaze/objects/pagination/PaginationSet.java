@@ -7,11 +7,11 @@ public class PaginationSet {
 
     private List<PaginationPage> pages;
 
-    private int currentPage = 0;
+    private int currentPage;
 
     public PaginationSet(List<String> items, int pageLength) {
         pages = new ArrayList<PaginationPage>();
-
+        currentPage = 0;
 
         if (items.size() < pageLength) {
             PaginationPage page = new PaginationPage();
@@ -30,7 +30,7 @@ public class PaginationSet {
                 pages.add(page);
                 return;
             }
-            for (String item : items.subList(position, position + pageLength - 1)) {
+            for (String item : items.subList(position, position + pageLength)) {
                 page.addItems(item);
             }
             pages.add(page);

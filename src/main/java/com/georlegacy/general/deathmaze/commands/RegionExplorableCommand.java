@@ -21,8 +21,6 @@ import java.util.List;
 
 public class RegionExplorableCommand {
 
-    private HashMap<String, PaginationSet> playerLists = new HashMap<String, PaginationSet>();
-
     @Command(permission = "deathmaze.admin.region", subCommand = "region")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
         Player p = (Player) sender;
@@ -225,19 +223,18 @@ public class RegionExplorableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("list")) {
+            PaginationSet storedSet = null;
             PaginationSet set;
-            if (playerLists.containsKey(p.getUniqueId().toString())) {
-                set = playerLists.get(p);
-            } else {
-                List<String> regionNames = new ArrayList<String>();
-                DeathMaze.getInstance().getMaze().getRegions().forEach(rgn -> regionNames.add(rgn.getName()));
-                if (regionNames.size() == 0) {
-                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NO_REGIONS);
-                    return true;
-                }
-                set = new PaginationSet(regionNames, 6);
-                playerLists.put(p.getUniqueId().toString(), set);
+            if (DeathMaze.getInstance().getPlayerLists().containsKey(p.getUniqueId().toString())) {
+                storedSet = DeathMaze.getInstance().getPlayerLists().get(p.getUniqueId().toString());
             }
+            List<String> regionNames = new ArrayList<String>();
+            DeathMaze.getInstance().getMaze().getRegions().forEach(rgn -> regionNames.add(rgn.getName()));
+            if (regionNames.size() == 0) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NO_REGIONS);
+                return true;
+            }
+            set = new PaginationSet(regionNames, 6);
             PaginationPage page;
             if (args.length == 2) {
                 page = set.getPage(0);
@@ -245,24 +242,27 @@ public class RegionExplorableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
+                DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
                 //TODO footer
                 return true;
             }
             if (args[2].equalsIgnoreCase("next")) {
-                page = set.getNextPage();
+                page = storedSet!=null ? storedSet.getNextPage() : set.getNextPage();
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
+                DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
                 //TODO footer
                 return true;
             }
             if (args[2].equalsIgnoreCase("previous")) {
-                page = set.getPreviousPage();
+                page = storedSet!=null ? storedSet.getNextPage() : set.getNextPage();
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
+                DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
                 //TODO footer
                 return true;
             }
@@ -273,16 +273,17 @@ public class RegionExplorableCommand {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
                 return true;
             }
-            if ((pageNo >= set.getPages().size() - 1) || (pageNo < 0)) {
+            if ((pageNo > set.getPages().size()) || (pageNo <= 0)) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
                 return true;
             }
             page = set.getPage(pageNo - 1);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
             for (String item : page.getItems()) {
                 p.sendMessage(ChatColor.GREEN + item);
             }
+            DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
             //TODO footer
-            p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
             return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);

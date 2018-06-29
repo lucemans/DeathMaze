@@ -7,6 +7,7 @@ import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.tasks.Refill;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
@@ -29,6 +30,7 @@ public final class DeathMaze extends JavaPlugin {
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
+    @Getter private HashMap<String, PaginationSet> playerLists;
 
     @Getter private Maze maze;
     @Getter private ConfigUtil configuration;
@@ -49,6 +51,7 @@ public final class DeathMaze extends JavaPlugin {
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
+        playerLists = new HashMap<String, PaginationSet>();
         configuration = ConfigUtil.get();
         worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 
