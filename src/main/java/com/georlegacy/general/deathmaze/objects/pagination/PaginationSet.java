@@ -1,5 +1,7 @@
 package com.georlegacy.general.deathmaze.objects.pagination;
 
+import org.bukkit.Bukkit;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class PaginationSet {
     }
 
     public PaginationPage getNextPage() {
-        if (currentPage != pages.size()) {
+        if (currentPage + 1 != pages.size()) {
             currentPage++;
             return pages.get(currentPage);
         } else
