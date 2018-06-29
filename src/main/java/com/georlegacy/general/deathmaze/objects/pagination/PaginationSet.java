@@ -39,10 +39,10 @@ public class PaginationSet {
     }
 
     public PaginationPage getNextPage() {
-        PaginationPage page = pages.get(currentPage);
         if (currentPage != pages.size()) {
             currentPage++;
         }
+        PaginationPage page = pages.get(currentPage);
         return page;
     }
 
