@@ -1,8 +1,9 @@
 package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
-import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationPage;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.PositionPreview;
@@ -10,12 +11,17 @@ import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class RegionExplorableCommand {
+
+    private HashMap<String, PaginationSet> playerLists = new HashMap<String, PaginationSet>();
 
     @Command(permission = "deathmaze.admin.region", subCommand = "region")
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
@@ -211,10 +217,73 @@ public class RegionExplorableCommand {
         if (args[1].equalsIgnoreCase("check")) {
             for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
                 if (new CuboidSelection(p.getWorld(), region.getPos1().getLocation(), region.getPos2().getLocation()).contains(p.getLocation())) {
-                    //TODO scs
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_CHECK_SUCCESS(region));
+                    return true;
                 }
             }
-            //TODO fail
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_CHECK_FAIL);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("list")) {
+            PaginationSet set;
+            if (playerLists.containsKey(p.getUniqueId().toString())) {
+                set = playerLists.get(p);
+            } else {
+                List<String> regionNames = new ArrayList<String>();
+                DeathMaze.getInstance().getMaze().getRegions().forEach(rgn -> regionNames.add(rgn.getName()));
+                if (regionNames.size() == 0) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NO_REGIONS);
+                    return true;
+                }
+                set = new PaginationSet(regionNames, 6);
+                playerLists.put(p.getUniqueId().toString(), set);
+            }
+            PaginationPage page;
+            if (args.length == 2) {
+                page = set.getPage(0);
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                //TODO footer
+                return true;
+            }
+            if (args[2].equalsIgnoreCase("next")) {
+                page = set.getNextPage();
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                //TODO footer
+                return true;
+            }
+            if (args[2].equalsIgnoreCase("previous")) {
+                page = set.getPreviousPage();
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                //TODO footer
+                return true;
+            }
+            int pageNo;
+            try {
+                pageNo = Integer.parseInt(args[2]);
+            } catch (NumberFormatException ex) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                return true;
+            }
+            if ((pageNo >= set.getPages().size() - 1) || (pageNo < 0)) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                return true;
+            }
+            page = set.getPage(pageNo - 1);
+            for (String item : page.getItems()) {
+                p.sendMessage(ChatColor.GREEN + item);
+            }
+            //TODO footer
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+            return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;

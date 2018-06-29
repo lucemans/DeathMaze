@@ -75,6 +75,11 @@ public class LangUtil {
         REGION_REMOVE_SPLASH_NOT_ENOUGH = isInitialised ? format(config.getString("RegionRemoveSplashNotEnough")) : null;
         REGION_REMOVE_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionRemoveSplashSuccess")) : null;
         REGION_LIST_SPLASH_HEADER = isInitialised ? format(config.getString("RegionListSplashHeader")) : null;
+        REGION_CHECK_FAIL = isInitialised ? format(config.getString("RegionCheckFail")) : null;
+        REGION_CHECK_SUCCESS = isInitialised ? format(config.getString("RegionCheckSuccess")) : null;
+        REGIONS_LIST_NOT_PAGE = isInitialised ? format(config.getString("RegionsListNotPage")) : null;
+        REGIONS_LIST_NO_REGIONS = isInitialised ? format(config.getString("RegionsListNoRegions")) : null;
+        REGIONS_LIST_HEADER = isInitialised ? format(config.getString("RegionsListHeader")) : null;
 
     }
 
@@ -179,7 +184,11 @@ public class LangUtil {
 
     private static String REGION_CHECK_SUCCESS;
 
-    //TODO init constructor
+    public static String REGIONS_LIST_NOT_PAGE;
+
+    public static String REGIONS_LIST_NO_REGIONS;
+
+    public static String REGIONS_LIST_HEADER;
 
     public static String CHECK_CONTAINER_LOOTABLE_TRUE(ContainerLootable container) {
         return CHECK_CONTAINER_LOOTABLE_TRUE

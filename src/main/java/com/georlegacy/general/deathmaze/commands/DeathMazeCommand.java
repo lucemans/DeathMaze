@@ -6,7 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class DeathMazeCommand implements CommandExecutor {
@@ -17,7 +16,7 @@ public class DeathMazeCommand implements CommandExecutor {
             sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
             sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
-            sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
+            sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash|check|list> - &7Controls regions"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze reload - &7Coming soon"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze version - &7Displays version and info"));
             return true;
@@ -48,7 +47,7 @@ public class DeathMazeCommand implements CommandExecutor {
                 sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
                 sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
-                sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash> - &7Controls regions"));
+                sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash|check|list> - &7Controls regions"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze reload - &7Coming soon"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze version - &7Displays version and info"));
                 break;

@@ -101,3 +101,9 @@ RegionCheckFail: '&eYou are not currently in a region.'
 # %RNAME% - The current region's name
 # %ESOUND% - The entry sound for the current region
 RegionCheckSuccess: '&aYou are currently in &e%RNAME%&a. The entry sound is &e%ESOUND%&a.'
+
+RegionsListNotPage: '&eThat is not a valid page.'
+
+RegionsListNoRegions: '&eThere are currently no regions configured.'
+
+RegionsListHeader: '&aRegions:'
