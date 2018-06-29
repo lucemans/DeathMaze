@@ -208,7 +208,14 @@ public class RegionExplorableCommand {
             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_SPLASH_NOT_REGION);
             return true;
         }
-        //TODO dm region check - provides current region, and shows the entry sound
+        if (args[1].equalsIgnoreCase("check")) {
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (new CuboidSelection(p.getWorld(), region.getPos1().getLocation(), region.getPos2().getLocation()).contains(p.getLocation())) {
+                    //TODO scs
+                }
+            }
+            //TODO fail
+        }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;
     }

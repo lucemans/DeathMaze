@@ -1,6 +1,8 @@
 package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.ContainerLootable;
+import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import static com.georlegacy.general.deathmaze.util.ColorUtil.format;
@@ -81,96 +83,113 @@ public class LangUtil {
     }
 
     public static String
-            PREFIX,
+            PREFIX;
 
-    HELP_HEADER,
+    public static String HELP_HEADER;
 
-    NO_PERMISSION_MESSAGE,
+    public static String NO_PERMISSION_MESSAGE;
 
-    INCORRECT_ARGS_MESSAGE,
+    public static String INCORRECT_ARGS_MESSAGE;
 
-    COMMAND_WRONG_WORLD_MESSAGE,
+    public static String COMMAND_WRONG_WORLD_MESSAGE;
 
-    REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    public static String REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
-    REMOVE_CONTAINER_COMMAND_SUCCESS,
+    public static String REMOVE_CONTAINER_COMMAND_SUCCESS;
 
-    REMOVE_CONTAINER_ATTEMPT_MESSAGE,
+    public static String REMOVE_CONTAINER_ATTEMPT_MESSAGE;
 
-    UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    public static String UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
-    UPDATE_CONTAINER_COMMAND_SUCCESS,
+    public static String UPDATE_CONTAINER_COMMAND_SUCCESS;
 
-    ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER,
+    public static String ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER;
 
-    ADD_CONTAINER_COMMAND_SUCCESS,
+    public static String ADD_CONTAINER_COMMAND_SUCCESS;
 
-    ADD_CONTAINER_COMMAND_EMPTY,
+    public static String ADD_CONTAINER_COMMAND_EMPTY;
 
-    ADD_CONTAINER_COMMAND_ALREADY_REGISTERED,
+    public static String ADD_CONTAINER_COMMAND_ALREADY_REGISTERED;
 
-    SET_REFILL_TIME_CONTAINER_NOT_NUMBER,
+    public static String SET_REFILL_TIME_CONTAINER_NOT_NUMBER;
 
-    SET_REFILL_TIME_CONTAINER_NO_NUMBER,
+    public static String SET_REFILL_TIME_CONTAINER_NO_NUMBER;
 
-    SET_REFILL_TIME_CONTAINER_SUCCESS,
+    public static String SET_REFILL_TIME_CONTAINER_SUCCESS;
 
-    SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER,
+    public static String SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER;
 
-    CHECK_CONTAINER_LOOTABLE_FALSE,
+    public static String CHECK_CONTAINER_LOOTABLE_FALSE;
 
-    CHECK_CONTAINER_LOOTABLE_TRUE,
+    private static String CHECK_CONTAINER_LOOTABLE_TRUE;
 
-    ADD_REGION_ALREADY_EXISTS,
+    public static String ADD_REGION_ALREADY_EXISTS;
 
-    ADD_REGION_NO_SELECTION,
+    public static String ADD_REGION_NO_SELECTION;
 
-    ADD_REGION_SELECTION_TOO_SMALL,
+    public static String ADD_REGION_SELECTION_TOO_SMALL;
 
-    ADD_REGION_NON_CUBOID_SELECTION,
+    public static String ADD_REGION_NON_CUBOID_SELECTION;
 
-    ADD_REGION_EXISTING_OVERLAP,
+    public static String ADD_REGION_EXISTING_OVERLAP;
 
-    ADD_REGION_SUCCESS,
+    public static String ADD_REGION_SUCCESS;
 
-    PREVIEW_REGION_NO_REGION,
+    public static String PREVIEW_REGION_NO_REGION;
 
-    PREVIEW_REGION_NOT_REGION,
+    public static String PREVIEW_REGION_NOT_REGION;
 
-    PREVIEW_REGION_SUCCESS,
+    public static String PREVIEW_REGION_SUCCESS;
 
-    PREVIEW_REGION_END,
+    public static String PREVIEW_REGION_END;
 
-    REMOVE_REGION_NO_REGION,
+    public static String REMOVE_REGION_NO_REGION;
 
-    REMOVE_REGION_NOT_REGION,
+    public static String REMOVE_REGION_NOT_REGION;
 
-    REMOVE_REGION_SUCCESS,
+    public static String REMOVE_REGION_SUCCESS;
 
-    SET_REGION_SOUND_NO_SOUND,
+    public static String SET_REGION_SOUND_NO_SOUND;
 
-    SET_REGION_SOUND_NOT_SOUND,
+    public static String SET_REGION_SOUND_NOT_SOUND;
 
-    SET_REGION_NOT_REGION,
+    public static String SET_REGION_NOT_REGION;
 
-    SET_REGION_SOUND_SUCCESS,
+    public static String SET_REGION_SOUND_SUCCESS;
 
-    REGION_SPLASH_NOT_REGION,
+    public static String REGION_SPLASH_NOT_REGION;
 
-    REGION_ADD_SPLASH_NO_SPLASH,
+    public static String REGION_ADD_SPLASH_NO_SPLASH;
 
-    REGION_ADD_SPLASH_EXISTS,
+    public static String REGION_ADD_SPLASH_EXISTS;
 
-    REGION_ADD_SPLASH_SUCCESS,
+    public static String REGION_ADD_SPLASH_SUCCESS;
 
-    REGION_REMOVE_SPLASH_NO_SPLASH,
+    public static String REGION_REMOVE_SPLASH_NO_SPLASH;
 
-    REGION_REMOVE_SPLASH_NOT_SPLASH,
+    public static String REGION_REMOVE_SPLASH_NOT_SPLASH;
 
-    REGION_REMOVE_SPLASH_NOT_ENOUGH,
+    public static String REGION_REMOVE_SPLASH_NOT_ENOUGH;
 
-    REGION_REMOVE_SPLASH_SUCCESS,
+    public static String REGION_REMOVE_SPLASH_SUCCESS;
 
-    REGION_LIST_SPLASH_HEADER;
+    public static String REGION_LIST_SPLASH_HEADER;
+
+    public static String REGION_CHECK_FAIL;
+
+    private static String REGION_CHECK_SUCCESS;
+
+    //TODO init constructor
+
+    public static String CHECK_CONTAINER_LOOTABLE_TRUE(ContainerLootable container) {
+        return CHECK_CONTAINER_LOOTABLE_TRUE
+                .replaceAll("%REFILL%", String.valueOf(container.getRefillSeconds()));
+    }
+
+    public static String REGION_CHECK_SUCCESS(RegionExplorable region) {
+        return REGION_CHECK_SUCCESS
+                .replaceAll("%RNAME%", region.getName())
+                .replaceAll("%ESOUND%", region.getEntrySound().name());
+    }
 
 }

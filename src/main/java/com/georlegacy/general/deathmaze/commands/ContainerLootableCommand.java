@@ -161,14 +161,13 @@ public class ContainerLootableCommand {
             return true;
         }
         if (args[1].equalsIgnoreCase("check")) {
-            //TODO show refill time
             if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_FALSE);
                 return true;
             }
             for (ContainerLootable container : DeathMaze.getInstance().getMaze().getContainers()) {
                 if (container.getLocation().getLocation().equals(block.getLocation())) {
-                    p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_TRUE);
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.CHECK_CONTAINER_LOOTABLE_TRUE(container));
                     return true;
                 }
             }
