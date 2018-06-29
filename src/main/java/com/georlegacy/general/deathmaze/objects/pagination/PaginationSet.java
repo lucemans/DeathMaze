@@ -41,16 +41,17 @@ public class PaginationSet {
     public PaginationPage getNextPage() {
         if (currentPage != pages.size()) {
             currentPage++;
-        }
-        PaginationPage page = pages.get(currentPage);
-        return page;
+            return pages.get(currentPage);
+        } else
+            return new EmptyPaginationPage();
     }
 
     public PaginationPage getPreviousPage() {
         if (currentPage != 0) {
             currentPage--;
-        }
-        return pages.get(currentPage);
+            return pages.get(currentPage);
+        } else
+            return new EmptyPaginationPage();
     }
 
     public PaginationPage getPage(int index) {

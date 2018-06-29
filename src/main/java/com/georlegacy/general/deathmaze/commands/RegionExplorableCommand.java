@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.pagination.EmptyPaginationPage;
 import com.georlegacy.general.deathmaze.objects.pagination.PaginationPage;
 import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
@@ -238,6 +239,10 @@ public class RegionExplorableCommand {
             PaginationPage page;
             if (args.length == 2) {
                 page = set.getPage(0);
+                if (page instanceof EmptyPaginationPage) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                    return true;
+                }
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
@@ -248,6 +253,10 @@ public class RegionExplorableCommand {
             }
             if (args[2].equalsIgnoreCase("next")) {
                 page = storedSet!=null ? storedSet.getNextPage() : set.getNextPage();
+                if (page instanceof EmptyPaginationPage) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                    return true;
+                }
                 p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
