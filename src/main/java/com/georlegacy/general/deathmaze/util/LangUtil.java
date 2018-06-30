@@ -49,6 +49,9 @@ public class LangUtil {
         SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : null;
         CHECK_CONTAINER_LOOTABLE_FALSE = isInitialised ? format(config.getString("CheckContainerLootableFalse")) : null;
         CHECK_CONTAINER_LOOTABLE_TRUE = isInitialised ? format(config.getString("CheckContainerLootableTrue")) : null;
+        CONTAINERS_LIST_NOT_PAGE = isInitialised ? format(config.getString("ContainersListNotPage")) : null;
+        CONTAINERS_LIST_NO_CONTAINERS = isInitialised ? format(config.getString("ContainersListNoContainers")) : null;
+        CONTAINERS_LIST_HEADER = isInitialised ? format(config.getString("ContainersListHeader")) : null;
         ADD_REGION_ALREADY_EXISTS = isInitialised ? format(config.getString("AddRegionAlreadyExists")) : null;
         ADD_REGION_NO_SELECTION = isInitialised ? format(config.getString("AddRegionNoSelection")) : null;
         ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : null;
@@ -127,6 +130,12 @@ public class LangUtil {
     public static String CHECK_CONTAINER_LOOTABLE_FALSE;
 
     private static String CHECK_CONTAINER_LOOTABLE_TRUE;
+
+    public static String CONTAINERS_LIST_NOT_PAGE;
+
+    public static String CONTAINERS_LIST_NO_CONTAINERS;
+
+    public static String CONTAINERS_LIST_HEADER;
 
     public static String ADD_REGION_ALREADY_EXISTS;
 

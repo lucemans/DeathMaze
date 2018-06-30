@@ -14,15 +14,12 @@ import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
 import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import javafx.collections.transformation.FilteredList;
 import lombok.Getter;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.*;
 
 public final class DeathMaze extends JavaPlugin {
@@ -30,7 +27,8 @@ public final class DeathMaze extends JavaPlugin {
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
-    @Getter private HashMap<String, PaginationSet> playerLists;
+    @Getter private HashMap<String, PaginationSet> playerRegionLists;
+    @Getter private HashMap<String, PaginationSet> playerLootableLists;
 
     @Getter private Maze maze;
     @Getter private ConfigUtil configuration;
@@ -51,7 +49,8 @@ public final class DeathMaze extends JavaPlugin {
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
-        playerLists = new HashMap<String, PaginationSet>();
+        playerRegionLists = new HashMap<String, PaginationSet>();
+        playerLootableLists = new HashMap<String, PaginationSet>();
         configuration = ConfigUtil.get();
         worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 

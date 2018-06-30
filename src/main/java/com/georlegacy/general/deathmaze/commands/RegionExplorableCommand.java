@@ -20,9 +20,7 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class RegionExplorableCommand {
@@ -231,8 +229,8 @@ public class RegionExplorableCommand {
         if (args[1].equalsIgnoreCase("list")) {
             PaginationSet storedSet = null;
             PaginationSet set;
-            if (DeathMaze.getInstance().getPlayerLists().containsKey(p.getUniqueId().toString())) {
-                storedSet = DeathMaze.getInstance().getPlayerLists().get(p.getUniqueId().toString());
+            if (DeathMaze.getInstance().getPlayerRegionLists().containsKey(p.getUniqueId().toString())) {
+                storedSet = DeathMaze.getInstance().getPlayerRegionLists().get(p.getUniqueId().toString());
             }
             List<String> regionNames = new ArrayList<String>();
             DeathMaze.getInstance().getMaze().getRegions().forEach(rgn -> regionNames.add(rgn.getName()));
@@ -248,7 +246,7 @@ public class RegionExplorableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
-                DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
+                DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
                 sendListFooter(p);
                 return true;
             }
@@ -294,7 +292,7 @@ public class RegionExplorableCommand {
             for (String item : page.getItems()) {
                 p.sendMessage(ChatColor.GREEN + item);
             }
-            DeathMaze.getInstance().getPlayerLists().put(p.getUniqueId().toString(), set);
+            DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
             sendListFooter(p);
             return true;
         }

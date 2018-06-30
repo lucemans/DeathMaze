@@ -43,6 +43,12 @@ CheckContainerLootableFalse: '&eThat container has not been registered or is not
 # %REFILL% - Refill time for the container
 CheckContainerLootableTrue: '&aThat container is a registered container within the maze and has a refill time of %REFILL% seconds.'
 
+ContainersListNotPage: '&eThat is not a valid page.'
+
+ContainersListNoContainers: '&eThere are currently no lootables configured.'
+
+ContainersListHeader: '&aLootables:'
+
 AddRegionAlreadyExists: '&eA region of this name already exists.'
 
 AddRegionNoSelection: '&eYou need to make a WorldEdit selection prior to creating a region.'

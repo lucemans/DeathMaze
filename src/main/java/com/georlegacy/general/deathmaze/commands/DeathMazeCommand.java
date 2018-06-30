@@ -15,7 +15,7 @@ public class DeathMazeCommand implements CommandExecutor {
         if (args.length == 0) {
             sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
             sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
-            sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
+            sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check|list> - &7Controls lootable containers"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash|check|list> - &7Controls regions"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze reload - &7Coming soon"));
             sender.sendMessage(ColorUtil.format("&c/deathmaze version - &7Displays version and info"));
@@ -46,7 +46,7 @@ public class DeathMazeCommand implements CommandExecutor {
             default:
                 sender.sendMessage(LangUtil.PREFIX + LangUtil.HELP_HEADER);
                 sender.sendMessage(ColorUtil.format("&c/deathmaze - &7Displays this help menu"));
-                sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check> - &7Controls lootable containers"));
+                sender.sendMessage(ColorUtil.format("&c/deathmaze lootable <add|remove|set|update|check|list> - &7Controls lootable containers"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze region <add|preview|remove|set|splash|check|list> - &7Controls regions"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze reload - &7Coming soon"));
                 sender.sendMessage(ColorUtil.format("&c/deathmaze version - &7Displays version and info"));
