@@ -7,6 +7,7 @@ import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.tasks.Refill;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
@@ -24,6 +25,7 @@ import java.util.*;
 
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
+    @Getter public HashMap<Player, MazeMode> modes;
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
@@ -46,6 +48,7 @@ public final class DeathMaze extends JavaPlugin {
         LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
+        modes = new HashMap<Player, MazeMode>();
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
