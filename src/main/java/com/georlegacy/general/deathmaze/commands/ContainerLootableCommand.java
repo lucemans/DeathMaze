@@ -20,6 +20,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
+import javax.xml.soap.Text;
 import java.util.*;
 
 public class ContainerLootableCommand {
@@ -30,6 +31,10 @@ public class ContainerLootableCommand {
         Set<Material> transparent = new HashSet<Material>();
         transparent.add(Material.AIR);
         Block block = p.getTargetBlock(transparent, 5);
+        if (args.length == 1) {
+            p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
+            return true;
+        }
         if (args[1].equalsIgnoreCase("list")) {
             PaginationSet storedSet = null;
             PaginationSet set;
@@ -58,7 +63,7 @@ public class ContainerLootableCommand {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
                 DeathMaze.getInstance().getPlayerLootableLists().put(p.getUniqueId().toString(), set);
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             if (args[2].equalsIgnoreCase("next")) {
@@ -71,7 +76,7 @@ public class ContainerLootableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             if (args[2].equalsIgnoreCase("previous")) {
@@ -84,7 +89,7 @@ public class ContainerLootableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             int pageNo;
@@ -104,7 +109,7 @@ public class ContainerLootableCommand {
                 p.sendMessage(ChatColor.GREEN + item);
             }
             DeathMaze.getInstance().getPlayerLootableLists().put(p.getUniqueId().toString(), set);
-            sendListFooter(p);
+            sendListFooter(p, pageNo);
             return true;
         }
         if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
@@ -135,10 +140,6 @@ public class ContainerLootableCommand {
         }
         if (block.getType().equals(Material.AIR)) {
             p.sendMessage(LangUtil.PREFIX + LangUtil.ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER);
-            return true;
-        }
-        if (args.length == 1) {
-            p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
             return true;
         }
         if (args[1].equalsIgnoreCase("add")) {
@@ -263,7 +264,7 @@ public class ContainerLootableCommand {
         return true;
     }
 
-    private void sendListFooter(Player player) {
+    private void sendListFooter(Player player, int pageNumber) {
         TextComponent end = new TextComponent("]----[");
         end.setColor(net.md_5.bungee.api.ChatColor.GRAY);
         end.setStrikethrough(true);
@@ -274,9 +275,17 @@ public class ContainerLootableCommand {
         previous.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Previous")}));
         previous.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable list previous"));
 
-        TextComponent split = new TextComponent("]---[");
-        split.setColor(net.md_5.bungee.api.ChatColor.GRAY);
-        split.setStrikethrough(true);
+        TextComponent splitLeft = new TextComponent("]+");
+        splitLeft.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitLeft.setStrikethrough(true);
+
+        TextComponent number = new TextComponent(String.valueOf(pageNumber));
+        number.setBold(true);
+        number.setColor(net.md_5.bungee.api.ChatColor.RED);
+
+        TextComponent splitRight = new TextComponent("+[");
+        splitRight.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitRight.setStrikethrough(true);
 
         TextComponent next = new TextComponent("▶▶");
         next.setColor(net.md_5.bungee.api.ChatColor.DARK_RED);
@@ -284,7 +293,7 @@ public class ContainerLootableCommand {
         next.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Next")}));
         next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable list next"));
 
-        player.spigot().sendMessage(end, previous, split, next, end);
+        player.spigot().sendMessage(end, previous, splitLeft, number, splitRight, next, end);
     }
 
 }

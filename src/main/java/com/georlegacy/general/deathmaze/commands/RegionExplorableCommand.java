@@ -247,7 +247,7 @@ public class RegionExplorableCommand {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
                 DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             if (args[2].equalsIgnoreCase("next")) {
@@ -260,7 +260,7 @@ public class RegionExplorableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             if (args[2].equalsIgnoreCase("previous")) {
@@ -273,7 +273,7 @@ public class RegionExplorableCommand {
                 for (String item : page.getItems()) {
                     p.sendMessage(ChatColor.GREEN + item);
                 }
-                sendListFooter(p);
+                sendListFooter(p, page.getNumber());
                 return true;
             }
             int pageNo;
@@ -293,14 +293,14 @@ public class RegionExplorableCommand {
                 p.sendMessage(ChatColor.GREEN + item);
             }
             DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
-            sendListFooter(p);
+            sendListFooter(p, pageNo);
             return true;
         }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;
     }
 
-    private void sendListFooter(Player player) {
+    private void sendListFooter(Player player, int pageNumber) {
         TextComponent end = new TextComponent("]----[");
         end.setColor(net.md_5.bungee.api.ChatColor.GRAY);
         end.setStrikethrough(true);
@@ -311,9 +311,17 @@ public class RegionExplorableCommand {
         previous.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Previous")}));
         previous.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze region list previous"));
 
-        TextComponent split = new TextComponent("]---[");
-        split.setColor(net.md_5.bungee.api.ChatColor.GRAY);
-        split.setStrikethrough(true);
+        TextComponent splitLeft = new TextComponent("]+");
+        splitLeft.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitLeft.setStrikethrough(true);
+
+        TextComponent number = new TextComponent(String.valueOf(pageNumber));
+        number.setBold(true);
+        number.setColor(net.md_5.bungee.api.ChatColor.RED);
+
+        TextComponent splitRight = new TextComponent("+[");
+        splitRight.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitRight.setStrikethrough(true);
 
         TextComponent next = new TextComponent("▶▶");
         next.setColor(net.md_5.bungee.api.ChatColor.DARK_RED);
@@ -321,7 +329,7 @@ public class RegionExplorableCommand {
         next.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Next")}));
         next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze region list next"));
 
-        player.spigot().sendMessage(end, previous, split, next, end);
+        player.spigot().sendMessage(end, previous, splitLeft, number, splitRight, next, end);
     }
 
 }
