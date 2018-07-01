@@ -35,7 +35,7 @@ public class PlayerMoveListener implements Listener {
         if (p.getLocation().getBlockX() == locs.get(p).getBlockX() && p.getLocation().getBlockZ() == locs.get(p).getBlockZ()) {
             return;
         }
-        if (plugin.getModes().get(p).equals(MazeMode.PLAYING)) {
+        if (plugin.getModes().getOrDefault(p, MazeMode.PLAYING).equals(MazeMode.PLAYING)) {
             PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
         }
         locs.put(p, p.getLocation());
