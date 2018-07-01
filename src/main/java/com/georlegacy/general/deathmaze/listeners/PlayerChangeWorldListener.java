@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +15,9 @@ public class PlayerChangeWorldListener implements Listener {
 
     @EventHandler
     private void onChange(PlayerChangedWorldEvent e) {
+
         e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+
     }
 
 }

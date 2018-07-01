@@ -20,13 +20,35 @@ ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'
 # Color codes and placeholders allowed.
 # Ensure no two lines are the same!
 ScoreboardFormat:
- - '&r'
- - '&bName: &e%NAME%'
- - '&bDistance: &e%DISTANCE%'
- - '&bKills: &e%KILLS%'
- - '&bDeaths: &e%DEATHS%'
- - '&bLootables: &e%CONTAINERS%'
- - '&bRegions: &e%REGIONS%'
+- '&r'
+- '&bName: &e%NAME%'
+- '&bDistance: &e%DISTANCE%'
+- '&bKills: &e%KILLS%'
+- '&bDeaths: &e%DEATHS%'
+- '&bLootables: &e%CONTAINERS%'
+- '&bRegions: &e%REGIONS%'
+
+# Format for staff editing scoreboard.
+# Color codes and ONLY %NAME% placeholder allowed.
+# Ensure no two lines are the same.
+EditingScoreboardFormat:
+- ' '
+- '%NAME%'
+- '  '
+- '&eYou are now:'
+- '&c&lEDITING'
+- '   '
+
+# Format for staff spectating scoreboard.
+# Color codes and ONLY %NAME% placeholder allowed.
+# Ensure no two lines are the same.
+SpectatingScoreboardFormat:
+- ' '
+- '%NAME%'
+- '  '
+- '&eYou are now:'
+- '&c&lSPECTATING'
+- '   '
 
 # The block used in previewing regions (CLIENT SIDE PREVIEW)
 PreviewBlock: GLASS

@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,20 +46,53 @@ public class ConfigUtil {
         return header.length() > 32 ? "HEADER_TOO_LONG" : ColorUtil.format(header);
     }
 
-    public Set<Map.Entry<String, Integer>> getScoreBoardFormat(PlayerStats stats) {
+    public Set<Map.Entry<String, Integer>> getScoreboardFormat(PlayerStats stats) {
         HashMap<String, Integer> scores = new HashMap<String, Integer>();
         List<String> lines = this.config.getStringList("ScoreboardFormat");
         int i = 0;
         for (String line : lines) {
-            String formattedLine = ChatColor.translateAlternateColorCodes('&', line
+            String formattedLine = ColorUtil.format(line
                     .replace("%UUID%", stats.getUuid())
                     .replace("%NAME%", stats.getName())
                     .replace("%DISTANCE%", DistanceFormatter.format(stats.getDistance()))
                     .replace("%KILLS%", format(stats.getKills()))
                     .replace("%DEATHS%", format(stats.getDeaths()))
                     .replace("%REGIONS%", format(stats.getRegionsExplored().size()))
-                    .replace("%CONTAINERS%", format(stats.getContainersLooted().size())));
-            if (line.length() >= 40)
+                    .replace("%CONTAINERS%", format(stats.getContainersLooted().size()))
+            );
+            if (formattedLine.length() >= 40)
+                formattedLine = "LINE_TOO_LONG";
+            scores.put(formattedLine, lines.size() - i);
+            i++;
+        }
+        return scores.entrySet();
+    }
+
+    public Set<Map.Entry<String, Integer>> getEditingScoreboardFormat(Player p) {
+        HashMap<String, Integer> scores = new HashMap<String, Integer>();
+        List<String> lines = this.config.getStringList("EditingScoreboardFormat");
+        int i = 0;
+        for (String line : lines) {
+            String formattedLine = ColorUtil.format(line
+                    .replace("%NAME%", p.getName())
+            );
+            if (formattedLine.length() >= 40)
+                formattedLine = "LINE_TOO_LONG";
+            scores.put(formattedLine, lines.size() - i);
+            i++;
+        }
+        return scores.entrySet();
+    }
+
+    public Set<Map.Entry<String, Integer>> getSpectatingScoreboardFormat(Player p) {
+        HashMap<String, Integer> scores = new HashMap<String, Integer>();
+        List<String> lines = this.config.getStringList("SpectatingScoreboardFormat");
+        int i = 0;
+        for (String line : lines) {
+            String formattedLine = ColorUtil.format(line
+                    .replace("%NAME%", p.getName())
+            );
+            if (formattedLine.length() >= 40)
                 formattedLine = "LINE_TOO_LONG";
             scores.put(formattedLine, lines.size() - i);
             i++;
