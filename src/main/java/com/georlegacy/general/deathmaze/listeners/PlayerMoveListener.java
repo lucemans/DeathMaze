@@ -48,7 +48,7 @@ public class PlayerMoveListener implements Listener {
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
             return;
         }
-        if (!plugin.getModes().get(p).equals(MazeMode.PLAYING)) {
+        if (!plugin.getModes().getOrDefault(p, MazeMode.PLAYING).equals(MazeMode.PLAYING)) {
             return;
         }
         for (RegionExplorable r : plugin.getMaze().getRegions()) {

@@ -31,7 +31,7 @@ public class PlayerKillEntityListener implements Listener {
             return;
         }
         if (plugin.getConfiguration().getEnabledWorlds().contains(((Player) e.getDamager()).getWorld())) {
-            if (plugin.getModes().get((Player) e.getDamager()).equals(MazeMode.PLAYING)) {
+            if (plugin.getModes().getOrDefault((Player) e.getDamager(), MazeMode.PLAYING).equals(MazeMode.PLAYING)) {
                 PlayerUtil.addKill((Player) e.getDamager());
             }
         }

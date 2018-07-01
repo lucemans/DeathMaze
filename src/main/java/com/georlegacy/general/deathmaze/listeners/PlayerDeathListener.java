@@ -15,7 +15,7 @@ public class PlayerDeathListener implements Listener {
 
     public void onDeath(PlayerDeathEvent e) {
         if (plugin.getConfiguration().getEnabledWorlds().contains(e.getEntity().getWorld())) {
-            if (plugin.getModes().get(e.getEntity()).equals(MazeMode.PLAYING))
+            if (plugin.getModes().getOrDefault(e.getEntity(), MazeMode.PLAYING).equals(MazeMode.PLAYING))
             PlayerUtil.addDeath(e.getEntity());
         }
 

@@ -18,6 +18,8 @@ public class PlayerChangeWorldListener implements Listener {
 
         e.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 
+        plugin.getModes().put(e.getPlayer(), MazeMode.getByGameMode(e.getPlayer().getGameMode()));
+
     }
 
 }
