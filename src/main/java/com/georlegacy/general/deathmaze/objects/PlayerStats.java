@@ -5,14 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-public  @Data class PlayerStats implements Serializable {
+public @Data class PlayerStats implements Serializable {
 
     public PlayerStats() {
-        regionsExplored = new LinkedList<RegionExplorable>();
-        containersLooted = new LinkedList<ContainerLootable>();
+        regionsExplored = new ArrayList<RegionExplorable>();
+        containersLooted = new ArrayList<ContainerLootable>();
     }
 
     @Getter @Setter private String name;
@@ -29,8 +29,14 @@ public  @Data class PlayerStats implements Serializable {
 
     @Getter @Setter private int deaths;
 
-    // to be added soon todo even lol
-    @Getter @Setter private RegionExplorable currentRegion;
+    @Setter private RegionExplorable currentRegion;
+
+    public RegionExplorable getCurrentRegion() {
+        if (currentRegion!=null)
+            return currentRegion;
+        else
+            return new NoRegion();
+    }
 
     @Getter @Setter private List<RegionExplorable> regionsExplored;
 

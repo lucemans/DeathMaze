@@ -67,6 +67,8 @@ public enum MazeMode {
      * @throws IllegalArgumentException When there is no MazeMode associated with that {@link GameMode}
      */
     public static MazeMode getByGameMode(GameMode gameMode) throws IllegalArgumentException {
+        if (gameMode.equals(GameMode.ADVENTURE))
+            return PLAYING;
         for (MazeMode mazeMode : values()) {
             if (mazeMode.getGameMode().equals(gameMode))
                 return mazeMode;

@@ -1,13 +1,14 @@
-# Availiable Placeholders for Marked Options:
+# Available Placeholders for Marked Options:
 # %UUID% - Player's UUID
 # %NAME% - Player's name
 # %DISTANCE% - Distance walked in the maze by the player
 # %KILLS% - Player's kills in the maze
 # %DEATHS% - Player's deaths in the maze
 # %REGIONS% - Explored regions in the maze
+# %CURRENTREGION%
 # %CONTAINERS% - Containers looted within the maze
 
-# Worlds that deathmaze is active in.
+# Worlds that DeathMaze is active in.
 EnabledWorlds:
 - world
 - nether
@@ -27,6 +28,7 @@ ScoreboardFormat:
 - '&bDeaths: &e%DEATHS%'
 - '&bLootables: &e%CONTAINERS%'
 - '&bRegions: &e%REGIONS%'
+- '&bCurrent Region: &e%CURRENTREGION%'
 
 # Format for staff editing scoreboard.
 # Color codes and ONLY %NAME% placeholder allowed.

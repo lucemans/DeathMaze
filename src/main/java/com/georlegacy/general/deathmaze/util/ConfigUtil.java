@@ -58,6 +58,7 @@ public class ConfigUtil {
                     .replace("%KILLS%", format(stats.getKills()))
                     .replace("%DEATHS%", format(stats.getDeaths()))
                     .replace("%REGIONS%", format(stats.getRegionsExplored().size()))
+                    .replace("%CURRENTREGION%", stats.getCurrentRegion().getName())
                     .replace("%CONTAINERS%", format(stats.getContainersLooted().size()))
             );
             if (formattedLine.length() >= 40)

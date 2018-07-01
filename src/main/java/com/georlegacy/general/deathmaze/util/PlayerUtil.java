@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.util;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
+import com.georlegacy.general.deathmaze.objects.NoRegion;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import org.bukkit.entity.Player;
@@ -75,45 +76,46 @@ public class PlayerUtil {
         ScoreboardUtil.send(p, stats);
     }
 
-    public static void setRegion(Player p, RegionExplorable r) {
+    public static void setRegion(Player player, RegionExplorable region) { DeathMaze.getInstance().getRegions().put(player, region);
         Random rand = new Random();
-        p.sendTitle(
-                DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(r),
-                ColorUtil.format(r.getEntrySplashes().get(rand.nextInt(r.getEntrySplashes().size()))),
+        player.sendTitle(
+                DeathMaze.getInstance().getConfiguration().getRegionEntryHeader(region),
+                ColorUtil.format(region.getEntrySplashes().get(rand.nextInt(region.getEntrySplashes().size()))),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeIn(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryStay(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
-        p.playSound(p.getLocation(), r.getEntrySound(), 1, 1);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, false));
-        DeathMaze.getInstance().getRegions().put(p, r);
+        player.playSound(player.getLocation(), region.getEntrySound(), 1, 1);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, false));
+
         PlayerStats stats;
-        if (DeathMaze.getInstance().stats.containsKey(p)) {
-            stats = DeathMaze.getInstance().stats.get(p);
-            for (RegionExplorable region : stats.getRegionsExplored()) {
-                if (r.getName().equals(region.getName())) {
+        if (DeathMaze.getInstance().stats.containsKey(player)) {
+            stats = DeathMaze.getInstance().stats.get(player);
+            for (RegionExplorable rgn : stats.getRegionsExplored()) {
+                if (rgn.getName().equals(region.getName())) {
                     return;
                 }
             }
-            stats.getRegionsExplored().add(r);
+            stats.getRegionsExplored().add(region);
         } else {
-            if (StatsEncoder.decode(p.getUniqueId().toString()) != null) {
-                DeathMaze.getInstance().stats.put(p, StatsEncoder.decode(p.getUniqueId().toString()));
-                stats = DeathMaze.getInstance().stats.get(p);
-                for (RegionExplorable region : stats.getRegionsExplored()) {
-                    if (r.getName().equals(region.getName())) {
+            if (StatsEncoder.decode(player.getUniqueId().toString()) != null) {
+                DeathMaze.getInstance().stats.put(player, StatsEncoder.decode(player.getUniqueId().toString()));
+                stats = DeathMaze.getInstance().stats.get(player);
+                for (RegionExplorable rgn : stats.getRegionsExplored()) {
+                    if (rgn.getName().equals(region.getName())) {
                         return;
                     }
                 }
-                stats.getRegionsExplored().add(r);
+                stats.getRegionsExplored().add(region);
             } else {
                 stats = new PlayerStats();
-                stats.setName(p.getName());
-                stats.setUuid(p.getUniqueId().toString());
-                stats.getRegionsExplored().add(r);
+                stats.setName(player.getName());
+                stats.setUuid(player.getUniqueId().toString());
+                stats.getRegionsExplored().add(region);
             }
         }
-        ScoreboardUtil.send(p, stats);
+        stats.setCurrentRegion(region);
+        ScoreboardUtil.send(player, stats);
     }
 
     public static void addContainer(Player p, ContainerLootable c) {

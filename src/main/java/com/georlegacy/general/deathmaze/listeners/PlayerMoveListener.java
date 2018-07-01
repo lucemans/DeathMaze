@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.NoRegion;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
