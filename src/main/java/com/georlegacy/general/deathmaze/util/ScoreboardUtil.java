@@ -29,6 +29,7 @@ public class ScoreboardUtil {
             DeathMaze.getInstance().getModes().put(p, MazeMode.getByGameMode(p.getGameMode()));
         }
         MazeMode mode = DeathMaze.getInstance().getModes().get(p);
+        System.out.println(mode);
         if (mode.equals(MazeMode.EDITING)) {
             for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getEditingScoreboardFormat(p)) {
                 Score s = o.getScore(entry.getKey());
@@ -36,13 +37,13 @@ public class ScoreboardUtil {
                 news.add(entry.getKey());
             }
         } else if (mode.equals(MazeMode.SPECTATING)) {
-            for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getEditingScoreboardFormat(p)) {
+            for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getSpectatingScoreboardFormat(p)) {
                 Score s = o.getScore(entry.getKey());
                 s.setScore(entry.getValue());
                 news.add(entry.getKey());
             }
         } else if (mode.equals(MazeMode.PLAYING)) {
-            for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getEditingScoreboardFormat(p)) {
+            for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getScoreboardFormat(stats)) {
                 Score s = o.getScore(entry.getKey());
                 s.setScore(entry.getValue());
                 news.add(entry.getKey());

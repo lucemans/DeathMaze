@@ -22,6 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.*;
+import java.util.logging.Level;
 
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
@@ -45,6 +46,7 @@ public final class DeathMaze extends JavaPlugin {
         getDataFolder().mkdirs();
         new File(getDataFolder(), File.separator + "players").mkdirs();
 
+        // Initialisation
         LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
@@ -63,6 +65,9 @@ public final class DeathMaze extends JavaPlugin {
             new PAPIHook(this).register();
         }
 
+        // Listeners
+        this.getServer().getPluginManager().registerEvents(new PlayerChangeGameModeListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
@@ -73,6 +78,9 @@ public final class DeathMaze extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
 
         this.getCommand("deathmaze").setExecutor(new DeathMazeCommand());
+
+        //Initialisation complete
+        this.getLogger().log(Level.FINE, "Initialisation complete.");
     }
 
     @Override
