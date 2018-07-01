@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import org.bukkit.Location;
@@ -34,7 +35,9 @@ public class PlayerMoveListener implements Listener {
         if (p.getLocation().getBlockX() == locs.get(p).getBlockX() && p.getLocation().getBlockZ() == locs.get(p).getBlockZ()) {
             return;
         }
-        PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
+        if (plugin.getModes().get(p).equals(MazeMode.PLAYING)) {
+            PlayerUtil.addDistance(p, Math.hypot(p.getLocation().getX() - locs.get(p).getX(), p.getLocation().getZ() - locs.get(p).getZ()));
+        }
         locs.put(p, p.getLocation());
     }
 
@@ -43,6 +46,9 @@ public class PlayerMoveListener implements Listener {
         Player p = e.getPlayer();
 
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
+            return;
+        }
+        if (!plugin.getModes().get(p).equals(MazeMode.PLAYING)) {
             return;
         }
         for (RegionExplorable r : plugin.getMaze().getRegions()) {

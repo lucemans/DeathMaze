@@ -29,7 +29,6 @@ public class ScoreboardUtil {
             DeathMaze.getInstance().getModes().put(p, MazeMode.getByGameMode(p.getGameMode()));
         }
         MazeMode mode = DeathMaze.getInstance().getModes().get(p);
-        System.out.println(mode);
         if (mode.equals(MazeMode.EDITING)) {
             for (Map.Entry<String, Integer> entry : DeathMaze.getInstance().getConfiguration().getEditingScoreboardFormat(p)) {
                 Score s = o.getScore(entry.getKey());

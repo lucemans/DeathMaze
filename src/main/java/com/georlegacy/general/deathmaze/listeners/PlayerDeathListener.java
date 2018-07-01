@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,9 +13,9 @@ public class PlayerDeathListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         if (plugin.getConfiguration().getEnabledWorlds().contains(e.getEntity().getWorld())) {
+            if (plugin.getModes().get(e.getEntity()).equals(MazeMode.PLAYING))
             PlayerUtil.addDeath(e.getEntity());
         }
 

@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +24,9 @@ public class PlayerOpenContainerListener implements Listener {
         }
         for (ContainerLootable c : plugin.getMaze().getContainers()) {
             if (c.getLocation().getLocation().equals(e.getInventory().getLocation())) {
-                PlayerUtil.addContainer(p, c);
+                if (plugin.getModes().get(p).equals(MazeMode.PLAYING)) {
+                    PlayerUtil.addContainer(p, c);
+                }
             }
         }
     }

@@ -29,6 +29,9 @@ public  @Data class PlayerStats implements Serializable {
 
     @Getter @Setter private int deaths;
 
+    // to be added soon todo even lol
+    @Getter @Setter private RegionExplorable currentRegion;
+
     @Getter @Setter private List<RegionExplorable> regionsExplored;
 
     @Getter @Setter private List<ContainerLootable> containersLooted;

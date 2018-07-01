@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.listeners;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.PlayerUtil;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -30,7 +31,9 @@ public class PlayerKillEntityListener implements Listener {
             return;
         }
         if (plugin.getConfiguration().getEnabledWorlds().contains(((Player) e.getDamager()).getWorld())) {
-            PlayerUtil.addKill((Player) e.getDamager());
+            if (plugin.getModes().get((Player) e.getDamager()).equals(MazeMode.PLAYING)) {
+                PlayerUtil.addKill((Player) e.getDamager());
+            }
         }
     }
 
