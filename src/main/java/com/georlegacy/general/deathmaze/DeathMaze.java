@@ -96,6 +96,7 @@ public final class DeathMaze extends JavaPlugin {
 
     public void reloadAll() {
         configuration = ConfigUtil.get();
+        LangUtil.init();
         startRefills();
         checkPlayers();
     }

@@ -113,3 +113,7 @@ RegionsListNotPage: '&eThat is not a valid page.'
 RegionsListNoRegions: '&eThere are currently no regions configured.'
 
 RegionsListHeader: '&aRegions:'
+
+ReloadCommandSuccess: '&aDeathMaze has been reloaded.'
+
+MazeSetSpawnSuccess: '&aYou have successfully set the spawn for the maze.'

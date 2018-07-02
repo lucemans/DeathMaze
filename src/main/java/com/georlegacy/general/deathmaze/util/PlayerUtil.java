@@ -97,7 +97,7 @@ public class PlayerUtil {
 
         stats.setCurrentRegion(region);
         ScoreboardUtil.send(player, stats);
-        
+
         for (RegionExplorable rgn : stats.getRegionsExplored()) {
             if (rgn.getName().equals(region.getName())) {
                 return;

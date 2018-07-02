@@ -15,6 +15,8 @@ public class LangUtil {
 
     protected YamlConfiguration config;
 
+    private static String noMsg = format("&4Error getting message.");
+
     private boolean isInitialised = false;
 
     private LangUtil() {
@@ -29,60 +31,62 @@ public class LangUtil {
         }
 
 
-        PREFIX = isInitialised ? format(config.getString("Prefix")) : null;
-        HELP_HEADER = isInitialised ? format(config.getString("HelpHeader")) : null;
-        NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : null;
-        INCORRECT_ARGS_MESSAGE = isInitialised ? format(config.getString("IncorrectArgsMessage")) : null;
-        COMMAND_WRONG_WORLD_MESSAGE = isInitialised ? format(config.getString("CommandWrongWorldMessage")) : null;
-        REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("RemoveContainerLootableCommandFailNotContainer")) : null;
-        REMOVE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("RemoveContainerLootableCommandSuccess")) : null;
-        REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : null;
-        UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("UpdateContainerLootableCommandFailNotContainer")) : null;
-        UPDATE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("UpdateContainerLootableCommandSuccess")) : null;
-        ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : null;
-        ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : null;
-        ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : null;
-        ADD_CONTAINER_COMMAND_ALREADY_REGISTERED = isInitialised ? format(config.getString("AddContainerLootableCommandAlreadyRegistered")) : null;
-        SET_REFILL_TIME_CONTAINER_NOT_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNotNumber")) : null;
-        SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : null;
-        SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : null;
-        SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : null;
-        CHECK_CONTAINER_LOOTABLE_FALSE = isInitialised ? format(config.getString("CheckContainerLootableFalse")) : null;
-        CHECK_CONTAINER_LOOTABLE_TRUE = isInitialised ? format(config.getString("CheckContainerLootableTrue")) : null;
-        CONTAINERS_LIST_NOT_PAGE = isInitialised ? format(config.getString("ContainersListNotPage")) : null;
-        CONTAINERS_LIST_NO_CONTAINERS = isInitialised ? format(config.getString("ContainersListNoContainers")) : null;
-        CONTAINERS_LIST_HEADER = isInitialised ? format(config.getString("ContainersListHeader")) : null;
-        ADD_REGION_ALREADY_EXISTS = isInitialised ? format(config.getString("AddRegionAlreadyExists")) : null;
-        ADD_REGION_NO_SELECTION = isInitialised ? format(config.getString("AddRegionNoSelection")) : null;
-        ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : null;
-        ADD_REGION_NON_CUBOID_SELECTION = isInitialised ? format(config.getString("AddRegionNonCuboidSelection")) : null;
-        ADD_REGION_EXISTING_OVERLAP = isInitialised ? format(config.getString("AddRegionExistingOverlap")) : null;
-        ADD_REGION_SUCCESS = isInitialised ? format(config.getString("AddRegionSuccess")) : null;
-        PREVIEW_REGION_NO_REGION = isInitialised ? format(config.getString("PreviewRegionNoRegion")) : null;
-        PREVIEW_REGION_NOT_REGION = isInitialised ? format(config.getString("PreviewRegionNotRegion")) : null;
-        PREVIEW_REGION_SUCCESS = isInitialised ? format(config.getString("PreviewRegionSuccess")) : null;
-        PREVIEW_REGION_END = isInitialised ? format(config.getString("PreviewRegionEnd")) : null;
-        REMOVE_REGION_NO_REGION = isInitialised ? format(config.getString("RemoveRegionNoRegion")) : null;
-        REMOVE_REGION_NOT_REGION = isInitialised ? format(config.getString("RemoveRegionNotRegion")) : null;
-        REMOVE_REGION_SUCCESS = isInitialised ? format(config.getString("RemoveRegionSuccess")) : null;
-        SET_REGION_SOUND_NO_SOUND = isInitialised ? format(config.getString("SetRegionSoundNoSound")) : null;
-        SET_REGION_SOUND_NOT_SOUND = isInitialised ? format(config.getString("SetRegionSoundNotSound")) : null;
-        SET_REGION_NOT_REGION = isInitialised ? format(config.getString("SetRegionNotRegion")) : null;
-        SET_REGION_SOUND_SUCCESS = isInitialised ? format(config.getString("SetRegionSoundSuccess")) : null;
-        REGION_SPLASH_NOT_REGION = isInitialised ? format(config.getString("RegionSplashNotRegion")) : null;
-        REGION_ADD_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionAddSplashNoSplash")) : null;
-        REGION_ADD_SPLASH_EXISTS = isInitialised ? format(config.getString("RegionAddSplashExists")) : null;
-        REGION_ADD_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionAddSplashSuccess")) : null;
-        REGION_REMOVE_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNoSplash")) : null;
-        REGION_REMOVE_SPLASH_NOT_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNotSplash")) : null;
-        REGION_REMOVE_SPLASH_NOT_ENOUGH = isInitialised ? format(config.getString("RegionRemoveSplashNotEnough")) : null;
-        REGION_REMOVE_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionRemoveSplashSuccess")) : null;
-        REGION_LIST_SPLASH_HEADER = isInitialised ? format(config.getString("RegionListSplashHeader")) : null;
-        REGION_CHECK_FAIL = isInitialised ? format(config.getString("RegionCheckFail")) : null;
-        REGION_CHECK_SUCCESS = isInitialised ? format(config.getString("RegionCheckSuccess")) : null;
-        REGIONS_LIST_NOT_PAGE = isInitialised ? format(config.getString("RegionsListNotPage")) : null;
-        REGIONS_LIST_NO_REGIONS = isInitialised ? format(config.getString("RegionsListNoRegions")) : null;
-        REGIONS_LIST_HEADER = isInitialised ? format(config.getString("RegionsListHeader")) : null;
+        PREFIX = isInitialised ? format(config.getString("Prefix")) : noMsg;
+        HELP_HEADER = isInitialised ? format(config.getString("HelpHeader")) : noMsg;
+        NO_PERMISSION_MESSAGE = isInitialised ? format(config.getString("NoPermissionMessage")) : noMsg;
+        INCORRECT_ARGS_MESSAGE = isInitialised ? format(config.getString("IncorrectArgsMessage")) : noMsg;
+        COMMAND_WRONG_WORLD_MESSAGE = isInitialised ? format(config.getString("CommandWrongWorldMessage")) : noMsg;
+        REMOVE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("RemoveContainerLootableCommandFailNotContainer")) : noMsg;
+        REMOVE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("RemoveContainerLootableCommandSuccess")) : noMsg;
+        REMOVE_CONTAINER_ATTEMPT_MESSAGE = isInitialised ? format(config.getString("RemoveContainerAttemptMessage")) : noMsg;
+        UPDATE_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("UpdateContainerLootableCommandFailNotContainer")) : noMsg;
+        UPDATE_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("UpdateContainerLootableCommandSuccess")) : noMsg;
+        ADD_CONTAINER_LOOTABLE_COMMAND_FAIL_NO_CONTAINER = isInitialised ? format(config.getString("AddContainerLootableCommandFailNoContainer")) : noMsg;
+        ADD_CONTAINER_COMMAND_SUCCESS = isInitialised ? format(config.getString("AddContainerLootableCommandSuccess")) : noMsg;
+        ADD_CONTAINER_COMMAND_EMPTY = isInitialised ? format(config.getString("AddContainerLootableCommandEmpty")) : noMsg;
+        ADD_CONTAINER_COMMAND_ALREADY_REGISTERED = isInitialised ? format(config.getString("AddContainerLootableCommandAlreadyRegistered")) : noMsg;
+        SET_REFILL_TIME_CONTAINER_NOT_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNotNumber")) : noMsg;
+        SET_REFILL_TIME_CONTAINER_NO_NUMBER = isInitialised ? format(config.getString("SetRefillTimeContainerNoNumber")) : noMsg;
+        SET_REFILL_TIME_CONTAINER_SUCCESS = isInitialised ? format(config.getString("SetRefillTimeContainerSuccess")) : noMsg;
+        SET_REFILL_TIME_CONTAINER_COMMAND_FAIL_NOT_CONTAINER = isInitialised ? format(config.getString("SetRefillTimeContainerCommandFailNotContainer")) : noMsg;
+        CHECK_CONTAINER_LOOTABLE_FALSE = isInitialised ? format(config.getString("CheckContainerLootableFalse")) : noMsg;
+        CHECK_CONTAINER_LOOTABLE_TRUE = isInitialised ? format(config.getString("CheckContainerLootableTrue")) : noMsg;
+        CONTAINERS_LIST_NOT_PAGE = isInitialised ? format(config.getString("ContainersListNotPage")) : noMsg;
+        CONTAINERS_LIST_NO_CONTAINERS = isInitialised ? format(config.getString("ContainersListNoContainers")) : noMsg;
+        CONTAINERS_LIST_HEADER = isInitialised ? format(config.getString("ContainersListHeader")) : noMsg;
+        ADD_REGION_ALREADY_EXISTS = isInitialised ? format(config.getString("AddRegionAlreadyExists")) : noMsg;
+        ADD_REGION_NO_SELECTION = isInitialised ? format(config.getString("AddRegionNoSelection")) : noMsg;
+        ADD_REGION_SELECTION_TOO_SMALL = isInitialised ? format(config.getString("AddRegionSelectionTooSmall")) : noMsg;
+        ADD_REGION_NON_CUBOID_SELECTION = isInitialised ? format(config.getString("AddRegionNonCuboidSelection")) : noMsg;
+        ADD_REGION_EXISTING_OVERLAP = isInitialised ? format(config.getString("AddRegionExistingOverlap")) : noMsg;
+        ADD_REGION_SUCCESS = isInitialised ? format(config.getString("AddRegionSuccess")) : noMsg;
+        PREVIEW_REGION_NO_REGION = isInitialised ? format(config.getString("PreviewRegionNoRegion")) : noMsg;
+        PREVIEW_REGION_NOT_REGION = isInitialised ? format(config.getString("PreviewRegionNotRegion")) : noMsg;
+        PREVIEW_REGION_SUCCESS = isInitialised ? format(config.getString("PreviewRegionSuccess")) : noMsg;
+        PREVIEW_REGION_END = isInitialised ? format(config.getString("PreviewRegionEnd")) : noMsg;
+        REMOVE_REGION_NO_REGION = isInitialised ? format(config.getString("RemoveRegionNoRegion")) : noMsg;
+        REMOVE_REGION_NOT_REGION = isInitialised ? format(config.getString("RemoveRegionNotRegion")) : noMsg;
+        REMOVE_REGION_SUCCESS = isInitialised ? format(config.getString("RemoveRegionSuccess")) : noMsg;
+        SET_REGION_SOUND_NO_SOUND = isInitialised ? format(config.getString("SetRegionSoundNoSound")) : noMsg;
+        SET_REGION_SOUND_NOT_SOUND = isInitialised ? format(config.getString("SetRegionSoundNotSound")) : noMsg;
+        SET_REGION_NOT_REGION = isInitialised ? format(config.getString("SetRegionNotRegion")) : noMsg;
+        SET_REGION_SOUND_SUCCESS = isInitialised ? format(config.getString("SetRegionSoundSuccess")) : noMsg;
+        REGION_SPLASH_NOT_REGION = isInitialised ? format(config.getString("RegionSplashNotRegion")) : noMsg;
+        REGION_ADD_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionAddSplashNoSplash")) : noMsg;
+        REGION_ADD_SPLASH_EXISTS = isInitialised ? format(config.getString("RegionAddSplashExists")) : noMsg;
+        REGION_ADD_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionAddSplashSuccess")) : noMsg;
+        REGION_REMOVE_SPLASH_NO_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNoSplash")) : noMsg;
+        REGION_REMOVE_SPLASH_NOT_SPLASH = isInitialised ? format(config.getString("RegionRemoveSplashNotSplash")) : noMsg;
+        REGION_REMOVE_SPLASH_NOT_ENOUGH = isInitialised ? format(config.getString("RegionRemoveSplashNotEnough")) : noMsg;
+        REGION_REMOVE_SPLASH_SUCCESS = isInitialised ? format(config.getString("RegionRemoveSplashSuccess")) : noMsg;
+        REGION_LIST_SPLASH_HEADER = isInitialised ? format(config.getString("RegionListSplashHeader")) : noMsg;
+        REGION_CHECK_FAIL = isInitialised ? format(config.getString("RegionCheckFail")) : noMsg;
+        REGION_CHECK_SUCCESS = isInitialised ? format(config.getString("RegionCheckSuccess")) : noMsg;
+        REGIONS_LIST_NOT_PAGE = isInitialised ? format(config.getString("RegionsListNotPage")) : noMsg;
+        REGIONS_LIST_NO_REGIONS = isInitialised ? format(config.getString("RegionsListNoRegions")) : noMsg;
+        REGIONS_LIST_HEADER = isInitialised ? format(config.getString("RegionsListHeader")) : noMsg;
+        RELOAD_COMMAND_SUCCESS = isInitialised ? format(config.getString("ReloadCommandSuccess")) : noMsg;
+        MAZE_SET_SPAWN_SUCCESS = isInitialised ? format(config.getString("MazeSetSpawnSuccess")) : noMsg;
 
     }
 
@@ -198,6 +202,10 @@ public class LangUtil {
     public static String REGIONS_LIST_NO_REGIONS;
 
     public static String REGIONS_LIST_HEADER;
+
+    public static String RELOAD_COMMAND_SUCCESS;
+
+    public static String MAZE_SET_SPAWN_SUCCESS;
 
     public static String CHECK_CONTAINER_LOOTABLE_TRUE(ContainerLootable container) {
         return CHECK_CONTAINER_LOOTABLE_TRUE

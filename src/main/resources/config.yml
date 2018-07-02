@@ -13,6 +13,14 @@ EnabledWorlds:
 - world
 - nether
 
+# Message sent to player when using /deathmaze visit
+# Only placeholder is %PNAME% (Player name)
+VisitMessage: '&cWelcome to the Maze &e%PNAME%&c, a place of &eterror &cand &etreachery &cto test your senses.'
+
+# Sound played to player when using /deathmaze visit
+# Use NONE for no sound
+VisitSound: BLOCK_DISPENSER_LAUNCH
+
 # Header for sidebar scoreboard.
 # Color codes allowed
 ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'

@@ -3,10 +3,7 @@ package com.georlegacy.general.deathmaze.util;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -39,6 +36,23 @@ public class ConfigUtil {
         List<World> worlds = new ArrayList<World>();
         this.config.getStringList("EnabledWorlds").forEach(string -> worlds.add(Bukkit.getWorld(string)));
         return !worlds.isEmpty() ? worlds : null;
+    }
+
+    public String getVisitMessage(Player p) {
+        return ColorUtil.format(this.config.getString("VisitMessage")
+                .replace("%PNAME%", p.getName()));
+    }
+
+    public Sound getVisitSound() {
+        if (this.config.getString("VisitSound").equalsIgnoreCase("NONE"))
+            return null;
+        Sound sound;
+        try {
+            sound = Sound.valueOf(this.config.getString("VisitSound"));
+        } catch (IllegalArgumentException ex) {
+            sound = Sound.BLOCK_DISPENSER_LAUNCH;
+        }
+        return sound;
     }
 
     public String getScoreboardHeader() {
