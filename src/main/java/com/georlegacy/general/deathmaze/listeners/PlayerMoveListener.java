@@ -66,6 +66,7 @@ public class PlayerMoveListener implements Listener {
                 return;
             }
         }
+        PlayerUtil.setRegion(p, new NoRegion());
         plugin.getRegions().remove(p);
     }
 
