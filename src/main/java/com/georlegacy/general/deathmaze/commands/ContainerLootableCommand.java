@@ -12,6 +12,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import javax.xml.soap.Text;
 import java.util.*;
 
 public class ContainerLootableCommand {
@@ -44,11 +44,11 @@ public class ContainerLootableCommand {
             List<String> containerCoords = new ArrayList<String>();
             DeathMaze.getInstance().getMaze().getContainers().forEach(cnt -> containerCoords.add(
                     cnt.getLocation().getLocation().getBlockX() +
-                            ", " +
+                            "," +
+                            cnt.getLocation().getLocation().getBlockY() +
+                            "," +
                             cnt.getLocation().getLocation().getBlockZ() +
-                            ", " +
-                            cnt.getLocation().getLocation().getBlockZ() +
-                            " " +
+                            "-" +
                             cnt.getLocation().getLocation().getWorld().getName()));
             if (containerCoords.size() == 0) {
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINERS_LIST_NO_CONTAINERS);
@@ -60,7 +60,11 @@ public class ContainerLootableCommand {
                 page = set.getPage(0);
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINERS_LIST_HEADER);
                 for (String item : page.getItems()) {
-                    p.sendMessage(ChatColor.GREEN + item);
+                    TextComponent toSend = new TextComponent(item);
+                    toSend.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+                    toSend.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Teleport")}));
+                    toSend.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable tp " + item));
+                    p.spigot().sendMessage(toSend);
                 }
                 DeathMaze.getInstance().getPlayerLootableLists().put(p.getUniqueId().toString(), set);
                 sendListFooter(p, page.getNumber());
@@ -74,7 +78,11 @@ public class ContainerLootableCommand {
                 }
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINERS_LIST_HEADER);
                 for (String item : page.getItems()) {
-                    p.sendMessage(ChatColor.GREEN + item);
+                    TextComponent toSend = new TextComponent(item);
+                    toSend.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+                    toSend.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Teleport")}));
+                    toSend.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable tp " + item));
+                    p.spigot().sendMessage(toSend);
                 }
                 sendListFooter(p, page.getNumber());
                 return true;
@@ -87,7 +95,11 @@ public class ContainerLootableCommand {
                 }
                 p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINERS_LIST_HEADER);
                 for (String item : page.getItems()) {
-                    p.sendMessage(ChatColor.GREEN + item);
+                    TextComponent toSend = new TextComponent(item);
+                    toSend.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+                    toSend.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Teleport")}));
+                    toSend.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable tp " + item));
+                    p.spigot().sendMessage(toSend);
                 }
                 sendListFooter(p, page.getNumber());
                 return true;
@@ -106,10 +118,31 @@ public class ContainerLootableCommand {
             page = set.getPage(pageNo - 1);
             p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINERS_LIST_HEADER);
             for (String item : page.getItems()) {
-                p.sendMessage(ChatColor.GREEN + item);
+                TextComponent toSend = new TextComponent(item);
+                toSend.setColor(net.md_5.bungee.api.ChatColor.GREEN);
+                toSend.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Teleport")}));
+                toSend.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze lootable tp " + item));
+                p.spigot().sendMessage(toSend);
             }
             DeathMaze.getInstance().getPlayerLootableLists().put(p.getUniqueId().toString(), set);
             sendListFooter(p, pageNo);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("tp")) {
+            if (args.length == 2) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINER_TP_NO_LOOTABLE);
+                return true;
+            }
+            for (ContainerLootable lootable : DeathMaze.getInstance().getMaze().getContainers()) {
+                Location loc = lootable.getLocation().getLocation();
+                if ((loc.getBlockX() + "," + loc.getBlockY() + "," + loc.getBlockZ() + "-" + loc.getWorld().getName()).equalsIgnoreCase(args[2])) {
+                    loc.setY(loc.getY() + 1);
+                    p.teleport(loc);
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINER_TP_SUCCESS);
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.CONTAINER_TP_NOT_LOOTABLE);
             return true;
         }
         if (!DeathMaze.getInstance().getConfiguration().getEnabledWorlds().contains(p.getWorld())) {

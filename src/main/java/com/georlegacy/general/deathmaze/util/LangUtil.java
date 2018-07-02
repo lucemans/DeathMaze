@@ -87,6 +87,9 @@ public class LangUtil {
         REGIONS_LIST_HEADER = isInitialised ? format(config.getString("RegionsListHeader")) : noMsg;
         RELOAD_COMMAND_SUCCESS = isInitialised ? format(config.getString("ReloadCommandSuccess")) : noMsg;
         MAZE_SET_SPAWN_SUCCESS = isInitialised ? format(config.getString("MazeSetSpawnSuccess")) : noMsg;
+        CONTAINER_TP_NO_LOOTABLE = isInitialised ? format(config.getString("ContainerTPNoLootable")) : noMsg;
+        CONTAINER_TP_NOT_LOOTABLE = isInitialised ? format(config.getString("ContainerTPNotLootable")) : noMsg;
+        CONTAINER_TP_SUCCESS = isInitialised ? format(config.getString("ContainerTPSuccess")) : noMsg;
 
     }
 
@@ -206,6 +209,12 @@ public class LangUtil {
     public static String RELOAD_COMMAND_SUCCESS;
 
     public static String MAZE_SET_SPAWN_SUCCESS;
+
+    public static String CONTAINER_TP_NO_LOOTABLE;
+
+    public static String CONTAINER_TP_NOT_LOOTABLE;
+
+    public static String CONTAINER_TP_SUCCESS;
 
     public static String CHECK_CONTAINER_LOOTABLE_TRUE(ContainerLootable container) {
         return CHECK_CONTAINER_LOOTABLE_TRUE

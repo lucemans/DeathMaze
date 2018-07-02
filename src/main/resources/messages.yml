@@ -43,6 +43,12 @@ CheckContainerLootableFalse: '&eThat container has not been registered or is not
 # %REFILL% - Refill time for the container
 CheckContainerLootableTrue: '&aThat container is a registered container within the maze and has a refill time of %REFILL% seconds.'
 
+ContainerTPNoLootable: '&eYou need to provide the lootable to teleport to.'
+
+ContainerTPNotLootable: '&eYou need to format the tp correctly, it is easiest from /deathmaze lootable list'
+
+ContainerTPSuccess: '&aTeleporting...'
+
 ContainersListNotPage: '&eThat is not a valid page.'
 
 ContainersListNoContainers: '&eThere are currently no lootables configured.'
