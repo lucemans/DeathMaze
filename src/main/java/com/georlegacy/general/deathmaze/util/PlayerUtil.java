@@ -5,6 +5,7 @@ import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.NoRegion;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -76,11 +77,13 @@ public class PlayerUtil {
         ScoreboardUtil.send(p, stats);
     }
 
-    public static void setRegion(Player player, RegionExplorable region) { DeathMaze.getInstance().getRegions().put(player, region);
+    public static void setRegion(Player player, RegionExplorable region) {
+        DeathMaze.getInstance().getRegions().put(player, region);
         PlayerStats stats = findStats(player);
         if (region instanceof NoRegion) {
             stats.setCurrentRegion(region);
-            ScoreboardUtil.send(player, stats);
+            if (DeathMaze.getInstance().getModes().getOrDefault(player, MazeMode.PLAYING).equals(MazeMode.PLAYING))
+                ScoreboardUtil.send(player, stats);
             return;
         }
 
@@ -92,6 +95,8 @@ public class PlayerUtil {
                 DeathMaze.getInstance().getConfiguration().getRegionEntryStay(),
                 DeathMaze.getInstance().getConfiguration().getRegionEntryFadeOut()
         );
+        if (!DeathMaze.getInstance().getModes().getOrDefault(player, MazeMode.PLAYING).equals(MazeMode.PLAYING))
+            return;
         player.playSound(player.getLocation(), region.getEntrySound(), 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, DeathMaze.getInstance().getConfiguration().getRegionEntryBlindness() * 20, 255, true, false));
 

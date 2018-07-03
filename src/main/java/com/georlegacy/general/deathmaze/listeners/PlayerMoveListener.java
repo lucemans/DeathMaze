@@ -49,9 +49,6 @@ public class PlayerMoveListener implements Listener {
         if (!plugin.getConfiguration().getEnabledWorlds().contains(p.getWorld())) {
             return;
         }
-        if (!plugin.getModes().getOrDefault(p, MazeMode.PLAYING).equals(MazeMode.PLAYING)) {
-            return;
-        }
         for (RegionExplorable r : plugin.getMaze().getRegions()) {
             CuboidSelection cs = new CuboidSelection(r.getPos1().getLocation().getWorld(), r.getPos1().getLocation(), r.getPos2().getLocation());
             if (cs.contains(p.getLocation())) {

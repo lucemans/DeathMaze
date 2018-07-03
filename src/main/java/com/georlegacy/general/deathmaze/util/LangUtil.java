@@ -85,6 +85,10 @@ public class LangUtil {
         REGIONS_LIST_NOT_PAGE = isInitialised ? format(config.getString("RegionsListNotPage")) : noMsg;
         REGIONS_LIST_NO_REGIONS = isInitialised ? format(config.getString("RegionsListNoRegions")) : noMsg;
         REGIONS_LIST_HEADER = isInitialised ? format(config.getString("RegionsListHeader")) : noMsg;
+        REGION_TELEPORT_NO_REGION = isInitialised ? format(config.getString("RegionTeleportNoRegion")) : noMsg;
+        REGION_TELEPORT_NOT_REGION = isInitialised ? format(config.getString("RegionTeleportNotRegion")) : noMsg;
+        REGION_TELEPORT_NO_SPACE = isInitialised ? format(config.getString("RegionTeleportNoSpace")) : noMsg;
+        REGION_TELEPORT_SUCCESS = isInitialised ? format(config.getString("RegionTeleportSuccess")) : noMsg;
         RELOAD_COMMAND_SUCCESS = isInitialised ? format(config.getString("ReloadCommandSuccess")) : noMsg;
         MAZE_SET_SPAWN_SUCCESS = isInitialised ? format(config.getString("MazeSetSpawnSuccess")) : noMsg;
         CONTAINER_TP_NO_LOOTABLE = isInitialised ? format(config.getString("ContainerTPNoLootable")) : noMsg;
@@ -205,6 +209,14 @@ public class LangUtil {
     public static String REGIONS_LIST_NO_REGIONS;
 
     public static String REGIONS_LIST_HEADER;
+
+    public static String REGION_TELEPORT_NO_REGION;
+
+    public static String REGION_TELEPORT_NOT_REGION;
+
+    public static String REGION_TELEPORT_NO_SPACE;
+
+    public static String REGION_TELEPORT_SUCCESS;
 
     public static String RELOAD_COMMAND_SUCCESS;
 

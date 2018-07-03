@@ -1,6 +1,7 @@
 package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
+import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
 import com.georlegacy.general.deathmaze.objects.pagination.EmptyPaginationPage;
 import com.georlegacy.general.deathmaze.objects.pagination.PaginationPage;
@@ -8,6 +9,7 @@ import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.PositionPreview;
+import com.georlegacy.general.deathmaze.util.TeleportUtil;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -16,9 +18,11 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,6 +218,30 @@ public class RegionExplorableCommand {
                 }
             }
             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_SPLASH_NOT_REGION);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("tp")) {
+            if (args.length == 2) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NO_REGION);
+                return true;
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    Location destination = TeleportUtil.findSafe(new CuboidSelection(
+                            region.getPos1().getLocation().getWorld(),
+                            region.getPos1().getLocation(),
+                            region.getPos2().getLocation()
+                    ));
+                    if (destination == null) {
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NO_SPACE);
+                        return true;
+                    }
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_SUCCESS);
+                    p.teleport(destination, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NOT_REGION);
             return true;
         }
         if (args[1].equalsIgnoreCase("check")) {

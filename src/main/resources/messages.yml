@@ -120,6 +120,14 @@ RegionsListNoRegions: '&eThere are currently no regions configured.'
 
 RegionsListHeader: '&aRegions:'
 
+RegionTeleportNoRegion: '&eYou need to provide a region.'
+
+RegionTeleportNotRegion: '&eThat is not a valid region.'
+
+RegionTeleportNoSpace: '&eThere is no space to teleport to in that region.'
+
+RegionTeleportSuccess: '&aTeleporting...'
+
 ReloadCommandSuccess: '&aDeathMaze has been reloaded.'
 
 MazeSetSpawnSuccess: '&aYou have successfully set the spawn for the maze.'

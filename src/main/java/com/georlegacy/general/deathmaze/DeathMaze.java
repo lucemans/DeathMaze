@@ -76,6 +76,7 @@ public final class DeathMaze extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerTeleportListener(this), this);
 
         this.getCommand("deathmaze").setExecutor(new DeathMazeCommand());
 
