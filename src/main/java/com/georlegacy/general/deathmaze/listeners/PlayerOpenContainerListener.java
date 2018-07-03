@@ -25,7 +25,7 @@ public class PlayerOpenContainerListener implements Listener {
         for (ContainerLootable c : plugin.getMaze().getContainers()) {
             if (c.getLocation().getLocation().equals(e.getInventory().getLocation())) {
                 if (plugin.getModes().getOrDefault(p, MazeMode.PLAYING).equals(MazeMode.PLAYING)) {
-                    PlayerUtil.addContainer(p, c);
+                    PlayerUtil.addLootable(p, c);
                 }
             }
         }

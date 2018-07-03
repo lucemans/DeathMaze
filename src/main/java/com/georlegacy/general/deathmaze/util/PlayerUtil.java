@@ -34,6 +34,7 @@ public class PlayerUtil {
                 DeathMaze.getInstance().stats.put(p, stats);
             }
         }
+        stats.addXp((dist / 100) * DeathMaze.getInstance().getConfiguration().getXPPer100M());
         ScoreboardUtil.send(p, stats);
     }
 
@@ -54,6 +55,7 @@ public class PlayerUtil {
                 stats.setKills(1);
             }
         }
+        stats.addXp(DeathMaze.getInstance().getConfiguration().getXPPerKill());
         ScoreboardUtil.send(p, stats);
     }
 
@@ -74,6 +76,7 @@ public class PlayerUtil {
                 stats.setDeaths(1);
             }
         }
+        stats.addXp(DeathMaze.getInstance().getConfiguration().getXPPerDeath());
         ScoreboardUtil.send(p, stats);
     }
 
@@ -108,13 +111,16 @@ public class PlayerUtil {
                 return;
             }
         }
+        stats.addXp(DeathMaze.getInstance().getConfiguration().getXPPerRegion());
         stats.getRegionsExplored().add(region);
     }
 
-    public static void addContainer(Player p, ContainerLootable c) {
+    public static void addLootable(Player p, ContainerLootable c) {
         PlayerStats stats = findStats(p);
-        if (!stats.getContainersLooted().contains(c))
+        if (!stats.getContainersLooted().contains(c)) {
             stats.getContainersLooted().add(c);
+            stats.addXp(DeathMaze.getInstance().getConfiguration().getXPPerLootable());
+        }
         ScoreboardUtil.send(p, stats);
     }
 

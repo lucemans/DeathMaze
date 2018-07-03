@@ -3,6 +3,7 @@ package com.georlegacy.general.deathmaze.util;
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.enumeration.Level;
 import org.bukkit.*;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -73,7 +74,10 @@ public class ConfigUtil {
                     .replace("%DEATHS%", format(stats.getDeaths()))
                     .replace("%REGIONS%", format(stats.getRegionsExplored().size()))
                     .replace("%CURRENTREGION%", stats.getCurrentRegion().getName())
-                    .replace("%CONTAINERS%", format(stats.getContainersLooted().size()))
+                    .replace("%CONTAINERS%", format(stats.getContainersLooted().size())
+                    .replace("%LEVEL%", format(stats.getCurrentLevel().getLevel()))
+                    .replace("%XP%", format(stats.getExcessXp()))
+                    .replace("%NEXTXP%", format(Level.getNextLevel(stats.getCurrentLevel()).getLevel())))
             );
             if (formattedLine.length() >= 40)
                 formattedLine = "LINE_TOO_LONG";
@@ -147,6 +151,26 @@ public class ConfigUtil {
 
     public long getDefaultRefillSeconds() {
         return this.config.getLong("DefaultRefillSeconds");
+    }
+
+    public int getXPPer100M() {
+        return this.config.getInt("XPPer100M");
+    }
+
+    public int getXPPerKill() {
+        return this.config.getInt("XPPerKill");
+    }
+
+    public int getXPPerDeath() {
+        return this.config.getInt("XPPerDeath");
+    }
+
+    public int getXPPerLootable() {
+        return this.config.getInt("XPPerLootable");
+    }
+
+    public int getXPPerRegion() {
+        return this.config.getInt("XPPerRegion");
     }
 
 }
