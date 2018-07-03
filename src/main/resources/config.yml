@@ -1,16 +1,28 @@
-# Availiable Placeholders for Marked Options:
+# Available Placeholders for Marked Options:
 # %UUID% - Player's UUID
 # %NAME% - Player's name
 # %DISTANCE% - Distance walked in the maze by the player
 # %KILLS% - Player's kills in the maze
 # %DEATHS% - Player's deaths in the maze
 # %REGIONS% - Explored regions in the maze
+# %CURRENTREGION% - The current region
 # %CONTAINERS% - Containers looted within the maze
+# %LEVEL% - The player's current level
+# %XP% - The player's current excess xp
+# %NEXTXP% - The total xp of the next level
 
-# Worlds that deathmaze is active in.
+# Worlds that DeathMaze is active in.
 EnabledWorlds:
 - world
 - nether
+
+# Message sent to player when using /deathmaze visit
+# Only placeholder is %PNAME% (Player name)
+VisitMessage: '&cWelcome to the Maze &e%PNAME%&c, a place of &eterror &cand &etreachery &cto test your senses.'
+
+# Sound played to player when using /deathmaze visit
+# Use NONE for no sound
+VisitSound: BLOCK_DISPENSER_LAUNCH
 
 # Header for sidebar scoreboard.
 # Color codes allowed
@@ -20,13 +32,38 @@ ScoreboardHeader: '&7&l&k|&c&lDeathMaze&7&l&k|'
 # Color codes and placeholders allowed.
 # Ensure no two lines are the same!
 ScoreboardFormat:
- - '&r'
- - '&bName: &e%NAME%'
- - '&bDistance: &e%DISTANCE%'
- - '&bKills: &e%KILLS%'
- - '&bDeaths: &e%DEATHS%'
- - '&bLootables: &e%CONTAINERS%'
- - '&bRegions: &e%REGIONS%'
+- '&r'
+- '&bName: &e%NAME%'
+- '&bDistance: &e%DISTANCE%'
+- '&bKills: &e%KILLS%'
+- '&bDeaths: &e%DEATHS%'
+- '&bLootables: &e%CONTAINERS%'
+- '&bRegions: &e%REGIONS%'
+- '&bCurrent Region: &e%CURRENTREGION%'
+- '&bLevel: &e%LEVEL%'
+- '&bNext Level: &e%XP%/%NEXTXP%'
+
+# Format for staff editing scoreboard.
+# Color codes and ONLY %NAME% placeholder allowed.
+# Ensure no two lines are the same.
+EditingScoreboardFormat:
+- ' '
+- '%NAME%'
+- '  '
+- '&eYou are now:'
+- '&c&lEDITING'
+- '   '
+
+# Format for staff spectating scoreboard.
+# Color codes and ONLY %NAME% placeholder allowed.
+# Ensure no two lines are the same.
+SpectatingScoreboardFormat:
+- ' '
+- '%NAME%'
+- '  '
+- '&eYou are now:'
+- '&c&lSPECTATING'
+- '   '
 
 # The block used in previewing regions (CLIENT SIDE PREVIEW)
 PreviewBlock: GLASS
@@ -53,3 +90,18 @@ RegionEntryBlindness: 2
 
 # Default refill time period when creating lootable containers in milliseconds.
 DefaultRefillSeconds: 15
+
+# XP earned by a player for every 100 meters walked in the maze
+XPPer100M: 5
+
+# XP earned by a player for every kill in the maze
+XPPerKill: 8
+
+# XP earned by a player dying in the maze
+XPPerDeath: 0
+
+# XP earned by a player for opening a new lootable
+XPPerLootable: 15
+
+# XP earned by a player for entering a new region
+XPPerRegion: 20

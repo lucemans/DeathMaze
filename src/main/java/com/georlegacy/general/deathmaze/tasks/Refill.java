@@ -2,6 +2,7 @@ package com.georlegacy.general.deathmaze.tasks;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
 import com.georlegacy.general.deathmaze.objects.ContainerLootable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
 import com.georlegacy.general.deathmaze.util.ItemStackSerializerUtil;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;

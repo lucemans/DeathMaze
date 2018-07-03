@@ -1,19 +1,31 @@
 package com.georlegacy.general.deathmaze.commands;
 
 import com.georlegacy.general.deathmaze.DeathMaze;
-import com.georlegacy.general.deathmaze.objects.PlayerStats;
+import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.pagination.EmptyPaginationPage;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationPage;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.util.ColorUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.PositionPreview;
+import com.georlegacy.general.deathmaze.util.TeleportUtil;
 import com.sk89q.worldedit.bukkit.selections.CuboidSelection;
 import com.sk89q.worldedit.bukkit.selections.Selection;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegionExplorableCommand {
 
@@ -208,9 +220,144 @@ public class RegionExplorableCommand {
             p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_SPLASH_NOT_REGION);
             return true;
         }
-        //TODO dm region check - provides current region, and shows the entry sound
+        if (args[1].equalsIgnoreCase("tp")) {
+            if (args.length == 2) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NO_REGION);
+                return true;
+            }
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (region.getName().equalsIgnoreCase(args[2])) {
+                    Location destination = TeleportUtil.findSafe(new CuboidSelection(
+                            region.getPos1().getLocation().getWorld(),
+                            region.getPos1().getLocation(),
+                            region.getPos2().getLocation()
+                    ));
+                    if (destination == null) {
+                        p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NO_SPACE);
+                        return true;
+                    }
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_SUCCESS);
+                    p.teleport(destination, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_TELEPORT_NOT_REGION);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("check")) {
+            for (RegionExplorable region : DeathMaze.getInstance().getMaze().getRegions()) {
+                if (new CuboidSelection(p.getWorld(), region.getPos1().getLocation(), region.getPos2().getLocation()).contains(p.getLocation())) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_CHECK_SUCCESS(region));
+                    return true;
+                }
+            }
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGION_CHECK_FAIL);
+            return true;
+        }
+        if (args[1].equalsIgnoreCase("list")) {
+            PaginationSet storedSet = null;
+            PaginationSet set;
+            if (DeathMaze.getInstance().getPlayerRegionLists().containsKey(p.getUniqueId().toString())) {
+                storedSet = DeathMaze.getInstance().getPlayerRegionLists().get(p.getUniqueId().toString());
+            }
+            List<String> regionNames = new ArrayList<String>();
+            DeathMaze.getInstance().getMaze().getRegions().forEach(rgn -> regionNames.add(rgn.getName()));
+            if (regionNames.size() == 0) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NO_REGIONS);
+                return true;
+            }
+            set = new PaginationSet(regionNames, 6);
+            PaginationPage page;
+            if (args.length == 2) {
+                page = set.getPage(0);
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
+                sendListFooter(p, page.getNumber());
+                return true;
+            }
+            if (args[2].equalsIgnoreCase("next")) {
+                page = storedSet!=null ? storedSet.getNextPage() : set.getNextPage();
+                if (page instanceof EmptyPaginationPage) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                    return true;
+                }
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                sendListFooter(p, page.getNumber());
+                return true;
+            }
+            if (args[2].equalsIgnoreCase("previous")) {
+                page = storedSet!=null ? storedSet.getPreviousPage() : set.getPreviousPage();
+                if (page instanceof EmptyPaginationPage) {
+                    p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                    return true;
+                }
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+                for (String item : page.getItems()) {
+                    p.sendMessage(ChatColor.GREEN + item);
+                }
+                sendListFooter(p, page.getNumber());
+                return true;
+            }
+            int pageNo;
+            try {
+                pageNo = Integer.parseInt(args[2]);
+            } catch (NumberFormatException ex) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                return true;
+            }
+            if ((pageNo > set.getPages().size()) || (pageNo <= 0)) {
+                p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_NOT_PAGE);
+                return true;
+            }
+            page = set.getPage(pageNo - 1);
+            p.sendMessage(LangUtil.PREFIX + LangUtil.REGIONS_LIST_HEADER);
+            for (String item : page.getItems()) {
+                p.sendMessage(ChatColor.GREEN + item);
+            }
+            DeathMaze.getInstance().getPlayerRegionLists().put(p.getUniqueId().toString(), set);
+            sendListFooter(p, pageNo);
+            return true;
+        }
         p.sendMessage(LangUtil.PREFIX + LangUtil.INCORRECT_ARGS_MESSAGE);
         return true;
+    }
+
+    private void sendListFooter(Player player, int pageNumber) {
+        TextComponent end = new TextComponent("]----[");
+        end.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        end.setStrikethrough(true);
+
+        TextComponent previous = new TextComponent("◀◀");
+        previous.setColor(net.md_5.bungee.api.ChatColor.DARK_RED);
+        previous.setBold(true);
+        previous.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Previous")}));
+        previous.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze region list previous"));
+
+        TextComponent splitLeft = new TextComponent("]+");
+        splitLeft.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitLeft.setStrikethrough(true);
+
+        TextComponent number = new TextComponent(String.valueOf(pageNumber));
+        number.setBold(true);
+        number.setColor(net.md_5.bungee.api.ChatColor.RED);
+
+        TextComponent splitRight = new TextComponent("+[");
+        splitRight.setColor(net.md_5.bungee.api.ChatColor.GRAY);
+        splitRight.setStrikethrough(true);
+
+        TextComponent next = new TextComponent("▶▶");
+        next.setColor(net.md_5.bungee.api.ChatColor.DARK_RED);
+        next.setBold(true);
+        next.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new BaseComponent[]{new TextComponent("Next")}));
+        next.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/deathmaze region list next"));
+
+        player.spigot().sendMessage(end, previous, splitLeft, number, splitRight, next, end);
     }
 
 }

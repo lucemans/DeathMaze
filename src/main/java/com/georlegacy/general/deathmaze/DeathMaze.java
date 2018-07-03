@@ -7,28 +7,31 @@ import com.georlegacy.general.deathmaze.objects.ContainerLootable;
 import com.georlegacy.general.deathmaze.objects.Maze;
 import com.georlegacy.general.deathmaze.objects.PlayerStats;
 import com.georlegacy.general.deathmaze.objects.RegionExplorable;
+import com.georlegacy.general.deathmaze.objects.enumeration.MazeMode;
+import com.georlegacy.general.deathmaze.objects.pagination.PaginationSet;
 import com.georlegacy.general.deathmaze.tasks.Refill;
 import com.georlegacy.general.deathmaze.util.ConfigUtil;
 import com.georlegacy.general.deathmaze.util.LangUtil;
 import com.georlegacy.general.deathmaze.util.MazeEncoder;
 import com.georlegacy.general.deathmaze.util.StatsEncoder;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import javafx.collections.transformation.FilteredList;
 import lombok.Getter;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.*;
+import java.util.logging.Level;
 
 public final class DeathMaze extends JavaPlugin {
     public HashMap<Player, PlayerStats> stats;
+    @Getter public HashMap<Player, MazeMode> modes;
     @Getter private HashMap<Integer, ContainerLootable> refills;
     @Getter private HashMap<Player, RegionExplorable> regions;
     @Getter private HashMap<ContainerLootable, Boolean> loots;
+    @Getter private HashMap<String, PaginationSet> playerRegionLists;
+    @Getter private HashMap<String, PaginationSet> playerLootableLists;
 
     @Getter private Maze maze;
     @Getter private ConfigUtil configuration;
@@ -43,12 +46,16 @@ public final class DeathMaze extends JavaPlugin {
         getDataFolder().mkdirs();
         new File(getDataFolder(), File.separator + "players").mkdirs();
 
+        // Initialisation
         LangUtil.init();
         maze = MazeEncoder.decode();
         stats = new HashMap<Player, PlayerStats>();
+        modes = new HashMap<Player, MazeMode>();
         refills = new HashMap<Integer, ContainerLootable>();
         regions = new HashMap<Player, RegionExplorable>();
         loots = new HashMap<ContainerLootable, Boolean>();
+        playerRegionLists = new HashMap<String, PaginationSet>();
+        playerLootableLists = new HashMap<String, PaginationSet>();
         configuration = ConfigUtil.get();
         worldedit = (WorldEditPlugin) this.getServer().getPluginManager().getPlugin("WorldEdit");
 
@@ -58,6 +65,9 @@ public final class DeathMaze extends JavaPlugin {
             new PAPIHook(this).register();
         }
 
+        // Listeners
+        this.getServer().getPluginManager().registerEvents(new PlayerChangeGameModeListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerChangeWorldListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerMoveListener(this), this);
@@ -66,8 +76,12 @@ public final class DeathMaze extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerDeathListener(this), this);
         this.getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
         this.getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerTeleportListener(this), this);
 
         this.getCommand("deathmaze").setExecutor(new DeathMazeCommand());
+
+        //Initialisation complete
+        this.getLogger().log(Level.FINE, "Initialisation complete.");
     }
 
     @Override
@@ -83,6 +97,7 @@ public final class DeathMaze extends JavaPlugin {
 
     public void reloadAll() {
         configuration = ConfigUtil.get();
+        LangUtil.init();
         startRefills();
         checkPlayers();
     }
@@ -104,12 +119,8 @@ public final class DeathMaze extends JavaPlugin {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!stats.containsKey(p)) continue;
             ArrayList<RegionExplorable> l = new ArrayList<RegionExplorable>(stats.get(p).getRegionsExplored());
-            Bukkit.getLogger().info("Checking Players");
             for (RegionExplorable region : (ArrayList<RegionExplorable>) l.clone()){
-                Bukkit.getLogger().info("found " + region.getName());
-                if (!containsMaze(maze.getRegions(), region))
-                {
-                    Bukkit.getLogger().info("REMOVING");
+                if (!containsMaze(maze.getRegions(), region)) {
                     stats.get(p).getRegionsExplored().remove(region);
                 }
             }

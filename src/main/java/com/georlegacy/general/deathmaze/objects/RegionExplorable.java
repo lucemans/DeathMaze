@@ -13,6 +13,8 @@ import java.util.LinkedList;
 
 public class RegionExplorable implements Serializable {
 
+    protected RegionExplorable() {}
+
     public RegionExplorable(String name, Location pos1, Location pos2) {
         this.name = name;
         this.pos1 = new SerializableLocation(pos1);

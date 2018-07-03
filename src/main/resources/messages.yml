@@ -39,7 +39,21 @@ SetRefillTimeContainerCommandFailNotContainer: '&eThat container is not currentl
 
 CheckContainerLootableFalse: '&eThat container has not been registered or is not in a maze enabled world.'
 
-CheckContainerLootableTrue: '&aThat container is a registered container within the maze.'
+# Placeholders available:
+# %REFILL% - Refill time for the container
+CheckContainerLootableTrue: '&aThat container is a registered container within the maze and has a refill time of %REFILL% seconds.'
+
+ContainerTPNoLootable: '&eYou need to provide the lootable to teleport to.'
+
+ContainerTPNotLootable: '&eYou need to format the tp correctly, it is easiest from /deathmaze lootable list'
+
+ContainerTPSuccess: '&aTeleporting...'
+
+ContainersListNotPage: '&eThat is not a valid page.'
+
+ContainersListNoContainers: '&eThere are currently no lootables configured.'
+
+ContainersListHeader: '&aLootables:'
 
 AddRegionAlreadyExists: '&eA region of this name already exists.'
 
@@ -92,3 +106,28 @@ RegionRemoveSplashNotEnough: '&eThat would leave you with no splashes.'
 RegionRemoveSplashSuccess: '&aThe splash has been removed.'
 
 RegionListSplashHeader: '&aSplashes are as following:'
+
+RegionCheckFail: '&eYou are not currently in a region.'
+
+# Placeholders available: 
+# %RNAME% - The current region's name
+# %ESOUND% - The entry sound for the current region
+RegionCheckSuccess: '&aYou are currently in &e%RNAME%&a. The entry sound is &e%ESOUND%&a.'
+
+RegionsListNotPage: '&eThat is not a valid page.'
+
+RegionsListNoRegions: '&eThere are currently no regions configured.'
+
+RegionsListHeader: '&aRegions:'
+
+RegionTeleportNoRegion: '&eYou need to provide a region.'
+
+RegionTeleportNotRegion: '&eThat is not a valid region.'
+
+RegionTeleportNoSpace: '&eThere is no space to teleport to in that region.'
+
+RegionTeleportSuccess: '&aTeleporting...'
+
+ReloadCommandSuccess: '&aDeathMaze has been reloaded.'
+
+MazeSetSpawnSuccess: '&aYou have successfully set the spawn for the maze.'
